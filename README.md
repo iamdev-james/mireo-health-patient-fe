@@ -40,13 +40,12 @@ With this template you will get all the boilerplate features included:
 * Perfect Lighthouse score - Optimized performance metrics
 * [Bundle analyzer](https://www.npmjs.com/package/@next/bundle-analyzer) - Monitor and manage bundle size during development
 * Testing suite - [Vitest](https://vitest.dev), [React Testing Library](https://testing-library.com/react), and [Playwright](https://playwright.dev/) for comprehensive testing
-* [Storybook](https://storybook.js.org/) - Component development and documentation
 * Advanced testing - Smoke and acceptance testing capabilities
 * [Conventional commits](https://www.conventionalcommits.org/) - Standardized commit history management
 * [Observability](https://opentelemetry.io/) - Open Telemetry integration
 * [Absolute imports](https://nextjs.org/docs/advanced-features/module-path-aliases) - Simplified import structure
 * [Health checks](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) - Kubernetes-compatible monitoring
-* [Radix UI](https://www.radix-ui.com/) - Headless components for customization
+* [shadcn/ui](https://ui.shadcn.com/) - Beautiful UI components built on Radix UI and Tailwind CSS
 * [CVA](http://cva.style/) (Class Variance Authority) - Consistent design system creation
 * [Renovate BOT](https://www.whitesourcesoftware.com/free-developer-tools/renovate) - Automated dependency and security updates
 * [Patch-package](https://www.npmjs.com/package/patch-package) - External dependency fixes without compromises
