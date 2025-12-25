@@ -19,8 +19,7 @@ export default function Web() {
   return (
     <>
       <section className="bg-white dark:bg-gray-900">
-        <p>James</p>
-        <Input type="email" placeholder="Email" />
+        <h2 className="py-5 text-center font-bold">Patient App</h2>
       </section>
     </>
   )
