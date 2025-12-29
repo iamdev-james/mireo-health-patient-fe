@@ -23,7 +23,6 @@ export function InstallPrompt() {
 
     const handler = (e: Event) => {
       e.preventDefault()
-      console.log("Install prompt event fired")
 
       setDeferredPrompt(e as BeforeInstallPromptEvent)
 
@@ -48,12 +47,6 @@ export function InstallPrompt() {
     const { outcome } = await deferredPrompt.userChoice
     console.log(`User ${outcome} the install prompt`)
 
-    if (outcome === "accepted") {
-      console.log("User accepted the install prompt")
-    } else {
-      console.log("User dismissed the install prompt")
-    }
-
     setDeferredPrompt(null)
     setShowInstallButton(false)
   }
@@ -74,7 +67,7 @@ export function InstallPrompt() {
           </div>
           <button
             onClick={() => setShowInstallButton(false)}
-            className="text-gray-400 hover:text-gray-600"
+            className="cursor-pointer text-gray-400 hover:text-gray-600"
             aria-label="Close"
           >
             ✕
@@ -83,13 +76,13 @@ export function InstallPrompt() {
         <div className="mt-3 flex gap-2">
           <button
             onClick={handleInstallClick}
-            className="flex-1 rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+            className="flex-1 cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
           >
             Install
           </button>
           <button
             onClick={() => setShowInstallButton(false)}
-            className="px-4 py-2 text-sm text-gray-600 transition-colors hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
+            className="cursor-pointer px-4 py-2 text-sm text-gray-600 transition-colors hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
           >
             Not Now
           </button>
