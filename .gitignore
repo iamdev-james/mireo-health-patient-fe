@@ -32,4 +32,12 @@ yarn-error.log*
 /playwright-report/
 /playwright/.cache/
 
+# PWA files
+public/sw.js
+public/sw.js.map
+public/workbox-*.js
+public/workbox-*.js.map
+public/swe-worker-*.js
+public/swe-worker-*.js.map
+
 /.npm-only-allow

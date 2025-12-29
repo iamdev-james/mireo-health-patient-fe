@@ -1,8 +1,8 @@
 import { Metadata } from "next"
-import { Input } from "@/components/ui/input"
 
 export const metadata: Metadata = {
   title: "Mireo Health - Patient App",
+  manifest: "/manifest.json",
   // openGraph: {
   //   url: "https://next-enterprise.vercel.app/",
   //   images: [

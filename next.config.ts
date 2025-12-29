@@ -1,5 +1,5 @@
 import withBundleAnalyzer from "@next/bundle-analyzer"
-import withPWAInit from "@ducanh2912/next-pwa"
+import withPWAInit from "next-pwa"
 import { type NextConfig } from "next"
 
 import { env } from "./env.mjs"
@@ -13,69 +13,65 @@ const withPWA = withPWAInit({
   disable: isDev, // Disable in development
   sw: "sw.js",
   scope: "/",
-  // swcMinify is handled by Next.js now, no need to specify
   buildExcludes: [/middleware-manifest\.json$/],
-  workboxOptions: {
-    disableDevLogs: true,
-    runtimeCaching: [
-      {
-        urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
-        handler: "CacheFirst",
-        options: {
-          cacheName: "google-fonts-cache",
-          expiration: {
-            maxEntries: 4,
-            maxAgeSeconds: 365 * 24 * 60 * 60, // 1 year
-          },
+  runtimeCaching: [
+    {
+      urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+      handler: "CacheFirst",
+      options: {
+        cacheName: "google-fonts-cache",
+        expiration: {
+          maxEntries: 4,
+          maxAgeSeconds: 365 * 24 * 60 * 60, // 1 year
         },
       },
-      {
-        urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
-        handler: "CacheFirst",
-        options: {
-          cacheName: "gstatic-fonts-cache",
-          expiration: {
-            maxEntries: 4,
-            maxAgeSeconds: 365 * 24 * 60 * 60, // 1 year
-          },
+    },
+    {
+      urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
+      handler: "CacheFirst",
+      options: {
+        cacheName: "gstatic-fonts-cache",
+        expiration: {
+          maxEntries: 4,
+          maxAgeSeconds: 365 * 24 * 60 * 60, // 1 year
         },
       },
-      {
-        urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp|avif|ico)$/i,
-        handler: "CacheFirst",
-        options: {
-          cacheName: "images-cache",
-          expiration: {
-            maxEntries: 64,
-            maxAgeSeconds: 24 * 60 * 60, // 24 hours
-          },
+    },
+    {
+      urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp|avif|ico)$/i,
+      handler: "CacheFirst",
+      options: {
+        cacheName: "images-cache",
+        expiration: {
+          maxEntries: 64,
+          maxAgeSeconds: 24 * 60 * 60, // 24 hours
         },
       },
-      {
-        urlPattern: /^https:\/\/res\.cloudinary\.com\/.*/i,
-        handler: "CacheFirst",
-        options: {
-          cacheName: "cloudinary-images-cache",
-          expiration: {
-            maxEntries: 100,
-            maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
-          },
+    },
+    {
+      urlPattern: /^https:\/\/res\.cloudinary\.com\/.*/i,
+      handler: "CacheFirst",
+      options: {
+        cacheName: "cloudinary-images-cache",
+        expiration: {
+          maxEntries: 100,
+          maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
         },
       },
-      {
-        urlPattern: /^https?.*/i,
-        handler: "NetworkFirst",
-        options: {
-          cacheName: "offlineCache",
-          expiration: {
-            maxEntries: 200,
-            maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
-          },
-          networkTimeoutSeconds: 10,
+    },
+    {
+      urlPattern: /^https?.*/i,
+      handler: "NetworkFirst",
+      options: {
+        cacheName: "offlineCache",
+        expiration: {
+          maxEntries: 200,
+          maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
         },
+        networkTimeoutSeconds: 10,
       },
-    ],
-  },
+    },
+  ],
   publicExcludes: ["!robots.txt", "!sitemap.xml"],
 })
 
