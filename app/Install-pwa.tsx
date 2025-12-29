@@ -1,4 +1,5 @@
-// app/components/install-prompt.tsx
+// app/install-pwa.tsx
+
 "use client"
 
 import { useEffect, useState } from "react"
@@ -20,16 +21,12 @@ export function InstallPrompt() {
       return
     }
 
-    // Listen for the install prompt event
     const handler = (e: Event) => {
-      // Prevent the default install prompt
       e.preventDefault()
       console.log("Install prompt event fired")
 
-      // Store the event for later use
       setDeferredPrompt(e as BeforeInstallPromptEvent)
 
-      // Show your custom install button
       setShowInstallButton(true)
     }
 
@@ -46,21 +43,17 @@ export function InstallPrompt() {
       return
     }
 
-    // Show the install prompt
     await deferredPrompt.prompt()
 
-    // Wait for the user's response
     const { outcome } = await deferredPrompt.userChoice
     console.log(`User ${outcome} the install prompt`)
 
     if (outcome === "accepted") {
       console.log("User accepted the install prompt")
-      // Optional: Track analytics
     } else {
       console.log("User dismissed the install prompt")
     }
 
-    // Clear the prompt (it can only be used once)
     setDeferredPrompt(null)
     setShowInstallButton(false)
   }

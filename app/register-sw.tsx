@@ -1,4 +1,5 @@
-// app/components/register-sw.tsx
+// app/register-sw.tsx
+
 "use client"
 
 import { useEffect } from "react"
@@ -23,7 +24,6 @@ export function RegisterServiceWorker() {
               if (newWorker.state === "activated") {
                 console.log("New service worker activated")
 
-                // Optional: Show update notification
                 if (confirm("New version available! Reload to update?")) {
                   window.location.reload()
                 }

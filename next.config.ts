@@ -8,9 +8,9 @@ const isDev = process.env.NODE_ENV === "development"
 
 const withPWA = withPWAInit({
   dest: "public",
-  register: false, // Manual registration for better control
+  register: false,
   skipWaiting: true,
-  disable: isDev, // Disable in development
+  disable: isDev,
   sw: "sw.js",
   scope: "/",
   buildExcludes: [/middleware-manifest\.json$/],
@@ -92,10 +92,8 @@ const config: NextConfig = {
   experimental: {
     optimizePackageImports: ["@iconify/react"],
   },
-  // Image optimization configuration
   images: {
     formats: ["image/webp", "image/avif"],
-    // Configure external image domains
     remotePatterns: [
       {
         protocol: "https",
@@ -110,21 +108,16 @@ const config: NextConfig = {
         hostname: "fonts.gstatic.com",
       },
     ],
-    // Allow SVG optimization
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    // Minimum cache TTL for optimized images (in seconds)
     minimumCacheTTL: 31536000, // 1 year
   },
 }
 
-// Apply transformations conditionally
 let finalConfig = config
 
-// Apply PWA wrapper
 finalConfig = withPWA(finalConfig)
 
-// Apply bundle analyzer if enabled
 if (env.ANALYZE) {
   finalConfig = withBundleAnalyzer({ enabled: env.ANALYZE })(finalConfig)
 }
