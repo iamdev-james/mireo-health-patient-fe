@@ -13,17 +13,12 @@ export function RegisterServiceWorker() {
             scope: "/",
           })
 
-          console.log("Service Worker registered:", registration.scope)
-
           // Check for updates
           registration.addEventListener("updatefound", () => {
             const newWorker = registration.installing
-            console.log("🔄 New service worker available")
 
             newWorker?.addEventListener("statechange", () => {
               if (newWorker.state === "activated") {
-                console.log("New service worker activated")
-
                 if (confirm("New version available! Reload to update?")) {
                   window.location.reload()
                 }
