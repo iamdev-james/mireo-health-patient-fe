@@ -55,7 +55,7 @@ export default function OnboardingPage() {
 
   return (
     <div className="m-auto flex min-h-screen max-w-2xl flex-col bg-white">
-      <div className="flex flex-1 flex-col items-center justify-center px-0 pb-8">
+      <div className="mt-8 flex flex-1 flex-col items-center justify-center px-0 pb-8">
         <div className="w-full max-w-md">
           <div className="relative h-[485px] w-full md:h-[540px]">
             <AnimatePresence mode="wait" initial={false}>
@@ -80,9 +80,9 @@ export default function OnboardingPage() {
                     <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-white via-white/80 to-transparent" />
                   </div>
 
-                  <div className="flex-1 space-y-3 px-9 text-center">
-                    <h2 className="text-2xl leading-tight font-bold text-gray-900 md:text-3xl">{slide?.title}</h2>
-                    <p className="text-sm leading-relaxed text-gray-600 md:text-base">{slide?.description}</p>
+                  <div className="flex-1 space-y-3 px-6 text-center">
+                    <h2 className="text-[28px] leading-10 font-bold text-gray-900 md:text-3xl">{slide?.title}</h2>
+                    <p className="text-sm leading-relaxed font-medium text-gray-400">{slide?.description}</p>
                   </div>
                 </div>
               </motion.div>
@@ -109,17 +109,10 @@ export default function OnboardingPage() {
       </div>
 
       <div className="space-y-3 p-6">
-        <Button
-          onClick={handleSignIn}
-          className="h-14 w-full rounded-xl bg-[#0066CC] text-lg font-medium text-white hover:bg-[#0052A3]"
-        >
+        <Button onClick={handleSignIn} size={"xl"} className="w-full">
           Sign In
         </Button>
-        <Button
-          onClick={handleCreateAccount}
-          variant="outline"
-          className="h-14 w-full rounded-xl border-2 border-gray-200 text-lg font-medium text-gray-900 hover:bg-gray-50"
-        >
+        <Button onClick={handleCreateAccount} variant="outline" className="w-full" size={"xl"}>
           Create Account
         </Button>
       </div>

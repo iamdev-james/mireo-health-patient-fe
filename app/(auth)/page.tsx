@@ -30,9 +30,7 @@ export default function SplashScreen() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className="text-5xl font-medium tracking-tight text-white">
-          Mireo <span className="font-light">Health</span>
-        </h1>
+        <h1 className="text-4xl font-bold tracking-tight text-white">Mireo Health</h1>
       </motion.div>
     </div>
   )
