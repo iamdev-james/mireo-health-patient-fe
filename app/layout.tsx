@@ -1,10 +1,10 @@
 // app/layout.tsx
 
 import { Metadata } from "next"
+import { satoshi } from "./fonts/satoshi"
 import { InstallPrompt } from "./Install-pwa"
 import { RegisterServiceWorker } from "./register-sw"
 
-import { satoshi } from "./fonts/satoshi"
 import "styles/tailwind.css"
 
 export const metadata: Metadata = {

@@ -2,9 +2,9 @@
 
 "use client"
 
-import { useEffect } from "react"
-import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 
 export default function SplashScreen() {
   const router = useRouter()
