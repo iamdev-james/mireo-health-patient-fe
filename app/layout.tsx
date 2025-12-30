@@ -1,5 +1,5 @@
-import { RegisterServiceWorker } from "./register-sw"
 import { InstallPrompt } from "./Install-pwa"
+import { RegisterServiceWorker } from "./register-sw"
 
 import "styles/tailwind.css"
 
