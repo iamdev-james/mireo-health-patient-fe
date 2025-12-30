@@ -54,7 +54,7 @@ export default function OnboardingPage() {
   const slide = onboardingSlides[currentSlide]
 
   return (
-    <div className="m-auto flex min-h-screen max-w-2xl flex-col bg-white">
+    <div className="m-auto flex min-h-screen w-full max-w-2xl flex-col overflow-hidden bg-white">
       <div className="mt-8 flex flex-1 flex-col items-center justify-center px-0 pb-8">
         <div className="w-full max-w-md">
           <div className="relative h-[485px] w-full md:h-[540px]">
