@@ -1,8 +1,10 @@
 import {
+  APIErrorResponse,
   CreateAccountFormData,
   HealthCheckAnswer,
   OTPVerificationData,
   PersonalInfoFormData,
+  VerifyOTPResponse,
 } from "@/types/registration"
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "/api"
@@ -29,11 +31,11 @@ async function fetchAPI<T>(endpoint: string, options?: RequestInit) {
     })
 
     if (!response.ok) {
-      const error: any = await response.json().catch(() => ({}))
+      const error = (await response.json().catch(() => ({}))) as APIErrorResponse
       throw new APIError(error.message || "An error occurred", response.status, error.errors)
     }
 
-    return response.json()
+    return (await response.json()) as T
   } catch (error) {
     if (error instanceof APIError) throw error
     throw new APIError("Network error occurred", 500)
@@ -48,8 +50,8 @@ export const registrationAPI = {
     })
   },
 
-  verifyOTP: async (data: OTPVerificationData) => {
-    return fetchAPI<{ success: boolean; token: string }>("/auth/verify-otp", {
+  verifyOTP: async (data: OTPVerificationData): Promise<VerifyOTPResponse> => {
+    return fetchAPI<VerifyOTPResponse>("/auth/verify-otp", {
       method: "POST",
       body: JSON.stringify(data),
     })

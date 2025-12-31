@@ -2,10 +2,10 @@
 
 "use client"
 
+import { AnimatePresence, motion } from "framer-motion"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { motion, AnimatePresence } from "framer-motion"
 import { HEALTH_CHECK_QUESTIONS } from "@/lib/constants/registration"
 import { APIError, registrationAPI } from "@/lib/services/registration-api"
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"

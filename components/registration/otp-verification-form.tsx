@@ -84,7 +84,7 @@ export default function OTPVerificationForm() {
     setError(null)
 
     try {
-      const result: any = await registrationAPI.verifyOTP({
+      const result = await registrationAPI.verifyOTP({
         code,
         phoneNumber: accountInfo.phoneNumber!,
         email: accountInfo.email!,
@@ -119,6 +119,7 @@ export default function OTPVerificationForm() {
       setCanResend(false)
     } catch (error) {
       setError("Failed to resend OTP. Please try again.")
+      console.error(error)
     }
   }
 

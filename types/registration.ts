@@ -1,5 +1,15 @@
 // types/registration.ts
 
+export interface VerifyOTPResponse {
+  success: boolean
+  token: string
+}
+
+export interface APIErrorResponse {
+  message?: string
+  errors?: Record<string, string[]>
+}
+
 export interface CreateAccountFormData {
   surname: string
   firstname: string
