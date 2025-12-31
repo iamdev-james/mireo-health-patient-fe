@@ -1,21 +1,17 @@
-// components/registration/otp-verification-form.tsx
+// components/signin/sign-in-otp-form.tsx
 
 "use client"
 
-import { ArrowLeft } from "lucide-react"
+import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
-import { useEffect, useRef, useState } from "react"
+import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { signInAPI, APIError } from "@/lib/services/sign-in-api"
 import { OTP_RESEND_COOLDOWN } from "@/lib/constants/registration"
-import { APIError, registrationAPI } from "@/lib/services/registration-api"
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
-import { setCurrentStep, setOTPVerified } from "@/lib/store/slices/registration-slice"
 
-export default function OTPVerificationForm() {
+export default function SignInOTPForm() {
   const router = useRouter()
-  const dispatch = useAppDispatch()
-  const accountInfo = useAppSelector((state) => state.registration.accountInfo)
-
+  const [identifier, setIdentifier] = useState<string | null>(null)
   const [otp, setOtp] = useState(["", "", "", "", "", ""])
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -25,10 +21,12 @@ export default function OTPVerificationForm() {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
 
   useEffect(() => {
-    // if (!accountInfo.email || !accountInfo.phoneNumber) {
-    //   router.push("/create-account")
-    //   return
-    // }
+    const storedIdentifier = sessionStorage.getItem("sign_in_identifier") || "james@gmail.com"
+    if (!storedIdentifier) {
+      router.push("/sign-in")
+      return
+    }
+    setIdentifier(storedIdentifier)
 
     const timer = setInterval(() => {
       setResendTimer((prev) => {
@@ -41,7 +39,7 @@ export default function OTPVerificationForm() {
     }, 1000)
 
     return () => clearInterval(timer)
-  }, [accountInfo, router])
+  }, [router])
 
   const handleChange = (index: number, value: string) => {
     if (!/^\d*$/.test(value)) return
@@ -80,23 +78,26 @@ export default function OTPVerificationForm() {
       return
     }
 
+    if (!identifier) {
+      router.push("/sign-in")
+      return
+    }
+
     setIsLoading(true)
     setError(null)
 
     try {
-      const result = await registrationAPI.verifyOTP({
+      const result = await signInAPI.verifyOTP({
         code,
-        phoneNumber: accountInfo.phoneNumber!,
-        email: accountInfo.email!,
+        identifier,
       })
 
-      if (result?.token) {
-        sessionStorage.setItem("registration_token", result?.token)
+      if (result.token) {
+        sessionStorage.setItem("auth_token", result.token)
+        sessionStorage.removeItem("sign_in_identifier")
       }
 
-      dispatch(setOTPVerified())
-      dispatch(setCurrentStep(2))
-      router.push("/create-account/personal-info")
+      router.push("/dashboard")
     } catch (error) {
       if (error instanceof APIError) {
         setError(error.message)
@@ -111,32 +112,44 @@ export default function OTPVerificationForm() {
   }
 
   const handleResend = async () => {
-    if (!canResend) return
+    if (!canResend || !identifier) return
 
     try {
-      await registrationAPI.resendOTP(accountInfo.phoneNumber!, accountInfo.email!)
+      await signInAPI.resendOTP(identifier)
       setResendTimer(OTP_RESEND_COOLDOWN)
       setCanResend(false)
     } catch (error) {
       setError("Failed to resend OTP. Please try again.")
-      console.error(error)
     }
+  }
+
+  if (!identifier) {
+    return null
   }
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="sticky top-0 z-10 flex items-center justify-between bg-white px-4 py-4">
-        <button onClick={() => router.back()} className="rounded-full p-2 hover:bg-gray-100" aria-label="Go back">
+      <div className="sticky top-0 z-10 grid grid-cols-3 items-center bg-white px-4 py-4">
+        <button
+          onClick={() => router.back()}
+          className="justify-self-start rounded-full p-2 hover:bg-gray-100"
+          aria-label="Go back"
+        >
           <ArrowLeft className="h-6 w-6 font-light" />
         </button>
-        <p className="absolute left-1/2 -mt-0.5 -translate-x-1/2 text-lg font-medium md:text-xl">Confirm OTP</p>
-        <div className="w-10" /> {/* Spacer to balance the back button */}
+
+        <p className="text-center text-lg font-medium md:text-xl">Confirm OTP</p>
+
+        <div />
       </div>
 
-      <div className="px-6 py-8">
+      <div className="px-6 py-4">
         <p className="px-6 text-center text-gray-400">
-          We've sent a code to your <span className="font-medium text-gray-900">Phone number</span> and{" "}
-          <span className="font-medium text-gray-900">email address</span>. Please enter it below.
+          We've sent a code to your{" "}
+          <span className="font-semibold text-gray-900">
+            {identifier?.includes("@") ? "email address" : "phone number"}
+          </span>
+          . Please enter it below.
         </p>
 
         {error && <div className="mt-6 rounded-lg bg-red-50 p-4 text-sm text-red-600">{error}</div>}
@@ -170,7 +183,7 @@ export default function OTPVerificationForm() {
           {isLoading ? "Confirming..." : "Confirm"}
         </Button>
 
-        <p className="mt-8 text-center text-sm">
+        <p className="mt-6 text-center text-sm">
           Didn't receive OTP?{" "}
           {canResend ? (
             <button onClick={handleResend} className="text-primary cursor-pointer font-medium hover:underline">

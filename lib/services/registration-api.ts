@@ -1,50 +1,44 @@
+// lib/services/registration-api.ts
+
 import {
-  APIErrorResponse,
   CreateAccountFormData,
+  PersonalInfoFormData,
   HealthCheckAnswer,
   OTPVerificationData,
-  PersonalInfoFormData,
-  VerifyOTPResponse,
 } from "@/types/registration"
+import { fetchAPI, APIError } from "@/lib/utils/api"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "/api"
-
-class APIError extends Error {
-  constructor(
-    message: string,
-    public statusCode: number,
-    public errors?: Record<string, string[]>
-  ) {
-    super(message)
-    this.name = "APIError"
-  }
+export interface CreateAccountResponse {
+  success: boolean
+  message: string
 }
 
-async function fetchAPI<T>(endpoint: string, options?: RequestInit) {
-  try {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-      headers: {
-        "Content-Type": "application/json",
-        ...options?.headers,
-      },
-      ...options,
-    })
+export interface VerifyOTPResponse {
+  success: boolean
+  token: string
+}
 
-    if (!response.ok) {
-      const error = (await response.json().catch(() => ({}))) as APIErrorResponse
-      throw new APIError(error.message || "An error occurred", response.status, error.errors)
-    }
+export interface ResendOTPResponse {
+  success: boolean
+  message: string
+}
 
-    return (await response.json()) as T
-  } catch (error) {
-    if (error instanceof APIError) throw error
-    throw new APIError("Network error occurred", 500)
-  }
+export interface SubmitPersonalInfoResponse {
+  success: boolean
+}
+
+export interface SubmitHealthCheckResponse {
+  success: boolean
+}
+
+export interface CompleteRegistrationResponse {
+  success: boolean
+  userId: string
 }
 
 export const registrationAPI = {
-  createAccount: async (data: CreateAccountFormData) => {
-    return fetchAPI<{ success: boolean; message: string }>("/auth/register", {
+  createAccount: async (data: CreateAccountFormData): Promise<CreateAccountResponse> => {
+    return fetchAPI<CreateAccountResponse>("/auth/register", {
       method: "POST",
       body: JSON.stringify(data),
     })
@@ -57,31 +51,31 @@ export const registrationAPI = {
     })
   },
 
-  resendOTP: async (phoneNumber: string, email: string) => {
-    return fetchAPI<{ success: boolean; message: string }>("/auth/resend-otp", {
+  resendOTP: async (phoneNumber: string, email: string): Promise<ResendOTPResponse> => {
+    return fetchAPI<ResendOTPResponse>("/auth/resend-otp", {
       method: "POST",
       body: JSON.stringify({ phoneNumber, email }),
     })
   },
 
-  submitPersonalInfo: async (data: PersonalInfoFormData, token: string) => {
-    return fetchAPI<{ success: boolean }>("/auth/personal-info", {
+  submitPersonalInfo: async (data: PersonalInfoFormData, token: string): Promise<SubmitPersonalInfoResponse> => {
+    return fetchAPI<SubmitPersonalInfoResponse>("/auth/personal-info", {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
       body: JSON.stringify(data),
     })
   },
 
-  submitHealthCheck: async (answers: HealthCheckAnswer[], token: string) => {
-    return fetchAPI<{ success: boolean }>("/auth/health-check", {
+  submitHealthCheck: async (answers: HealthCheckAnswer[], token: string): Promise<SubmitHealthCheckResponse> => {
+    return fetchAPI<SubmitHealthCheckResponse>("/auth/health-check", {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
       body: JSON.stringify({ answers }),
     })
   },
 
-  completeRegistration: async (token: string) => {
-    return fetchAPI<{ success: boolean; userId: string }>("/auth/complete-registration", {
+  completeRegistration: async (token: string): Promise<CompleteRegistrationResponse> => {
+    return fetchAPI<CompleteRegistrationResponse>("/auth/complete-registration", {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
     })
