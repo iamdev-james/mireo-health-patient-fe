@@ -64,8 +64,8 @@ export default function PersonalInfoForm() {
     <div className="min-h-screen bg-white">
       <div className="px-6 py-8">
         <div className="mb-8 text-center">
-          <p className="text-2xl font-semibold">Tell us a bit about yourself</p>
-          <p className="mt-2 px-10 text-sm text-gray-400">
+          <p className="text-2xl font-medium md:font-semibold">Tell us a bit about yourself</p>
+          <p className="mt-4 px-10 text-sm text-gray-400">
             We keep your data safe and use it only for personalized care
           </p>
         </div>
