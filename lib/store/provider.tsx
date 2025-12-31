@@ -2,11 +2,11 @@
 
 "use client"
 
-import { useRef, useEffect, useMemo } from "react"
+import { useEffect, useMemo, useRef } from "react"
 import { Provider } from "react-redux"
-import { makeStore, AppStore } from "./store"
 import { registrationStorage } from "@/lib/utils/registration-storage"
 import { loadFromStorage } from "./slices/registration-slice"
+import { AppStore, makeStore } from "./store"
 
 export default function StoreProvider({ children }: { children: React.ReactNode }) {
   const store = useMemo(() => makeStore(), [])

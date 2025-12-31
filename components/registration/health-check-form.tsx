@@ -2,13 +2,13 @@
 
 "use client"
 
-import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { HEALTH_CHECK_QUESTIONS } from "@/lib/constants/registration"
-import { registrationAPI, APIError } from "@/lib/services/registration-api"
+import { APIError, registrationAPI } from "@/lib/services/registration-api"
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
-import { setHealthCheckAnswers, setCurrentStep } from "@/lib/store/slices/registration-slice"
+import { setCurrentStep, setHealthCheckAnswers } from "@/lib/store/slices/registration-slice"
 import { HealthCheckAnswer } from "@/types/registration"
 
 export default function HealthCheckForm() {

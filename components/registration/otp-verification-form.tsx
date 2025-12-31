@@ -2,14 +2,14 @@
 
 "use client"
 
-import { useState, useEffect, useRef } from "react"
-import { useRouter } from "next/navigation"
 import { ArrowLeft } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { registrationAPI, APIError } from "@/lib/services/registration-api"
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
-import { setOTPVerified, setCurrentStep } from "@/lib/store/slices/registration-slice"
 import { OTP_RESEND_COOLDOWN } from "@/lib/constants/registration"
+import { APIError, registrationAPI } from "@/lib/services/registration-api"
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
+import { setCurrentStep, setOTPVerified } from "@/lib/store/slices/registration-slice"
 
 export default function OTPVerificationForm() {
   const router = useRouter()

@@ -1,10 +1,10 @@
 // app/layout.tsx
 
 import { Metadata, Viewport } from "next"
+import StoreProvider from "@/lib/store/provider"
 import { satoshi } from "./fonts/satoshi"
 import { InstallPrompt } from "./Install-pwa"
 import { RegisterServiceWorker } from "./register-sw"
-import StoreProvider from "@/lib/store/provider"
 
 import "styles/tailwind.css"
 

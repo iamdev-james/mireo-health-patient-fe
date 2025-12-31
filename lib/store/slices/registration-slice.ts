@@ -1,8 +1,8 @@
 // lib/store/slices/registration-slice.ts
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { RegistrationState, CreateAccountFormData, PersonalInfoFormData, HealthCheckAnswer } from "@/types/registration"
 import { registrationStorage } from "@/lib/utils/registration-storage"
+import { CreateAccountFormData, HealthCheckAnswer, PersonalInfoFormData, RegistrationState } from "@/types/registration"
 
 const initialState: RegistrationState = {
   currentStep: 0,

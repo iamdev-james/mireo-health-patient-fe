@@ -1,8 +1,8 @@
 import {
   CreateAccountFormData,
-  PersonalInfoFormData,
   HealthCheckAnswer,
   OTPVerificationData,
+  PersonalInfoFormData,
 } from "@/types/registration"
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "/api"

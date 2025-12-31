@@ -1,7 +1,7 @@
 // lib/utils/registration-storage.ts
 
-import { RegistrationState } from "@/types/registration"
 import { REGISTRATION_STORAGE_KEY } from "@/lib/constants/registration"
+import { RegistrationState } from "@/types/registration"
 
 const isClient = typeof window !== "undefined"
 

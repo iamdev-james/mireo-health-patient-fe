@@ -1,20 +1,20 @@
 // components/registration/create-account-form.tsx
 "use client"
 
+import { zodResolver } from "@hookform/resolvers/zod"
+import { ArrowLeft } from "lucide-react"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useRouter } from "next/navigation"
-import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { createAccountSchema, type CreateAccountInput } from "@/lib/validations/registration"
 import { COUNTRY_CODES } from "@/lib/constants/registration"
-import { registrationAPI, APIError } from "@/lib/services/registration-api"
+import { APIError, registrationAPI } from "@/lib/services/registration-api"
 import { useAppDispatch } from "@/lib/store/hooks"
 import { setAccountInfo, setCurrentStep } from "@/lib/store/slices/registration-slice"
+import { type CreateAccountInput, createAccountSchema } from "@/lib/validations/registration"
 
 export default function CreateAccountForm() {
   const router = useRouter()
