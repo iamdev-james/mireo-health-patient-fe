@@ -1,9 +1,10 @@
 // app/layout.tsx
 
-import { Metadata } from "next"
+import { Metadata, Viewport } from "next"
 import { satoshi } from "./fonts/satoshi"
 import { InstallPrompt } from "./Install-pwa"
 import { RegisterServiceWorker } from "./register-sw"
+import StoreProvider from "@/lib/store/provider"
 
 import "styles/tailwind.css"
 
@@ -21,14 +22,23 @@ export const metadata: Metadata = {
   //   ],
   // },
 }
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: "#0066CC",
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={satoshi.variable}>
       <body>
-        {children}
-        <RegisterServiceWorker />
-        <InstallPrompt />
+        <StoreProvider>
+          {children}
+          <RegisterServiceWorker />
+          <InstallPrompt />
+        </StoreProvider>
       </body>
     </html>
   )
