@@ -1,8 +1,8 @@
 // components/registration/create-account-form.tsx
 "use client"
 
-import { AnimatePresence, motion } from "framer-motion"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { AnimatePresence, motion } from "framer-motion"
 import { ArrowLeft } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
