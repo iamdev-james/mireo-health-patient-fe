@@ -1,12 +1,12 @@
 // lib/services/registration-api.ts
 
+import { APIError, fetchAPI } from "@/lib/utils/api"
 import {
   CreateAccountFormData,
-  PersonalInfoFormData,
   HealthCheckAnswer,
   OTPVerificationData,
+  PersonalInfoFormData,
 } from "@/types/registration"
-import { fetchAPI, APIError } from "@/lib/utils/api"
 
 export interface CreateAccountResponse {
   success: boolean

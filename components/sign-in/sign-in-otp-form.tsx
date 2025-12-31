@@ -2,12 +2,13 @@
 
 "use client"
 
-import { useState, useEffect, useRef } from "react"
-import { useRouter } from "next/navigation"
+import { AnimatePresence, motion } from "framer-motion"
 import { ArrowLeft } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { signInAPI, APIError } from "@/lib/services/sign-in-api"
 import { OTP_RESEND_COOLDOWN } from "@/lib/constants/registration"
+import { APIError, signInAPI } from "@/lib/services/sign-in-api"
 
 export default function SignInOTPForm() {
   const router = useRouter()
@@ -120,6 +121,7 @@ export default function SignInOTPForm() {
       setCanResend(false)
     } catch (error) {
       setError("Failed to resend OTP. Please try again.")
+      console.error(error)
     }
   }
 
@@ -128,72 +130,81 @@ export default function SignInOTPForm() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="sticky top-0 z-10 grid grid-cols-3 items-center bg-white px-4 py-4">
-        <button
-          onClick={() => router.back()}
-          className="justify-self-start rounded-full p-2 hover:bg-gray-100"
-          aria-label="Go back"
-        >
-          <ArrowLeft className="h-6 w-6 font-light" />
-        </button>
+    <AnimatePresence mode="wait" initial={true}>
+      <motion.div
+        key="sign-in-form"
+        initial={{ x: 300, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        exit={{ x: -300, opacity: 0 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="min-h-screen bg-white"
+      >
+        <div className="sticky top-0 z-10 grid grid-cols-3 items-center bg-white px-4 py-4">
+          <button
+            onClick={() => router.back()}
+            className="justify-self-start rounded-full p-2 hover:bg-gray-100"
+            aria-label="Go back"
+          >
+            <ArrowLeft className="h-6 w-6 font-light" />
+          </button>
 
-        <p className="text-center text-lg font-medium md:text-xl">Confirm OTP</p>
+          <p className="text-center text-lg font-medium md:text-xl">Confirm OTP</p>
 
-        <div />
-      </div>
-
-      <div className="px-6 py-4">
-        <p className="px-6 text-center text-gray-400">
-          We've sent a code to your{" "}
-          <span className="font-semibold text-gray-900">
-            {identifier?.includes("@") ? "email address" : "phone number"}
-          </span>
-          . Please enter it below.
-        </p>
-
-        {error && <div className="mt-6 rounded-lg bg-red-50 p-4 text-sm text-red-600">{error}</div>}
-
-        <div className="mt-12 flex justify-center gap-3">
-          {otp.map((digit, index) => (
-            <input
-              key={index}
-              ref={(el) => {
-                inputRefs.current[index] = el
-              }}
-              type="text"
-              inputMode="numeric"
-              maxLength={1}
-              value={digit}
-              onChange={(e) => handleChange(index, e.target.value)}
-              onKeyDown={(e) => handleKeyDown(index, e)}
-              onPaste={handlePaste}
-              className="bg-gray-350 h-14 w-12 rounded-lg text-center text-lg font-medium focus:outline-none"
-              disabled={isLoading}
-            />
-          ))}
+          <div />
         </div>
 
-        <Button
-          onClick={handleSubmit}
-          className="mt-12 w-full"
-          size={"xl"}
-          disabled={isLoading || otp.join("").length !== 6}
-        >
-          {isLoading ? "Confirming..." : "Confirm"}
-        </Button>
+        <div className="px-6 py-4">
+          <p className="px-6 text-center text-gray-400">
+            We've sent a code to your{" "}
+            <span className="font-semibold text-gray-900">
+              {identifier?.includes("@") ? "email address" : "phone number"}
+            </span>
+            . Please enter it below.
+          </p>
 
-        <p className="mt-6 text-center text-sm">
-          Didn't receive OTP?{" "}
-          {canResend ? (
-            <button onClick={handleResend} className="text-primary cursor-pointer font-medium hover:underline">
-              Resend
-            </button>
-          ) : (
-            <span className="text-primary font-medium">{resendTimer}s</span>
-          )}
-        </p>
-      </div>
-    </div>
+          {error && <div className="mt-6 rounded-lg bg-red-50 p-4 text-sm text-red-600">{error}</div>}
+
+          <div className="mt-12 flex justify-center gap-3">
+            {otp.map((digit, index) => (
+              <input
+                key={index}
+                ref={(el) => {
+                  inputRefs.current[index] = el
+                }}
+                type="text"
+                inputMode="numeric"
+                maxLength={1}
+                value={digit}
+                onChange={(e) => handleChange(index, e.target.value)}
+                onKeyDown={(e) => handleKeyDown(index, e)}
+                onPaste={handlePaste}
+                className="bg-gray-350 h-14 w-12 rounded-lg text-center text-lg font-medium focus:outline-none"
+                disabled={isLoading}
+              />
+            ))}
+          </div>
+
+          <Button
+            onClick={handleSubmit}
+            className="mt-12 w-full"
+            size={"xl"}
+            disabled={isLoading || otp.join("").length !== 6}
+          >
+            {isLoading ? "Confirming..." : "Confirm"}
+          </Button>
+
+          <p className="mt-6 text-center text-sm">
+            Didn't receive OTP?{" "}
+            {canResend ? (
+              <button onClick={handleResend} className="text-primary cursor-pointer font-medium hover:underline">
+                Resend
+              </button>
+            ) : (
+              <span className="text-primary font-medium">{resendTimer}s</span>
+            )}
+          </p>
+        </div>
+      </motion.div>
+    </AnimatePresence>
   )
 }

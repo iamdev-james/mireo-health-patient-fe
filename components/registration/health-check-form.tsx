@@ -70,58 +70,67 @@ export default function HealthCheckForm() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="px-6 py-8">
-        <div className="mb-12 text-center">
-          <h1 className="text-2xl font-medium md:font-semibold">Let's do a quick health check</h1>
-          <p className="mt-4 text-sm text-gray-400">
-            Answer a few simple questions. We'll use your responses to assess key health indicators and recommend next
-            steps
-          </p>
-        </div>
+    <AnimatePresence mode="wait" initial={true}>
+      <motion.div
+        key="sign-in-form"
+        initial={{ x: 300, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        exit={{ x: -300, opacity: 0 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="min-h-screen bg-white"
+      >
+        <div className="px-6 py-8">
+          <div className="mb-12 text-center">
+            <h1 className="text-2xl font-medium md:font-semibold">Let's do a quick health check</h1>
+            <p className="mt-4 text-sm text-gray-400">
+              Answer a few simple questions. We'll use your responses to assess key health indicators and recommend next
+              steps
+            </p>
+          </div>
 
-        {error && <div className="mb-6 rounded-lg bg-red-50 p-4 text-sm text-red-600">{error}</div>}
+          {error && <div className="mb-6 rounded-lg bg-red-50 p-4 text-sm text-red-600">{error}</div>}
 
-        <div className="mt-12 rounded-xl border border-gray-50 p-5 md:p-8">
-          <p className="mb-8 text-center text-sm text-gray-400">
-            {currentQuestion + 1}/{totalQuestions}
-          </p>
+          <div className="mt-12 rounded-xl border border-gray-50 p-5 md:p-8">
+            <p className="mb-8 text-center text-sm text-gray-400">
+              {currentQuestion + 1}/{totalQuestions}
+            </p>
 
-          <div className="relative h-32 overflow-hidden">
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.h2
-                key={question?.id}
-                initial={{ x: 300, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: -300, opacity: 0 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="absolute inset-0 flex items-center justify-center text-center text-2xl font-medium"
+            <div className="relative h-32 overflow-hidden">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.h2
+                  key={question?.id}
+                  initial={{ x: 300, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  exit={{ x: -300, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="absolute inset-0 flex items-center justify-center text-center text-2xl font-medium"
+                >
+                  {question?.question}
+                </motion.h2>
+              </AnimatePresence>
+            </div>
+
+            <div className="space-y-4">
+              <Button
+                onClick={() => handleAnswer(true)}
+                variant="outline"
+                className="border-primary text-primary hover:bg-primary h-12 w-full border font-medium hover:text-white"
+                disabled={isLoading}
               >
-                {question?.question}
-              </motion.h2>
-            </AnimatePresence>
-          </div>
-
-          <div className="space-y-4">
-            <Button
-              onClick={() => handleAnswer(true)}
-              variant="outline"
-              className="border-primary text-primary hover:bg-primary h-12 w-full border font-medium hover:text-white"
-              disabled={isLoading}
-            >
-              Yes
-            </Button>
-            <Button
-              onClick={() => handleAnswer(false)}
-              variant="outline"
-              className="border-primary text-primary hover:bg-primary h-12 w-full border font-medium hover:text-white"
-              disabled={isLoading}
-            >
-              No
-            </Button>
+                Yes
+              </Button>
+              <Button
+                onClick={() => handleAnswer(false)}
+                variant="outline"
+                className="border-primary text-primary hover:bg-primary h-12 w-full border font-medium hover:text-white"
+                disabled={isLoading}
+              >
+                No
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </AnimatePresence>
   )
 }
