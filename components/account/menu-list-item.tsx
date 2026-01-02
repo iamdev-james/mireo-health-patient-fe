@@ -16,15 +16,14 @@ export function MenuListItem({ label, href, variant = "default", icon, onClick }
   const content = (
     <div
       className={cn(
-        "flex items-center justify-between rounded-xl bg-white px-6 py-4 transition-colors hover:bg-gray-50",
-        variant === "danger" && "text-red-600"
+        "hover:bg-gray-350 flex cursor-pointer items-center justify-between rounded-xl bg-transparent px-3 py-4 transition-colors",
+        variant === "danger" && "text-destructive"
       )}
     >
       <div className="flex items-center gap-3">
-        {icon && <span className="text-xl">{icon}</span>}
-        <span className="text-base font-normal">{label}</span>
+        <span className="text-sm md:text-base">{label}</span>
       </div>
-      {variant === "default" && <ChevronRight className="h-5 w-5 text-gray-400" />}
+      {variant === "default" && <ChevronRight className="h-5 w-5 text-gray-700" />}
       {variant === "danger" && icon}
     </div>
   )

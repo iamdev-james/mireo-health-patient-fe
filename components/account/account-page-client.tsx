@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation"
 import { Trash2 } from "lucide-react"
 import { PageTransition } from "@/components/ui/page-transition"
 import { UserProfileHeader } from "@/components/account/user-profile-header"
-import { MenuSection } from "@/components/account/menu-section"
 import { MenuListItem } from "@/components/account/menu-list-item"
 import { Button } from "@/components/ui/button"
 import { accountAPI } from "@/lib/services/account-api"
@@ -38,26 +37,33 @@ export default function AccountPageClient({ userData }: AccountPageClientProps) 
   }
 
   return (
-    <PageTransition className="min-h-screen bg-gray-50 pb-20">
+    <PageTransition className="bg-gray-350 min-h-screen pb-20">
       <div className="px-6 py-6">
         <UserProfileHeader name={userData.name} profileImage={userData.profileImage} />
 
-        <div className="mt-8 space-y-6">
-          <MenuSection title="Personal Information">
-            <MenuListItem label="Bio-data" href="/account/bio-data" />
-          </MenuSection>
+        <div className="mt-6 space-y-6">
+          <div className="space-y-3 rounded-2xl bg-white px-2 pt-4 pb-2">
+            <p className="px-3 text-sm md:text-base">Personal Information</p>
+            <div className="space-y-2">
+              <MenuListItem label="Bio-data" href="/account/bio-data" />
+            </div>
+          </div>
 
-          <MenuSection title="Medical Information">
-            <MenuListItem label="Past medical history" href="/account/medical-history" />
-            <MenuListItem label="Medical records" href="/account/medical-records" />
-            <MenuListItem label="Monthly report" href="/account/monthly-report" />
-          </MenuSection>
+          <div className="space-y-3 rounded-2xl bg-white px-2 pt-4 pb-2">
+            <p className="px-3 text-sm md:text-base">Medical Information</p>
+            <div className="">
+              <MenuListItem label="Past medical history" href="/account/medical-history" />
+              <hr className="mx-3 my-1" />
+              <MenuListItem label="Medical records" href="/account/medical-records" />
+              <hr className="mx-3 my-1" />
+              <MenuListItem label="Monthly report" href="/account/monthly-report" />
+            </div>
+          </div>
 
-          <MenuSection title="">
+          <div className="rounded-2xl bg-white px-2 py-2">
             <MenuListItem label="Subscription" href="/account/subscription" />
-          </MenuSection>
-
-          <div className="pt-4">
+          </div>
+          <div className="rounded-2xl bg-white px-2 py-2">
             <MenuListItem
               label="Delete account"
               href="#"
@@ -67,10 +73,7 @@ export default function AccountPageClient({ userData }: AccountPageClientProps) 
             />
           </div>
 
-          <Button
-            onClick={handleSignOut}
-            className="h-14 w-full rounded-xl bg-red-600 text-lg font-medium text-white hover:bg-red-700"
-          >
+          <Button onClick={handleSignOut} className="mt-8 w-full" variant={"destructive"} size={"xl"}>
             Sign Out
           </Button>
         </div>

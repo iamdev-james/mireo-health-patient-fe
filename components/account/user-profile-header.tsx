@@ -10,8 +10,8 @@ interface UserProfileHeaderProps {
 export function UserProfileHeader({ name, profileImage }: UserProfileHeaderProps) {
   return (
     <div className="flex items-center justify-between">
-      <h1 className="text-3xl font-bold text-gray-900">Account</h1>
-      <div className="relative h-20 w-20 overflow-hidden rounded-full bg-gray-200">
+      <p className="text-2xl font-medium text-gray-900">Account</p>
+      <div className="relative h-13 w-13 overflow-hidden rounded-full bg-gray-200">
         {profileImage ? (
           <Image src={profileImage} alt={name} fill className="object-cover" sizes="80px" />
         ) : (
