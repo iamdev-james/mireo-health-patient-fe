@@ -6,7 +6,6 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { ArrowLeft } from "lucide-react"
 import { PageTransition } from "@/components/ui/page-transition"
-import { BioDataRow } from "@/components/account/bio-data-row"
 import { EditFieldModal } from "@/components/account/edit-field-modal"
 import { accountAPI, APIError } from "@/lib/services/account-api"
 
@@ -51,7 +50,7 @@ export default function BioDataPageClient({ initialData }: BioDataPageClientProp
   }
 
   return (
-    <PageTransition className="min-h-screen bg-white">
+    <PageTransition className="m-auto min-h-screen w-full max-w-2xl bg-white">
       <div className="sticky top-0 z-10 grid grid-cols-3 items-center bg-white px-4 py-4">
         <button
           onClick={() => router.back()}
@@ -67,7 +66,7 @@ export default function BioDataPageClient({ initialData }: BioDataPageClientProp
       </div>
 
       <div className="px-6 py-6">
-        <div className="rounded-2xl border border-gray-200 bg-white p-6">
+        <div className="rounded-2xl border border-gray-50 bg-white px-4 pt-3 pb-5">
           <BioDataRow label="Name" value={bioData.name} />
 
           <BioDataRow label="Email" value={bioData.email} editable onEdit={() => setEditingField("email")} />
@@ -108,5 +107,30 @@ export default function BioDataPageClient({ initialData }: BioDataPageClientProp
         />
       )}
     </PageTransition>
+  )
+}
+
+interface BioDataRowProps {
+  label: string
+  value: string
+  editable?: boolean
+  onEdit?: () => void
+}
+
+export function BioDataRow({ label, value, editable = false, onEdit }: BioDataRowProps) {
+  return (
+    <div className="my-1.5 py-4">
+      <div className="flex items-center justify-between">
+        <span className="text-xs text-gray-400 md:text-sm">{label}</span>
+        <div className="flex items-center gap-3">
+          <p className="text-xs font-medium md:text-sm">{value}</p>
+        </div>
+      </div>
+      {editable && onEdit && (
+        <button onClick={onEdit} className="text-primary float-right cursor-pointer text-xs hover:underline md:text-sm">
+          Edit
+        </button>
+      )}
+    </div>
   )
 }

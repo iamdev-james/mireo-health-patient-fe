@@ -38,7 +38,7 @@ export default function AccountPageClient({ userData }: AccountPageClientProps) 
 
   return (
     <PageTransition className="bg-gray-350 min-h-screen pb-20">
-      <div className="px-6 py-6">
+      <div className="m-auto min-h-screen w-full max-w-2xl px-6 py-6">
         <UserProfileHeader name={userData.name} profileImage={userData.profileImage} />
 
         <div className="mt-6 space-y-6">

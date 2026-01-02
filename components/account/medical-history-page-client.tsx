@@ -5,7 +5,7 @@
 import { useRouter } from "next/navigation"
 import { ArrowLeft } from "lucide-react"
 import { PageTransition } from "@/components/ui/page-transition"
-import { BioDataRow } from "@/components/account/bio-data-row"
+import { BioDataRow } from "@/components/account/bio-data-page-client"
 
 interface MedicalHistoryPageClientProps {
   data: {
