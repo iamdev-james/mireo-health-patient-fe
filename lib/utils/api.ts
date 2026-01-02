@@ -18,14 +18,36 @@ interface APIErrorResponse {
   errors?: Record<string, string[]>
 }
 
-export async function fetchAPI<T>(endpoint: string, options?: RequestInit): Promise<T> {
+function getAuthToken(): string | null {
+  if (typeof window === "undefined") return null
+  return sessionStorage.getItem("auth_token")
+}
+
+export async function fetchAPI<T>(endpoint: string, options?: RequestInit & { requiresAuth?: boolean }): Promise<T> {
+  const { requiresAuth = false, ...fetchOptions } = options || {}
+
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  }
+
+  if (fetchOptions?.headers) {
+    const existingHeaders = new Headers(fetchOptions.headers)
+    existingHeaders.forEach((value, key) => {
+      headers[key] = value
+    })
+  }
+
+  if (requiresAuth) {
+    const token = getAuthToken()
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`
+    }
+  }
+
   try {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-      headers: {
-        "Content-Type": "application/json",
-        ...options?.headers,
-      },
-      ...options,
+      ...fetchOptions,
+      headers,
     })
 
     if (!response.ok) {

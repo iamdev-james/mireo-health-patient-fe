@@ -1,12 +1,12 @@
 // lib/services/registration-api.ts
 
-import { APIError, fetchAPI } from "@/lib/utils/api"
 import {
   CreateAccountFormData,
+  PersonalInfoFormData,
   HealthCheckAnswer,
   OTPVerificationData,
-  PersonalInfoFormData,
 } from "@/types/registration"
+import { fetchAPI, APIError } from "@/lib/utils/api"
 
 export interface CreateAccountResponse {
   success: boolean
@@ -58,26 +58,26 @@ export const registrationAPI = {
     })
   },
 
-  submitPersonalInfo: async (data: PersonalInfoFormData, token: string): Promise<SubmitPersonalInfoResponse> => {
+  submitPersonalInfo: async (data: PersonalInfoFormData): Promise<SubmitPersonalInfoResponse> => {
     return fetchAPI<SubmitPersonalInfoResponse>("/auth/personal-info", {
       method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
       body: JSON.stringify(data),
+      requiresAuth: true,
     })
   },
 
-  submitHealthCheck: async (answers: HealthCheckAnswer[], token: string): Promise<SubmitHealthCheckResponse> => {
+  submitHealthCheck: async (answers: HealthCheckAnswer[]): Promise<SubmitHealthCheckResponse> => {
     return fetchAPI<SubmitHealthCheckResponse>("/auth/health-check", {
       method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
       body: JSON.stringify({ answers }),
+      requiresAuth: true,
     })
   },
 
-  completeRegistration: async (token: string): Promise<CompleteRegistrationResponse> => {
+  completeRegistration: async (): Promise<CompleteRegistrationResponse> => {
     return fetchAPI<CompleteRegistrationResponse>("/auth/complete-registration", {
       method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
+      requiresAuth: true,
     })
   },
 }

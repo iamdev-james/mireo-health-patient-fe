@@ -43,10 +43,7 @@ export default function PersonalInfoForm() {
     setApiError(null)
 
     try {
-      const token = sessionStorage.getItem("registration_token")
-      if (!token) throw new Error("Authentication token not found")
-
-      await registrationAPI.submitPersonalInfo(data, token)
+      await registrationAPI.submitPersonalInfo(data)
       dispatch(setPersonalInfo(data))
       dispatch(setCurrentStep(3))
       router.push("/create-account/health-check")

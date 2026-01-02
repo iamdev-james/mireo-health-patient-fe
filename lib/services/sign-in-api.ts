@@ -1,7 +1,7 @@
 // lib/services/sign-in-api.ts
 
-import { APIError, fetchAPI } from "@/lib/utils/api"
 import { SignInFormData, SignInOTPData } from "@/types/sign-in"
+import { fetchAPI, APIError } from "@/lib/utils/api"
 
 export interface RequestSignInOTPResponse {
   success: boolean
