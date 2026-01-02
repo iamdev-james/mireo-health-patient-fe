@@ -2,12 +2,12 @@
 
 "use client"
 
-import { useRouter } from "next/navigation"
 import { Trash2 } from "lucide-react"
-import { PageTransition } from "@/components/ui/page-transition"
-import { UserProfileHeader } from "@/components/account/user-profile-header"
+import { useRouter } from "next/navigation"
 import { MenuListItem } from "@/components/account/menu-list-item"
+import { UserProfileHeader } from "@/components/account/user-profile-header"
 import { Button } from "@/components/ui/button"
+import { PageTransition } from "@/components/ui/page-transition"
 import { accountAPI } from "@/lib/services/account-api"
 
 interface AccountPageClientProps {

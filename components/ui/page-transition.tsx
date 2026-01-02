@@ -2,7 +2,7 @@
 
 "use client"
 
-import { motion, AnimatePresence } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 
 interface PageTransitionProps {
   children: React.ReactNode

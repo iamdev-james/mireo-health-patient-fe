@@ -2,10 +2,10 @@
 
 "use client"
 
-import { useRouter } from "next/navigation"
 import { ArrowLeft } from "lucide-react"
-import { PageTransition } from "@/components/ui/page-transition"
+import { useRouter } from "next/navigation"
 import { BioDataRow } from "@/components/account/bio-data-page-client"
+import { PageTransition } from "@/components/ui/page-transition"
 
 interface MedicalHistoryPageClientProps {
   data: {

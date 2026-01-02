@@ -1,7 +1,7 @@
 // lib/services/account-api.ts
 
-import { UserProfile, BioData, MedicalHistory } from "@/types/account"
-import { fetchAPI, APIError } from "@/lib/utils/api"
+import { APIError, fetchAPI } from "@/lib/utils/api"
+import { BioData, MedicalHistory, UserProfile } from "@/types/account"
 
 export interface GetUserProfileResponse {
   success: boolean

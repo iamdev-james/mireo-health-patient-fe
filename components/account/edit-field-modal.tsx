@@ -2,9 +2,9 @@
 
 "use client"
 
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import { X } from "lucide-react"
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
@@ -35,6 +35,7 @@ export function EditFieldModal({ isOpen, onClose, fieldLabel, currentValue, onSa
       onClose()
     } catch (err) {
       setError("Failed to update. Please try again.")
+      console.error(err)
     } finally {
       setIsLoading(false)
     }

@@ -2,11 +2,11 @@
 
 "use client"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
 import { ArrowLeft } from "lucide-react"
-import { PageTransition } from "@/components/ui/page-transition"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 import { EditFieldModal } from "@/components/account/edit-field-modal"
+import { PageTransition } from "@/components/ui/page-transition"
 import { accountAPI, APIError } from "@/lib/services/account-api"
 
 interface BioDataPageClientProps {
