@@ -50,9 +50,6 @@ export default function HealthCheckForm() {
     setError(null)
 
     try {
-      const token = sessionStorage.getItem("registration_token")
-      if (!token) throw new Error("Authentication token not found")
-
       await registrationAPI.submitHealthCheck(finalAnswers)
       await registrationAPI.completeRegistration()
 
