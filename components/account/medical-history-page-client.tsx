@@ -30,13 +30,13 @@ export default function MedicalHistoryPageClient({ data }: MedicalHistoryPageCli
           <ArrowLeft className="h-6 w-6 font-light" />
         </button>
 
-        <p className="text-center text-lg font-medium md:text-xl">Medical History</p>
+        <p className="text-center text-lg font-medium md:text-xl whitespace-nowrap">Medical History</p>
 
         <div />
       </div>
 
-      <div className="px-6 py-6">
-        <div className="rounded-2xl border border-gray-200 bg-white p-6">
+      <div className="px-6 py-2">
+        <div className="rounded-2xl border border-gray-50 bg-white px-4 pt-0 pb-2">
           <BioDataRow label="History of hypertension :" value={data.hypertension ? "Yes" : "No"} />
 
           <BioDataRow label="Diagnosed with diabetes:" value={data.diabetes ? "Yes" : "No"} />

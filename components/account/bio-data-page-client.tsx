@@ -65,7 +65,7 @@ export default function BioDataPageClient({ initialData }: BioDataPageClientProp
         <div />
       </div>
 
-      <div className="px-6 py-6">
+      <div className="px-6 py-2">
         <div className="rounded-2xl border border-gray-50 bg-white px-4 pt-3 pb-5">
           <BioDataRow label="Name" value={bioData.name} />
 
@@ -119,7 +119,7 @@ interface BioDataRowProps {
 
 export function BioDataRow({ label, value, editable = false, onEdit }: BioDataRowProps) {
   return (
-    <div className="my-1.5 py-4">
+    <div className="my-1.5 py-3">
       <div className="flex items-center justify-between">
         <span className="text-xs text-gray-400 md:text-sm">{label}</span>
         <div className="flex items-center gap-3">
