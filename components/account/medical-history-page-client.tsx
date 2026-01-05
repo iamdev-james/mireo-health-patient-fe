@@ -20,7 +20,7 @@ export default function MedicalHistoryPageClient({ data }: MedicalHistoryPageCli
   const router = useRouter()
 
   return (
-    <PageTransition className="min-h-screen bg-white">
+    <PageTransition className="m-auto min-h-screen w-full max-w-2xl bg-white">
       <div className="sticky top-0 z-10 grid grid-cols-3 items-center bg-white px-4 py-4">
         <button
           onClick={() => router.back()}
@@ -30,7 +30,7 @@ export default function MedicalHistoryPageClient({ data }: MedicalHistoryPageCli
           <ArrowLeft className="h-6 w-6 font-light" />
         </button>
 
-        <p className="text-center text-lg font-medium md:text-xl whitespace-nowrap">Medical History</p>
+        <p className="text-center text-lg font-medium whitespace-nowrap md:text-xl">Medical History</p>
 
         <div />
       </div>
