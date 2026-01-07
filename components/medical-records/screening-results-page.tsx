@@ -1,12 +1,12 @@
 // components/medical-records/screening-results-page.tsx
 
 import Link from "next/link"
-import { PageTransition } from "@/components/ui/page-transition"
-import { VitalSignCard } from "@/components/medical-records/vital-sign-card"
 import { CollapsibleSection } from "@/components/medical-records/collapsible-section"
-import { ScreeningResult } from "@/types/medical-records"
+import { VitalSignCard } from "@/components/medical-records/vital-sign-card"
 import { BackButton } from "@/components/ui/back-button"
+import { PageTransition } from "@/components/ui/page-transition"
 import { cn } from "@/lib/utils"
+import { ScreeningResult } from "@/types/medical-records"
 
 interface ScreeningResultsPageClientProps {
   data: ScreeningResult
@@ -15,13 +15,13 @@ interface ScreeningResultsPageClientProps {
 export default function ScreeningResultsPageClient({ data }: ScreeningResultsPageClientProps) {
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "normal":
-        return "text-green-600"
-      case "high":
-      case "low":
-        return "text-red-600"
+      case 'normal':
+        return 'text-green-600'
+      case 'high':
+      case 'low':
+        return 'text-red-600'
       default:
-        return "text-gray-600"
+        return 'text-gray-600'
     }
   }
 
@@ -106,14 +106,14 @@ export default function ScreeningResultsPageClient({ data }: ScreeningResultsPag
                 <div className="rounded-xl bg-gray-50 p-4">
                   <p className="text-sm text-gray-500">Random Blood Sugar</p>
                   <p className="mt-2 text-xl font-semibold text-gray-900">
-                    {data.baselineTests.bloodSugar.random.value}{" "}
+                    {data.baselineTests.bloodSugar.random.value}{' '}
                     <span className="text-sm font-normal text-gray-500">
                       {data.baselineTests.bloodSugar.random.unit}
                     </span>
                   </p>
                   <p
                     className={cn(
-                      "mt-1 text-sm font-medium",
+                      'mt-1 text-sm font-medium',
                       getStatusColor(data.baselineTests.bloodSugar.random.status)
                     )}
                   >
@@ -124,14 +124,14 @@ export default function ScreeningResultsPageClient({ data }: ScreeningResultsPag
                 <div className="rounded-xl bg-gray-50 p-4">
                   <p className="text-sm text-gray-500">Fasting Blood Sugar</p>
                   <p className="mt-2 text-xl font-semibold text-gray-900">
-                    {data.baselineTests.bloodSugar.fasting.value}{" "}
+                    {data.baselineTests.bloodSugar.fasting.value}{' '}
                     <span className="text-sm font-normal text-gray-500">
                       {data.baselineTests.bloodSugar.fasting.unit}
                     </span>
                   </p>
                   <p
                     className={cn(
-                      "mt-1 text-sm font-medium",
+                      'mt-1 text-sm font-medium',
                       getStatusColor(data.baselineTests.bloodSugar.fasting.status)
                     )}
                   >
@@ -146,11 +146,11 @@ export default function ScreeningResultsPageClient({ data }: ScreeningResultsPag
             <div>
               <p className="mb-3 font-medium text-gray-900">Urinalysis</p>
               <div className="grid grid-cols-2 gap-3">
-                {data.baselineTests?.urinalysis?.map((test, index) => (
+                {data.baselineTests.urinalysis.map((test, index) => (
                   <div key={index} className="rounded-xl bg-gray-50 p-4">
                     <p className="text-sm text-gray-500">{test.label}</p>
                     <p className="mt-2 text-xl font-semibold text-gray-900">{test.value}</p>
-                    <p className={cn("mt-1 text-sm font-medium", getStatusColor(test.status))}>
+                    <p className={cn('mt-1 text-sm font-medium', getStatusColor(test.status))}>
                       {test.status.charAt(0).toUpperCase() + test.status.slice(1)}
                     </p>
                   </div>
@@ -162,7 +162,7 @@ export default function ScreeningResultsPageClient({ data }: ScreeningResultsPag
 
         {/* View Pre-diagnosis Button */}
         <Link
-          href={`/medical-records/pre-diagnosis/${data.id}`}
+          href="/medical-records/pre-diagnosis"
           className="block w-full rounded-xl bg-[#0066CC] py-4 text-center text-lg font-medium text-white hover:bg-[#0052A3]"
         >
           View pre - diagnosis

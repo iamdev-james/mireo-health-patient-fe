@@ -1,10 +1,10 @@
 // components/medical-records/medical-records-page.tsx
 
 import { Info } from "lucide-react"
-import { PageTransition } from "@/components/ui/page-transition"
 import { CollapsibleSection } from "@/components/medical-records/collapsible-section"
-import { PreDiagnosis } from "@/types/medical-records"
 import { BackButton } from "@/components/ui/back-button"
+import { PageTransition } from "@/components/ui/page-transition"
+import { PreDiagnosis } from "@/types/medical-records"
 
 interface PreDiagnosisPageClientProps {
   data: PreDiagnosis

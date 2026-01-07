@@ -1,11 +1,11 @@
 // components/medical-records/medical-records-page.tsx
 
-import { Info, ExternalLink } from "lucide-react"
+import { ExternalLink, Info } from "lucide-react"
 import Link from "next/link"
-import { PageTransition } from "@/components/ui/page-transition"
 import { CollapsibleSection } from "@/components/medical-records/collapsible-section"
-import { ManagementPlan } from "@/types/medical-records"
 import { BackButton } from "@/components/ui/back-button"
+import { PageTransition } from "@/components/ui/page-transition"
+import { ManagementPlan } from "@/types/medical-records"
 
 interface ManagementPlanPageClientProps {
   data: ManagementPlan
@@ -28,7 +28,9 @@ export default function ManagementPlanPageClient({ data }: ManagementPlanPageCli
 
             <div className="mt-4 flex gap-3 rounded-xl bg-blue-50 p-4">
               <Info className="h-5 w-5 flex-shrink-0 text-[#0066CC]" />
-              <p className="text-sm leading-relaxed text-gray-600">{data.preDiagnosis.disclaimer}</p>
+              <p className="text-sm leading-relaxed text-gray-600">
+                {data.preDiagnosis.disclaimer}
+              </p>
             </div>
           </CollapsibleSection>
         )}
@@ -50,7 +52,9 @@ export default function ManagementPlanPageClient({ data }: ManagementPlanPageCli
         {/* Laboratory Test Request */}
         {data.labTestRequest && (
           <CollapsibleSection title="Laboratory Test Request" defaultOpen>
-            <p className="mb-4 text-sm leading-relaxed text-gray-700">{data.labTestRequest.description}</p>
+            <p className="mb-4 text-sm leading-relaxed text-gray-700">
+              {data.labTestRequest.description}
+            </p>
             <ul className="list-disc space-y-2 pl-5">
               {data.labTestRequest.tests.map((test, index) => (
                 <li key={index} className="text-sm text-gray-700">
@@ -90,9 +94,10 @@ export default function ManagementPlanPageClient({ data }: ManagementPlanPageCli
         {data.hospitalReferral && (
           <CollapsibleSection title="Hospital Referral" defaultOpen>
             <p className="text-sm leading-relaxed text-gray-700">
-              You are advised to visit <span className="font-semibold">{data.hospitalReferral.hospitalName}</span>,{" "}
-              <span className="font-semibold">{data.hospitalReferral.location}</span> for {data.hospitalReferral.reason}
-              .
+              You are advised to visit{' '}
+              <span className="font-semibold">{data.hospitalReferral.hospitalName}</span>,{' '}
+              <span className="font-semibold">{data.hospitalReferral.location}</span> for{' '}
+              {data.hospitalReferral.reason}.
             </p>
             {data.hospitalReferral.mapsLink && (
               <Link

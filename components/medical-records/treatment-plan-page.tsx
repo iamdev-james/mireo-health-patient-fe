@@ -2,11 +2,11 @@
 
 import { ExternalLink } from "lucide-react"
 import Link from "next/link"
-import { PageTransition } from "@/components/ui/page-transition"
 import { CollapsibleSection } from "@/components/medical-records/collapsible-section"
-import { TreatmentPlan } from "@/types/medical-records"
 import { BackButton } from "@/components/ui/back-button"
 import { Button } from "@/components/ui/button"
+import { PageTransition } from "@/components/ui/page-transition"
+import { TreatmentPlan } from "@/types/medical-records"
 
 interface TreatmentPlanPageClientProps {
   data: TreatmentPlan
@@ -24,7 +24,10 @@ export default function TreatmentPlanPageClient({ data }: TreatmentPlanPageClien
       <div className="space-y-6 px-6 py-6">
         {/* Full consultation note link */}
         {data.consultationNoteLink && (
-          <Link href={data.consultationNoteLink} className="flex items-center gap-2 text-[#0066CC] hover:underline">
+          <Link
+            href={data.consultationNoteLink}
+            className="flex items-center gap-2 text-[#0066CC] hover:underline"
+          >
             <span className="font-medium">Full consultation note</span>
             <ExternalLink className="h-4 w-4" />
           </Link>
@@ -35,7 +38,9 @@ export default function TreatmentPlanPageClient({ data }: TreatmentPlanPageClien
           <h2 className="mb-4 text-lg font-semibold text-gray-900">Diagnosis</h2>
           <div className="rounded-2xl border border-gray-200 bg-white p-6">
             <h3 className="text-lg font-semibold text-gray-900">{data.diagnosis.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-gray-600">{data.diagnosis.description}</p>
+            <p className="mt-2 text-sm leading-relaxed text-gray-600">
+              {data.diagnosis.description}
+            </p>
           </div>
         </div>
 
@@ -72,8 +77,9 @@ export default function TreatmentPlanPageClient({ data }: TreatmentPlanPageClien
           {data.hospitalReferral && (
             <CollapsibleSection title="Hospital Referral" defaultOpen>
               <p className="text-sm leading-relaxed text-gray-700">
-                You are advised to visit <span className="font-semibold">{data.hospitalReferral.hospitalName}</span>,{" "}
-                <span className="font-semibold">{data.hospitalReferral.location}</span> for{" "}
+                You are advised to visit{' '}
+                <span className="font-semibold">{data.hospitalReferral.hospitalName}</span>,{' '}
+                <span className="font-semibold">{data.hospitalReferral.location}</span> for{' '}
                 {data.hospitalReferral.reason}.
               </p>
               {data.hospitalReferral.mapsLink && (

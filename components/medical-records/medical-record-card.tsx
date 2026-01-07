@@ -1,7 +1,7 @@
 // components/medical-records/medical-record-card.tsx
 
-import Link from "next/link"
 import { ChevronRight } from "lucide-react"
+import Link from "next/link"
 import { RecordType } from "@/types/medical-records"
 
 interface MedicalRecordCardProps {
@@ -12,13 +12,13 @@ interface MedicalRecordCardProps {
 }
 
 const typeRoutes: Record<RecordType, string> = {
-  screening: "/medical-records/screening",
-  consultation: "/medical-records/consultation",
-  lab_test: "/medical-records/lab-tests",
+  screening: '/medical-records/screening',
+  consultation: '/medical-records/treatment-plan',
+  lab_test: '/medical-records/lab-tests',
 }
 
-export function MedicalRecordCard({ id, type, title, date }: MedicalRecordCardProps) {
-  const href = `${typeRoutes[type]}/${id}`
+export function MedicalRecordCard({ type, title, date }: MedicalRecordCardProps) {
+  const href = typeRoutes[type]
 
   return (
     <Link
