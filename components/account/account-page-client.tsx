@@ -54,7 +54,7 @@ export default function AccountPageClient({ userData }: AccountPageClientProps) 
             <div className="">
               <MenuListItem label="Past medical history" href="/account/medical-history" />
               <hr className="mx-3 my-1" />
-              <MenuListItem label="Medical records" href="/account/medical-records" />
+              <MenuListItem label="Medical records" href="/medical-records" />
               <hr className="mx-3 my-1" />
               <MenuListItem label="Monthly report" href="/account/monthly-report" />
             </div>
