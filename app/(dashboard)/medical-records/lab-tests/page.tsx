@@ -8,27 +8,27 @@ export const metadata = {
   description: "View and upload your lab test results",
 }
 
-export async function getLabTests(): Promise<LabTest[]> {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "/api"}/medical-records/lab-tests`, {
-      headers: {
-        // In production, get token from cookies
-        // Authorization: `Bearer ${token}`,
-      },
-      cache: "no-store",
-    })
+// async function getLabTests(): Promise<LabTest[]> {
+//   try {
+//     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "/api"}/medical-records/lab-tests`, {
+//       headers: {
+//         // In production, get token from cookies
+//         // Authorization: `Bearer ${token}`,
+//       },
+//       cache: "no-store",
+//     })
 
-    if (!response.ok) {
-      return []
-    }
+//     if (!response.ok) {
+//       return []
+//     }
 
-    const data = (await response.json()) as { data: { tests: LabTest[] } }
-    return data?.data.tests
-  } catch (error) {
-    console.error("Failed to fetch lab tests:", error)
-    return []
-  }
-}
+//     const data = (await response.json()) as { data: { tests: LabTest[] } }
+//     return data?.data.tests
+//   } catch (error) {
+//     console.error("Failed to fetch lab tests:", error)
+//     return []
+//   }
+// }
 
 export default async function LabTestsPage() {
   // Mock data for development

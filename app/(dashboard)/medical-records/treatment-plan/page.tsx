@@ -8,27 +8,27 @@ export const metadata = {
   description: "View your treatment plan",
 }
 
-export async function getTreatmentPlan(): Promise<TreatmentPlan | null> {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "/api"}/medical-records/treatment-plan`, {
-      headers: {
-        // In production, get token from cookies
-        // Authorization: `Bearer ${token}`,
-      },
-      cache: "no-store",
-    })
+// async function getTreatmentPlan(): Promise<TreatmentPlan | null> {
+//   try {
+//     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "/api"}/medical-records/treatment-plan`, {
+//       headers: {
+//         // In production, get token from cookies
+//         // Authorization: `Bearer ${token}`,
+//       },
+//       cache: "no-store",
+//     })
 
-    if (!response.ok) {
-      return null
-    }
+//     if (!response.ok) {
+//       return null
+//     }
 
-    const data = (await response.json()) as { data: TreatmentPlan }
-    return data.data
-  } catch (error) {
-    console.error("Failed to fetch treatment plan:", error)
-    return null
-  }
-}
+//     const data = (await response.json()) as { data: TreatmentPlan }
+//     return data.data
+//   } catch (error) {
+//     console.error("Failed to fetch treatment plan:", error)
+//     return null
+//   }
+// }
 
 export default async function TreatmentPlanPage() {
   // Mock data for development

@@ -8,27 +8,27 @@ export const metadata = {
   description: "View your screening results",
 }
 
-export async function getScreeningResult(): Promise<ScreeningResult | null> {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "/api"}/medical-records/screening`, {
-      headers: {
-        // In production, get token from cookies
-        // Authorization: `Bearer ${token}`,
-      },
-      cache: "no-store",
-    })
+// async function getScreeningResult(): Promise<ScreeningResult | null> {
+//   try {
+//     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "/api"}/medical-records/screening`, {
+//       headers: {
+//         // In production, get token from cookies
+//         // Authorization: `Bearer ${token}`,
+//       },
+//       cache: "no-store",
+//     })
 
-    if (!response.ok) {
-      return null
-    }
+//     if (!response.ok) {
+//       return null
+//     }
 
-    const data = (await response.json()) as { data: ScreeningResult }
-    return data.data
-  } catch (error) {
-    console.error("Failed to fetch screening result:", error)
-    return null
-  }
-}
+//     const data = (await response.json()) as { data: ScreeningResult }
+//     return data.data
+//   } catch (error) {
+//     console.error("Failed to fetch screening result:", error)
+//     return null
+//   }
+// }
 
 export default async function ScreeningResultPage() {
   // Mock data for development

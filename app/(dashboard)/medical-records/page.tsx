@@ -8,27 +8,27 @@ export const metadata = {
   description: "View your medical records",
 }
 
-export async function getMedicalRecords(): Promise<MedicalRecord[]> {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "/api"}/medical-records`, {
-      headers: {
-        // In production, get token from cookies
-        // Authorization: `Bearer ${token}`,
-      },
-      cache: "no-store",
-    })
+// async function getMedicalRecords(): Promise<MedicalRecord[]> {
+//   try {
+//     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "/api"}/medical-records`, {
+//       headers: {
+//         // In production, get token from cookies
+//         // Authorization: `Bearer ${token}`,
+//       },
+//       cache: "no-store",
+//     })
 
-    if (!response.ok) {
-      return []
-    }
+//     if (!response.ok) {
+//       return []
+//     }
 
-    const data = (await response.json()) as { data: MedicalRecord[] }
-    return data.data
-  } catch (error) {
-    console.error("Failed to fetch medical records:", error)
-    return []
-  }
-}
+//     const data = (await response.json()) as { data: MedicalRecord[] }
+//     return data.data
+//   } catch (error) {
+//     console.error("Failed to fetch medical records:", error)
+//     return []
+//   }
+// }
 
 export default async function MedicalRecordsPage() {
   // Mock data for development

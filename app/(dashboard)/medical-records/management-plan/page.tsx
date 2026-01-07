@@ -8,27 +8,27 @@ export const metadata = {
   description: "View your management plan",
 }
 
-export async function getManagementPlan(): Promise<ManagementPlan | null> {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "/api"}/medical-records/management-plan`, {
-      headers: {
-        // In production, get token from cookies
-        // Authorization: `Bearer ${token}`,
-      },
-      cache: "no-store",
-    })
+// async function getManagementPlan(): Promise<ManagementPlan | null> {
+//   try {
+//     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "/api"}/medical-records/management-plan`, {
+//       headers: {
+//         // In production, get token from cookies
+//         // Authorization: `Bearer ${token}`,
+//       },
+//       cache: "no-store",
+//     })
 
-    if (!response.ok) {
-      return null
-    }
+//     if (!response.ok) {
+//       return null
+//     }
 
-    const data = (await response.json()) as { data: ManagementPlan }
-    return data.data
-  } catch (error) {
-    console.error("Failed to fetch management plan:", error)
-    return null
-  }
-}
+//     const data = (await response.json()) as { data: ManagementPlan }
+//     return data.data
+//   } catch (error) {
+//     console.error("Failed to fetch management plan:", error)
+//     return null
+//   }
+// }
 
 export default async function ManagementPlanPage() {
   // Mock data for development

@@ -8,27 +8,27 @@ export const metadata = {
   description: "View your pre-diagnosis",
 }
 
-export async function getPreDiagnosis(): Promise<PreDiagnosis | null> {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "/api"}/medical-records/pre-diagnosis`, {
-      headers: {
-        // In production, get token from cookies
-        // Authorization: `Bearer ${token}`,
-      },
-      cache: "no-store",
-    })
+// async function getPreDiagnosis(): Promise<PreDiagnosis | null> {
+//   try {
+//     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "/api"}/medical-records/pre-diagnosis`, {
+//       headers: {
+//         // In production, get token from cookies
+//         // Authorization: `Bearer ${token}`,
+//       },
+//       cache: "no-store",
+//     })
 
-    if (!response.ok) {
-      return null
-    }
+//     if (!response.ok) {
+//       return null
+//     }
 
-    const data = (await response.json()) as { data: PreDiagnosis }
-    return data.data
-  } catch (error) {
-    console.error("Failed to fetch pre-diagnosis:", error)
-    return null
-  }
-}
+//     const data = (await response.json()) as { data: PreDiagnosis }
+//     return data.data
+//   } catch (error) {
+//     console.error("Failed to fetch pre-diagnosis:", error)
+//     return null
+//   }
+// }
 
 export default async function PreDiagnosisPage() {
   // Mock data for development
