@@ -15,13 +15,13 @@ interface ScreeningResultsPageClientProps {
 export default function ScreeningResultsPageClient({ data }: ScreeningResultsPageClientProps) {
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'normal':
-        return 'text-green-600'
-      case 'high':
-      case 'low':
-        return 'text-red-600'
+      case "normal":
+        return "text-green-600"
+      case "high":
+      case "low":
+        return "text-red-600"
       default:
-        return 'text-gray-600'
+        return "text-gray-600"
     }
   }
 
@@ -106,14 +106,14 @@ export default function ScreeningResultsPageClient({ data }: ScreeningResultsPag
                 <div className="rounded-xl bg-gray-50 p-4">
                   <p className="text-sm text-gray-500">Random Blood Sugar</p>
                   <p className="mt-2 text-xl font-semibold text-gray-900">
-                    {data.baselineTests.bloodSugar.random.value}{' '}
+                    {data.baselineTests.bloodSugar.random.value}{" "}
                     <span className="text-sm font-normal text-gray-500">
                       {data.baselineTests.bloodSugar.random.unit}
                     </span>
                   </p>
                   <p
                     className={cn(
-                      'mt-1 text-sm font-medium',
+                      "mt-1 text-sm font-medium",
                       getStatusColor(data.baselineTests.bloodSugar.random.status)
                     )}
                   >
@@ -124,14 +124,14 @@ export default function ScreeningResultsPageClient({ data }: ScreeningResultsPag
                 <div className="rounded-xl bg-gray-50 p-4">
                   <p className="text-sm text-gray-500">Fasting Blood Sugar</p>
                   <p className="mt-2 text-xl font-semibold text-gray-900">
-                    {data.baselineTests.bloodSugar.fasting.value}{' '}
+                    {data.baselineTests.bloodSugar.fasting.value}{" "}
                     <span className="text-sm font-normal text-gray-500">
                       {data.baselineTests.bloodSugar.fasting.unit}
                     </span>
                   </p>
                   <p
                     className={cn(
-                      'mt-1 text-sm font-medium',
+                      "mt-1 text-sm font-medium",
                       getStatusColor(data.baselineTests.bloodSugar.fasting.status)
                     )}
                   >
@@ -150,7 +150,7 @@ export default function ScreeningResultsPageClient({ data }: ScreeningResultsPag
                   <div key={index} className="rounded-xl bg-gray-50 p-4">
                     <p className="text-sm text-gray-500">{test.label}</p>
                     <p className="mt-2 text-xl font-semibold text-gray-900">{test.value}</p>
-                    <p className={cn('mt-1 text-sm font-medium', getStatusColor(test.status))}>
+                    <p className={cn("mt-1 text-sm font-medium", getStatusColor(test.status))}>
                       {test.status.charAt(0).toUpperCase() + test.status.slice(1)}
                     </p>
                   </div>

@@ -14,11 +14,11 @@ interface LabTestsPageClientProps {
 export default function LabTestsPageClient({ tests }: LabTestsPageClientProps) {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
-    return date.toLocaleString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
+    return date.toLocaleString("en-US", {
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
       hour12: true,
     })
   }
@@ -36,17 +36,12 @@ export default function LabTestsPageClient({ tests }: LabTestsPageClientProps) {
           <div className="mt-12 text-center">
             <FileText className="mx-auto h-12 w-12 text-gray-300" />
             <p className="mt-4 text-gray-500">No lab tests yet</p>
-            <p className="mt-2 text-sm text-gray-400">
-              Your laboratory test results will appear here
-            </p>
+            <p className="mt-2 text-sm text-gray-400">Your laboratory test results will appear here</p>
           </div>
         ) : (
           <div className="space-y-3">
             {tests.map((test) => (
-              <div
-                key={test.id}
-                className="rounded-2xl border border-gray-200 bg-white p-6"
-              >
+              <div key={test.id} className="rounded-2xl border border-gray-200 bg-white p-6">
                 <h3 className="text-lg font-semibold text-gray-900">{test.name}</h3>
                 <div className="mt-2 flex items-center gap-2 text-sm text-gray-500">
                   <FileText className="h-4 w-4" />
@@ -55,10 +50,7 @@ export default function LabTestsPageClient({ tests }: LabTestsPageClientProps) {
                   <span>{formatDate(test.uploadDate)}</span>
                 </div>
                 {test.resultLink && (
-                  <Link
-                    href={test.resultLink}
-                    className="mt-4 inline-block font-medium text-[#0066CC] hover:underline"
-                  >
+                  <Link href={test.resultLink} className="mt-4 inline-block font-medium text-[#0066CC] hover:underline">
                     View result
                   </Link>
                 )}

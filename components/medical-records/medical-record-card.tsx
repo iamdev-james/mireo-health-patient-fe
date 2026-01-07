@@ -12,9 +12,9 @@ interface MedicalRecordCardProps {
 }
 
 const typeRoutes: Record<RecordType, string> = {
-  screening: '/medical-records/screening',
-  consultation: '/medical-records/treatment-plan',
-  lab_test: '/medical-records/lab-tests',
+  screening: "/medical-records/screening",
+  consultation: "/medical-records/treatment-plan",
+  lab_test: "/medical-records/lab-tests",
 }
 
 export function MedicalRecordCard({ type, title, date }: MedicalRecordCardProps) {

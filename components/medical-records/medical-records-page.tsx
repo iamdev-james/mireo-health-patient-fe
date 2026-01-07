@@ -22,9 +22,7 @@ export default function MedicalRecordsPageClient({ records }: MedicalRecordsPage
         {records.length === 0 ? (
           <div className="mt-12 text-center">
             <p className="text-gray-500">No medical records found</p>
-            <p className="mt-2 text-sm text-gray-400">
-              Your medical records will appear here after consultations
-            </p>
+            <p className="mt-2 text-sm text-gray-400">Your medical records will appear here after consultations</p>
           </div>
         ) : (
           <div className="space-y-3">
