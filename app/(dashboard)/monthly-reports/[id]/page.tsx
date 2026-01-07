@@ -1,12 +1,18 @@
 // app/(dashboard)/monthly-reports/[id]/page.tsx
 
-import { notFound } from "next/navigation"
+// import { notFound } from "next/navigation"
 import MonthlyReportDetailPageClient from "@/components/monthly-reports/monthly-report-detail-page"
 import { MonthlyReportDetail } from "@/types/monthly-reports"
 
 export const metadata = {
   title: "Monthly Report | Mireo Health",
   description: "View your monthly report details",
+}
+
+interface PageProps {
+  params: Promise<{
+    id: string
+  }>
 }
 
 async function getMonthlyReportDetail(id: string): Promise<MonthlyReportDetail | null> {
@@ -31,10 +37,11 @@ async function getMonthlyReportDetail(id: string): Promise<MonthlyReportDetail |
   }
 }
 
-export default async function MonthlyReportDetailPage({ params }: { params: { id: string } }) {
+export default async function MonthlyReportDetailPage({ params }: PageProps) {
+  const { id } = await params
   // Mock data for development
   const reportData: MonthlyReportDetail = {
-    id: params?.id,
+    id: id,
     userInfo: {
       name: "Rufus Oluwaseyi",
       reportMonth: "November 2025",

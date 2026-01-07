@@ -8,27 +8,27 @@ export const metadata = {
   description: "View your monthly health reports",
 }
 
-async function getMonthlyReports(): Promise<MonthlyReportListItem[]> {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "/api"}/monthly-reports`, {
-      headers: {
-        // In production, get token from cookies
-        // Authorization: `Bearer ${token}`,
-      },
-      cache: "no-store",
-    })
+// async function getMonthlyReports(): Promise<MonthlyReportListItem[]> {
+//   try {
+//     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "/api"}/monthly-reports`, {
+//       headers: {
+//         // In production, get token from cookies
+//         // Authorization: `Bearer ${token}`,
+//       },
+//       cache: "no-store",
+//     })
 
-    if (!response.ok) {
-      return []
-    }
+//     if (!response.ok) {
+//       return []
+//     }
 
-    const data = (await response.json()) as { data: MonthlyReportListItem[] }
-    return data.data
-  } catch (error) {
-    console.error("Failed to fetch monthly reports:", error)
-    return []
-  }
-}
+//     const data = (await response.json()) as { data: MonthlyReportListItem[] }
+//     return data.data
+//   } catch (error) {
+//     console.error("Failed to fetch monthly reports:", error)
+//     return []
+//   }
+// }
 
 export default async function MonthlyReportsPage() {
   // Mock data for development
