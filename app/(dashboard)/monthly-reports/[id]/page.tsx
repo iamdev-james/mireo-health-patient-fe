@@ -34,7 +34,7 @@ async function getMonthlyReportDetail(id: string): Promise<MonthlyReportDetail |
 export default async function MonthlyReportDetailPage({ params }: { params: { id: string } }) {
   // Mock data for development
   const reportData: MonthlyReportDetail = {
-    id: params.id,
+    id: params?.id,
     userInfo: {
       name: "Rufus Oluwaseyi",
       reportMonth: "November 2025",
