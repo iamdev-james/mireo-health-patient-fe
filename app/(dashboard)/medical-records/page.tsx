@@ -1,6 +1,5 @@
 // app/(dashboard)/medical-records/page.tsx
 
-import { redirect } from 'next/navigation'
 import MedicalRecordsPageClient from '@/components/medical-records/medical-records-page'
 import { MedicalRecord } from '@/types/medical-records'
 
@@ -9,7 +8,7 @@ export const metadata = {
   description: 'View your medical records',
 }
 
-async function getMedicalRecords(): Promise<MedicalRecord[]> {
+export async function getMedicalRecords(): Promise<MedicalRecord[]> {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api'}/medical-records`, {
       headers: {

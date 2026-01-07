@@ -1,6 +1,5 @@
 // app/(dashboard)/medical-records/pre-diagnosis/page.tsx
 
-import { notFound } from 'next/navigation'
 import PreDiagnosisPageClient from '@/components/medical-records/pre-diagnosis-page'
 import { PreDiagnosis } from '@/types/medical-records'
 
@@ -9,7 +8,7 @@ export const metadata = {
   description: 'View your pre-diagnosis',
 }
 
-async function getPreDiagnosis(): Promise<PreDiagnosis | null> {
+export async function getPreDiagnosis(): Promise<PreDiagnosis | null> {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL || '/api'}/medical-records/pre-diagnosis`,
@@ -26,7 +25,7 @@ async function getPreDiagnosis(): Promise<PreDiagnosis | null> {
       return null
     }
 
-    const data = await response.json()
+    const data = await response.json() as { data: PreDiagnosis }
     return data.data
   } catch (error) {
     console.error('Failed to fetch pre-diagnosis:', error)

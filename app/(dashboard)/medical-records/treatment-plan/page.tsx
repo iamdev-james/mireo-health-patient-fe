@@ -1,6 +1,5 @@
 // app/(dashboard)/medical-records/treatment-plan/page.tsx
 
-import { notFound } from 'next/navigation'
 import TreatmentPlanPageClient from '@/components/medical-records/treatment-plan-page'
 import { TreatmentPlan } from '@/types/medical-records'
 
@@ -9,7 +8,7 @@ export const metadata = {
   description: 'View your treatment plan',
 }
 
-async function getTreatmentPlan(): Promise<TreatmentPlan | null> {
+export async function getTreatmentPlan(): Promise<TreatmentPlan | null> {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL || '/api'}/medical-records/treatment-plan`,

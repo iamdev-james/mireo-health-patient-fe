@@ -8,7 +8,7 @@ export const metadata = {
   description: 'View and upload your lab test results',
 }
 
-async function getLabTests(): Promise<LabTest[]> {
+export async function getLabTests(): Promise<LabTest[]> {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL || '/api'}/medical-records/lab-tests`,

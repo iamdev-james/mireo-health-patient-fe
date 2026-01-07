@@ -1,6 +1,5 @@
 // app/(dashboard)/medical-records/screening/page.tsx
 
-import { notFound } from 'next/navigation'
 import ScreeningResultsPageClient from '@/components/medical-records/screening-results-page'
 import { ScreeningResult } from '@/types/medical-records'
 
@@ -9,7 +8,7 @@ export const metadata = {
   description: 'View your screening results',
 }
 
-async function getScreeningResult(): Promise<ScreeningResult | null> {
+export async function getScreeningResult(): Promise<ScreeningResult | null> {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL || '/api'}/medical-records/screening`,

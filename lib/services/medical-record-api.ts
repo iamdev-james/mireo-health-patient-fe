@@ -1,5 +1,3 @@
-// lib/services/medical-record-api.ts
-
 import { APIError, fetchAPI } from '@/lib/utils/api'
 import {
   LabTestsResponse,
@@ -58,6 +56,7 @@ export const medicalRecordsAPI = {
     formData.append('file', file)
     formData.append('testId', testId)
 
+    // Note: For FormData, we need to override headers
     const token = typeof window !== 'undefined' ? sessionStorage.getItem('auth_token') : null
     
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api'}/medical-records/lab-tests/upload`, {
@@ -72,7 +71,7 @@ export const medicalRecordsAPI = {
       throw new Error('Upload failed')
     }
 
-    return response.json()
+    return response.json() as Promise<{ success: boolean }>
   },
 }
 
