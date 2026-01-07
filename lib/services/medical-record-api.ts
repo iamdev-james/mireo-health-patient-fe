@@ -1,56 +1,6 @@
-import { APIError, fetchAPI } from "@/lib/utils/api"
-import {
-  LabTestsResponse,
-  ManagementPlanResponse,
-  MedicalRecordsResponse,
-  PreDiagnosis,
-  ScreeningResultResponse,
-  TreatmentPlanResponse,
-} from "@/types/medical-records"
+import { APIError } from "@/lib/utils/api"
 
 export const medicalRecordsAPI = {
-  getMedicalRecords: async (): Promise<MedicalRecordsResponse> => {
-    return fetchAPI<MedicalRecordsResponse>("/medical-records", {
-      method: "GET",
-      requiresAuth: true,
-    })
-  },
-
-  getScreeningResult: async (): Promise<ScreeningResultResponse> => {
-    return fetchAPI<ScreeningResultResponse>("/medical-records/screening", {
-      method: "GET",
-      requiresAuth: true,
-    })
-  },
-
-  getTreatmentPlan: async (): Promise<TreatmentPlanResponse> => {
-    return fetchAPI<TreatmentPlanResponse>("/medical-records/treatment-plan", {
-      method: "GET",
-      requiresAuth: true,
-    })
-  },
-
-  getManagementPlan: async (): Promise<ManagementPlanResponse> => {
-    return fetchAPI<ManagementPlanResponse>("/medical-records/management-plan", {
-      method: "GET",
-      requiresAuth: true,
-    })
-  },
-
-  getPreDiagnosis: async (): Promise<{ success: boolean; data: PreDiagnosis }> => {
-    return fetchAPI<{ success: boolean; data: PreDiagnosis }>("/medical-records/pre-diagnosis", {
-      method: "GET",
-      requiresAuth: true,
-    })
-  },
-
-  getLabTests: async (): Promise<LabTestsResponse> => {
-    return fetchAPI<LabTestsResponse>("/medical-records/lab-tests", {
-      method: "GET",
-      requiresAuth: true,
-    })
-  },
-
   uploadLabResult: async (testId: string, file: File): Promise<{ success: boolean }> => {
     const formData = new FormData()
     formData.append("file", file)
