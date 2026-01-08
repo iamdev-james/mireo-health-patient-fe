@@ -47,8 +47,8 @@ export default async function MedicalRecordsPage() {
     },
     {
       id: "3",
-      type: "consultation",
-      title: "Doctor's consultation",
+      type: "lab_test",
+      title: "Lab Result Review",
       date: "12, Nov 2025",
     },
   ]

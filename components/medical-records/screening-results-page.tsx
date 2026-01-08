@@ -157,7 +157,7 @@ export default function ScreeningResultsPageClient({ data }: ScreeningResultsPag
         {/* View Pre-diagnosis Button */}
         <Link
           href="/medical-records/pre-diagnosis"
-          className="bg-primary hover:bg-primary/90 block w-full rounded-md py-3 text-center text-lg font-medium text-white"
+          className="bg-primary hover:bg-primary/90 block w-full rounded-md py-3 text-center text-sm font-medium text-white"
           prefetch
         >
           View pre - diagnosis
