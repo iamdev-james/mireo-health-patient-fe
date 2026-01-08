@@ -13,7 +13,7 @@ interface TreatmentPlanPageClientProps {
 
 export default function TreatmentPlanPageClient({ data }: TreatmentPlanPageClientProps) {
   return (
-    <PageTransition className=" m-auto min-h-screen w-full max-w-2xl bg-white pb-20">
+    <PageTransition className="m-auto min-h-screen w-full max-w-2xl bg-white pb-20">
       <div className="sticky top-0 z-10 grid grid-cols-3 items-center bg-white px-4 py-4">
         <BackButton />
         <p className="text-center text-lg font-medium text-nowrap md:text-xl">Treatment plan</p>
@@ -49,7 +49,7 @@ export default function TreatmentPlanPageClient({ data }: TreatmentPlanPageClien
           <CollapsibleSection
             title="Medication prescription"
             defaultOpen
-            className="mb-3 rounded-2xl border border-gray-50 bg-white p-4"
+            className="mb-3 rounded-xl border border-gray-50 bg-white p-4"
           >
             <div className="space-y-5 border-t border-gray-50 pt-4">
               {data.medications.map((med, index) => (
@@ -66,7 +66,7 @@ export default function TreatmentPlanPageClient({ data }: TreatmentPlanPageClien
             <CollapsibleSection
               title="Lifestyle recommendations"
               defaultOpen
-              className="mb-3 rounded-2xl border border-gray-50 p-4"
+              className="mb-3 rounded-xl border border-gray-50 p-4"
             >
               <ul className="list-disc space-y-2 pl-5">
                 {data.lifestyleRecommendations.map((rec, index) => (
@@ -83,7 +83,7 @@ export default function TreatmentPlanPageClient({ data }: TreatmentPlanPageClien
             <CollapsibleSection
               title="Hospital Referral"
               defaultOpen
-              className="rounded-2xl border border-gray-50 bg-white p-4"
+              className="rounded-xl border border-gray-50 bg-white p-4"
             >
               <p className="text-sm leading-relaxed text-gray-400">
                 You are advised to visit <span className="text-black">{data.hospitalReferral.hospitalName}</span>,{" "}
