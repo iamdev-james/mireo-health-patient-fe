@@ -1,6 +1,6 @@
 // components/medical-records/medical-records-page.tsx
 
-import { MoveUpRight, Info } from "lucide-react"
+import { Info, MoveUpRight } from "lucide-react"
 import Link from "next/link"
 import { CollapsibleSection } from "@/components/medical-records/collapsible-section"
 import { BackButton } from "@/components/ui/back-button"

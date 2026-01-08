@@ -1,10 +1,9 @@
 // components/medical-records/medical-records-page.tsx
 
-import { MoveUpRight, ArrowRight } from "lucide-react"
+import { ArrowRight, MoveUpRight } from "lucide-react"
 import Link from "next/link"
 import { CollapsibleSection } from "@/components/medical-records/collapsible-section"
 import { BackButton } from "@/components/ui/back-button"
-import { Button } from "@/components/ui/button"
 import { PageTransition } from "@/components/ui/page-transition"
 import { TreatmentPlan } from "@/types/medical-records"
 

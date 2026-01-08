@@ -2,9 +2,9 @@
 
 "use client"
 
-import { useState } from "react"
 import { Trash2, X } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { useState } from "react"
 import { MenuListItem } from "@/components/account/menu-list-item"
 import { UserProfileHeader } from "@/components/account/user-profile-header"
 import { Button } from "@/components/ui/button"

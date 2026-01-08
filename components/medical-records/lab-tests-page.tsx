@@ -1,6 +1,6 @@
 // components/medical-records/medical-records-page.tsx
 
-import { FileText, FileCheck } from "lucide-react"
+import { FileCheck, FileText } from "lucide-react"
 import Link from "next/link"
 import { BackButton } from "@/components/ui/back-button"
 import { Button } from "@/components/ui/button"

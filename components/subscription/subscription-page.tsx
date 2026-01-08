@@ -2,12 +2,12 @@
 
 "use client"
 
-import { useState } from "react"
+import { CheckCircle2, Copy, CreditCard, X } from "lucide-react"
 import { useRouter } from "next/navigation"
-import { Copy, CreditCard, X, CheckCircle2 } from "lucide-react"
-import { PageTransition } from "@/components/ui/page-transition"
+import { useState } from "react"
 import { BackButton } from "@/components/ui/back-button"
 import { Button } from "@/components/ui/button"
+import { PageTransition } from "@/components/ui/page-transition"
 import { SubscriptionData } from "@/types/subscription"
 
 interface SubscriptionPageClientProps {
