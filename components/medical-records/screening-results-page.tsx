@@ -5,7 +5,6 @@ import { CollapsibleSection } from "@/components/medical-records/collapsible-sec
 import { VitalSignCard } from "@/components/medical-records/vital-sign-card"
 import { BackButton } from "@/components/ui/back-button"
 import { PageTransition } from "@/components/ui/page-transition"
-import { cn } from "@/lib/utils"
 import { ScreeningResult } from "@/types/medical-records"
 
 interface ScreeningResultsPageClientProps {
@@ -16,12 +15,12 @@ export default function ScreeningResultsPageClient({ data }: ScreeningResultsPag
   const getStatusColor = (status: string) => {
     switch (status) {
       case "normal":
-        return "text-green-600"
+        return "#12AF03"
       case "high":
       case "low":
-        return "text-red-600"
+        return "#F60000"
       default:
-        return "text-gray-600"
+        return "#6B7280" // gray-500
     }
   }
 
@@ -29,7 +28,7 @@ export default function ScreeningResultsPageClient({ data }: ScreeningResultsPag
     <PageTransition className="min-h-screen bg-white pb-20">
       <div className="sticky top-0 z-10 grid grid-cols-3 items-center bg-white px-4 py-4">
         <BackButton />
-        <p className="text-center text-lg font-medium md:text-xl">Screening Results</p>
+        <p className="text-center text-lg font-medium text-nowrap md:text-xl">Screening Results</p>
         <div />
       </div>
 
@@ -66,30 +65,32 @@ export default function ScreeningResultsPageClient({ data }: ScreeningResultsPag
 
         {/* BMI */}
         <CollapsibleSection title="BMI" defaultOpen>
-          <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <p className="text-sm text-gray-500">Height</p>
-                <p className="mt-1 text-base font-medium text-gray-900">
+          <div className="bg-gray-350 space-y-3 rounded-lg border border-gray-50 p-4">
+            <div className="space-y-3">
+              <div className="items-cemter flex justify-between">
+                <p className="text-sm text-gray-400">Height</p>
+                <p className="mt-1 text-base font-medium text-black">
                   {data.bmi.height}
-                  <span className="text-sm text-gray-500">{data.bmi.heightUnit}</span>
+                  <span className="ml-1 text-sm text-gray-400">{data.bmi.heightUnit}</span>
                 </p>
               </div>
-              <div>
-                <p className="text-sm text-gray-500">Weight</p>
-                <p className="mt-1 text-base font-medium text-gray-900">
+              <div className="items-cemter flex justify-between">
+                <p className="text-sm text-gray-400">Weight</p>
+                <p className="mt-1 text-base font-medium text-black">
                   {data.bmi.weight}
-                  <span className="text-sm text-gray-500">{data.bmi.weightUnit}</span>
+                  <span className="ml-1 text-sm text-gray-400">{data.bmi.weightUnit}</span>
                 </p>
               </div>
             </div>
-            <div className="rounded-xl bg-gray-50 p-4">
-              <p className="text-sm text-gray-500">BMI</p>
-              <p className="mt-1 text-2xl font-semibold text-gray-900">
-                {data.bmi.bmi}
-                <span className="text-sm font-normal text-gray-500">{data.bmi.bmiUnit}</span>
-              </p>
-              <p className={cn("mt-1 text-sm font-medium", getStatusColor(data.bmi.status))}>
+            <div className="border-t border-gray-100 pt-2">
+              <div className="flex items-center justify-between">
+                <p className="text-black">BMI</p>
+                <p className="mt-1 text-lg font-medium text-black">
+                  {data.bmi.bmi}
+                  <span className="ml-1 text-sm font-normal text-gray-500">{data.bmi.bmiUnit}</span>
+                </p>
+              </div>
+              <p className="mt-1 text-sm" style={{ color: getStatusColor(data.bmi.status) }}>
                 {data.bmi.status.charAt(0).toUpperCase() + data.bmi.status.slice(1)}
               </p>
             </div>
@@ -101,39 +102,29 @@ export default function ScreeningResultsPageClient({ data }: ScreeningResultsPag
           <div className="space-y-6">
             {/* Blood Sugar */}
             <div>
-              <p className="mb-3 font-medium text-gray-900">Blood Sugar</p>
-              <div className="grid grid-cols-2 gap-3">
-                <div className="rounded-xl bg-gray-50 p-4">
-                  <p className="text-sm text-gray-500">Random Blood Sugar</p>
-                  <p className="mt-2 text-xl font-semibold text-gray-900">
-                    {data.baselineTests.bloodSugar.random.value}{" "}
-                    <span className="text-sm font-normal text-gray-500">
-                      {data.baselineTests.bloodSugar.random.unit}
-                    </span>
+              <p className="mb-3 text-sm">Blood Sugar</p>
+              <div className="bg-gray-350 grid grid-cols-2 gap-3 rounded-lg border border-gray-50 p-4">
+                <div className="">
+                  <p className="text-sm text-gray-400">Random Blood Sugar</p>
+                  <p className="mt-2 text-xl font-medium">
+                    {data.baselineTests.bloodSugar.random.value} {data.baselineTests.bloodSugar.random.unit}
                   </p>
                   <p
-                    className={cn(
-                      "mt-1 text-sm font-medium",
-                      getStatusColor(data.baselineTests.bloodSugar.random.status)
-                    )}
+                    className="mt-1 text-sm"
+                    style={{ color: getStatusColor(data.baselineTests.bloodSugar.random.status) }}
                   >
                     {data.baselineTests.bloodSugar.random.status.charAt(0).toUpperCase() +
                       data.baselineTests.bloodSugar.random.status.slice(1)}
                   </p>
                 </div>
-                <div className="rounded-xl bg-gray-50 p-4">
-                  <p className="text-sm text-gray-500">Fasting Blood Sugar</p>
-                  <p className="mt-2 text-xl font-semibold text-gray-900">
-                    {data.baselineTests.bloodSugar.fasting.value}{" "}
-                    <span className="text-sm font-normal text-gray-500">
-                      {data.baselineTests.bloodSugar.fasting.unit}
-                    </span>
+                <div className="">
+                  <p className="text-sm text-gray-400">Fasting Blood Sugar</p>
+                  <p className="mt-2 text-xl font-medium">
+                    {data.baselineTests.bloodSugar.fasting.value} {data.baselineTests.bloodSugar.fasting.unit}
                   </p>
                   <p
-                    className={cn(
-                      "mt-1 text-sm font-medium",
-                      getStatusColor(data.baselineTests.bloodSugar.fasting.status)
-                    )}
+                    className="mt-1 text-sm"
+                    style={{ color: getStatusColor(data.baselineTests.bloodSugar.fasting.status) }}
                   >
                     {data.baselineTests.bloodSugar.fasting.status.charAt(0).toUpperCase() +
                       data.baselineTests.bloodSugar.fasting.status.slice(1)}
@@ -144,13 +135,16 @@ export default function ScreeningResultsPageClient({ data }: ScreeningResultsPag
 
             {/* Urinalysis */}
             <div>
-              <p className="mb-3 font-medium text-gray-900">Urinalysis</p>
-              <div className="grid grid-cols-2 gap-3">
+              <p className="mb-3 text-sm">Urinalysis</p>
+              <div className="bg-gray-350 grid grid-cols-2 rounded-lg border border-gray-50 px-4">
                 {data.baselineTests.urinalysis.map((test, index) => (
-                  <div key={index} className="rounded-xl bg-gray-50 p-4">
-                    <p className="text-sm text-gray-500">{test.label}</p>
-                    <p className="mt-2 text-xl font-semibold text-gray-900">{test.value}</p>
-                    <p className={cn("mt-1 text-sm font-medium", getStatusColor(test.status))}>
+                  <div
+                    key={index}
+                    className="border-b border-gray-50 py-5 last:border-0 [&:nth-last-child(2)]:border-b-0"
+                  >
+                    <p className="text-sm text-gray-400">{test.label}</p>
+                    <p className="mt-2 text-xl font-medium">{test.value}</p>
+                    <p className="mt-1 text-sm" style={{ color: getStatusColor(test.status) }}>
                       {test.status.charAt(0).toUpperCase() + test.status.slice(1)}
                     </p>
                   </div>
@@ -163,7 +157,8 @@ export default function ScreeningResultsPageClient({ data }: ScreeningResultsPag
         {/* View Pre-diagnosis Button */}
         <Link
           href="/medical-records/pre-diagnosis"
-          className="block w-full rounded-xl bg-[#0066CC] py-4 text-center text-lg font-medium text-white hover:bg-[#0052A3]"
+          className="bg-primary hover:bg-primary/90 block w-full rounded-md py-3 text-center text-lg font-medium text-white"
+          prefetch
         >
           View pre - diagnosis
         </Link>

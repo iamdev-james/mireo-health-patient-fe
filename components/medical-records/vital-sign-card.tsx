@@ -1,6 +1,5 @@
 // components/medical-records/vital-sign-card.tsx
 
-import { cn } from "@/lib/utils"
 import { VitalStatus } from "@/types/medical-records"
 
 interface VitalSignCardProps {
@@ -11,22 +10,24 @@ interface VitalSignCardProps {
 }
 
 const statusConfig = {
-  normal: { text: "Normal", color: "text-green-600" },
-  high: { text: "High", color: "text-red-600" },
-  low: { text: "Low", color: "text-red-600" },
+  normal: { text: "Normal", color: "#12AF03" },
+  high: { text: "High", color: "#F60000" },
+  low: { text: "Low", color: "#F60000" },
 }
 
 export function VitalSignCard({ label, value, unit, status }: VitalSignCardProps) {
   const config = statusConfig[status]
 
   return (
-    <div className="rounded-xl bg-gray-50 p-4">
-      <p className="text-sm text-gray-500">{label}</p>
-      <p className="mt-2 text-2xl font-semibold text-gray-900">
+    <div className="bg-gray-350 rounded-lg border border-gray-50 p-4">
+      <p className="text-sm text-gray-400 md:text-base">{label}</p>
+      <p className="mt-2 text-xl text-black">
         {value}
-        <span className="text-sm font-normal text-gray-500">{unit}</span>
+        <span className="ml-1.5 text-sm font-medium text-gray-400">{unit}</span>
       </p>
-      <p className={cn("mt-1 text-sm font-medium", config.color)}>{config.text}</p>
+      <p className="mt-1 text-sm md:text-base" style={{ color: config.color }}>
+        {config.text}
+      </p>
     </div>
   )
 }

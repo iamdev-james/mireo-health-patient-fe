@@ -60,6 +60,7 @@
   --color-gray-350: var(--gray-350);
   --color-gray-400: var(--gray-400);
   --color-gray-700: var(--gray-700);
+  --color-gray-800: var(--gray-800);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -103,6 +104,7 @@
   --gray-350: #f8fafc;
   --gray-400: #888888;
   --gray-700: #0a090b;
+  --gray-800: #444444;
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);

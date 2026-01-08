@@ -17,13 +17,13 @@ export function CollapsibleSection({ title, defaultOpen = false, children, class
   const [isOpen, setIsOpen] = useState(defaultOpen)
 
   return (
-    <div className={cn("rounded-2xl border border-gray-200 bg-white", className)}>
-      <button onClick={() => setIsOpen(!isOpen)} className="flex w-full items-center justify-between p-6">
-        <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
-        {isOpen ? <ChevronUp className="h-5 w-5 text-gray-400" /> : <ChevronDown className="h-5 w-5 text-gray-400" />}
+    <div className={cn("", className)}>
+      <button onClick={() => setIsOpen(!isOpen)} className="mb-1 flex w-full items-center justify-between">
+        <h3 className="text-xl text-black">{title}</h3>
+        {isOpen ? <ChevronUp className="h-5 w-5 text-gray-700" /> : <ChevronDown className="h-5 w-5 text-gray-700" />}
       </button>
 
-      {isOpen && <div className="border-t border-gray-100 px-6 pt-4 pb-6">{children}</div>}
+      {isOpen && <div className="pt-4">{children}</div>}
     </div>
   )
 }

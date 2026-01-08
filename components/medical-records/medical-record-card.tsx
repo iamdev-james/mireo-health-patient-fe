@@ -24,6 +24,7 @@ export function MedicalRecordCard({ type, title, date }: MedicalRecordCardProps)
     <Link
       href={href}
       className="flex items-center justify-between rounded-xl border border-solid border-gray-50 bg-white p-4 transition-colors hover:bg-gray-50/50 md:p-6"
+      prefetch
     >
       <div>
         <h3 className="text-lg text-black">{title}</h3>
