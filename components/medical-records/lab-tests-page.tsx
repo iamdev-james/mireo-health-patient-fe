@@ -1,6 +1,6 @@
 // components/medical-records/medical-records-page.tsx
 
-import { FileText } from "lucide-react"
+import { FileText, FileCheck } from "lucide-react"
 import Link from "next/link"
 import { BackButton } from "@/components/ui/back-button"
 import { Button } from "@/components/ui/button"
@@ -24,33 +24,33 @@ export default function LabTestsPageClient({ tests }: LabTestsPageClientProps) {
   }
 
   return (
-    <PageTransition className="min-h-screen bg-white pb-24">
-      <div className="sticky top-0 z-10 grid grid-cols-3 items-center bg-white px-4 py-4">
+    <PageTransition className="bg-gray-350 min-h-screen pb-24 md:bg-white">
+      <div className="bg-gray-350 sticky top-0 z-10 grid grid-cols-3 items-center px-4 py-4 md:bg-white">
         <BackButton />
-        <p className="text-center text-lg font-medium md:text-xl">Laboratory Tests</p>
+        <p className="text-center text-lg font-medium text-nowrap md:text-xl">Laboratory Tests</p>
         <div />
       </div>
 
-      <div className="px-6 py-6">
+      <div className="px-6 pt-2 pb-5">
         {tests.length === 0 ? (
           <div className="mt-12 text-center">
             <FileText className="mx-auto h-12 w-12 text-gray-300" />
-            <p className="mt-4 text-gray-500">No lab tests yet</p>
+            <p className="mt-4">No lab tests yet</p>
             <p className="mt-2 text-sm text-gray-400">Your laboratory test results will appear here</p>
           </div>
         ) : (
           <div className="space-y-3">
             {tests.map((test) => (
-              <div key={test.id} className="rounded-2xl border border-gray-200 bg-white p-6">
-                <h3 className="text-lg font-semibold text-gray-900">{test.name}</h3>
-                <div className="mt-2 flex items-center gap-2 text-sm text-gray-500">
-                  <FileText className="h-4 w-4" />
+              <div key={test.id} className="rounded-xl border border-gray-50 bg-white px-4 py-3">
+                <h3 className="text-lg font-medium">{test.name}</h3>
+                <div className="mt-1 flex items-center gap-2 text-xs text-gray-400">
+                  <FileCheck className="h-4 w-4" />
                   <span>Image uploaded</span>
                   <span>•</span>
                   <span>{formatDate(test.uploadDate)}</span>
                 </div>
                 {test.resultLink && (
-                  <Link href={test.resultLink} className="mt-4 inline-block font-medium text-[#0066CC] hover:underline">
+                  <Link href={test.resultLink} className="text-primary mt-1 ml-7 inline-block text-xs underline">
                     View result
                   </Link>
                 )}
@@ -61,9 +61,9 @@ export default function LabTestsPageClient({ tests }: LabTestsPageClientProps) {
       </div>
 
       {/* Upload results button */}
-      <div className="fixed inset-x-0 bottom-0 bg-white p-6 shadow-lg">
+      <div className="bg-gray-350 fixed inset-x-0 bottom-0 p-6 shadow-lg">
         <Link href="/medical-records/lab-tests/upload">
-          <Button className="h-14 w-full rounded-xl bg-[#0066CC] text-lg font-medium text-white hover:bg-[#0052A3]">
+          <Button className="w-full" size={"xl"} disabled>
             Upload results
           </Button>
         </Link>
