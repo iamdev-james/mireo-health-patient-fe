@@ -1,9 +1,7 @@
 // app/notifications/page.tsx
 
-import Link from "next/link"
-import { ChevronLeft } from "lucide-react"
-import { NotificationCard } from "@/components/notifications/notification-card"
 import { UserProfileHeader } from "@/components/account/user-profile-header"
+import { NotificationCard } from "@/components/notifications/notification-card"
 import { Notification } from "@/types/notifications"
 
 async function getNotifications(): Promise<Notification[]> {
