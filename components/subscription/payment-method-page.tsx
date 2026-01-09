@@ -8,6 +8,7 @@ import { BackButton } from "@/components/ui/back-button"
 import { Button } from "@/components/ui/button"
 import { PageTransition } from "@/components/ui/page-transition"
 import { PaymentMethodForm } from "@/types/subscription"
+import { Input } from "../ui/input"
 
 interface PaymentMethodPageClientProps {
   mode: "add" | "change"
@@ -47,10 +48,6 @@ export default function PaymentMethodPageClient({ mode }: PaymentMethodPageClien
     setIsSubmitting(true)
 
     try {
-      // API call to save payment method
-      await new Promise((resolve) => setTimeout(resolve, 1000)) // Mock delay
-
-      // Navigate back to subscription page
       router.push("/subscription")
     } catch (error) {
       console.error("Failed to save payment method:", error)
@@ -60,73 +57,66 @@ export default function PaymentMethodPageClient({ mode }: PaymentMethodPageClien
   }
 
   return (
-    <PageTransition className="min-h-screen bg-white">
+    <PageTransition className="m-auto min-h-screen w-full max-w-2xl bg-white">
       <div className="sticky top-0 z-10 grid grid-cols-3 items-center bg-white px-4 py-4">
         <BackButton />
-        <p className="text-center text-lg font-medium md:text-xl">
+        <p className="-ml-5 text-center text-lg font-medium text-nowrap md:text-xl">
           {mode === "add" ? "Add Payment Method" : "Change Payment Method"}
         </p>
-        <div />
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6 px-6 py-6">
-        {/* Card Number */}
         <div>
-          <label htmlFor="cardNumber" className="mb-2 block text-base font-medium text-gray-900">
+          <label htmlFor="cardNumber" className="mb-2 block text-sm md:text-base">
             Card number
           </label>
-          <input
+          <Input
             id="cardNumber"
             type="text"
             value={formData.cardNumber}
             onChange={(e) => handleInputChange("cardNumber", e.target.value)}
             placeholder="0000 0000 0000 00000"
             maxLength={19}
-            className="w-full rounded-xl border-0 bg-gray-50 px-4 py-4 text-base text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-[#0066CC] focus:outline-none"
             required
+            className="h-14"
           />
         </div>
 
-        {/* Expiry Date and CVV */}
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="expiryDate" className="mb-2 block text-base font-medium text-gray-900">
+            <label htmlFor="expiryDate" className="mb-2 block text-sm md:text-base">
               Expiry date
             </label>
-            <input
+            <Input
               id="expiryDate"
               type="text"
               value={formData.expiryDate}
               onChange={(e) => handleInputChange("expiryDate", e.target.value)}
               placeholder="MM/YY"
               maxLength={5}
-              className="w-full rounded-xl border-0 bg-gray-50 px-4 py-4 text-base text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-[#0066CC] focus:outline-none"
+              className="h-14"
               required
             />
           </div>
           <div>
-            <label htmlFor="cvv" className="mb-2 block text-base font-medium text-gray-900">
+            <label htmlFor="cvv" className="mb-2 block text-sm md:text-base">
               CVV
             </label>
-            <input
+            <Input
               id="cvv"
               type="password"
               value={formData.cvv}
               onChange={(e) => handleInputChange("cvv", e.target.value)}
               placeholder="***"
               maxLength={3}
-              className="w-full rounded-xl border-0 bg-gray-50 px-4 py-4 text-base text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-[#0066CC] focus:outline-none"
+              className="h-14"
               required
             />
           </div>
         </div>
 
         {/* Save Button */}
-        <Button
-          type="submit"
-          disabled={isSubmitting}
-          className="h-14 w-full rounded-xl bg-[#0066CC] text-lg font-medium text-white hover:bg-[#0052A3] disabled:opacity-50"
-        >
+        <Button type="submit" disabled={isSubmitting} className="w-full" size={"xl"}>
           {isSubmitting ? "Saving..." : "Save"}
         </Button>
       </form>

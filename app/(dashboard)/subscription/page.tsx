@@ -8,27 +8,26 @@ export const metadata = {
   description: "Manage your subscription",
 }
 
-async function getSubscriptionData(): Promise<SubscriptionData> {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "/api"}/subscription`, {
-      headers: {
-        // In production, get token from cookies
-        // Authorization: `Bearer ${token}`,
-      },
-      cache: "no-store",
-    })
+// async function getSubscriptionData(): Promise<SubscriptionData> {
+//   try {
+//     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "/api"}/subscription`, {
+//       headers: {
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch subscription data")
-    }
+//       },
+//       cache: "no-store",
+//     })
 
-    const data = (await response.json()) as { data: SubscriptionData }
-    return data.data
-  } catch (error) {
-    console.error("Failed to fetch subscription data:", error)
-    throw error
-  }
-}
+//     if (!response.ok) {
+//       throw new Error("Failed to fetch subscription data")
+//     }
+
+//     const data = (await response.json()) as { data: SubscriptionData }
+//     return data.data
+//   } catch (error) {
+//     console.error("Failed to fetch subscription data:", error)
+//     throw error
+//   }
+// }
 
 export default async function SubscriptionPage() {
   // Mock data for development
@@ -41,10 +40,10 @@ export default async function SubscriptionPage() {
     },
     benefits: [
       { text: "Monthly Prescription by health provider" },
-      { text: "Monitor how your health improves" },
-      { text: "Get compliant with treatment plan given" },
-      { text: "A doctor to review your health regularly" },
-      { text: "Have a health care provider check in on you regularly" },
+      { text: "Health improvement monitoring" },
+      { text: "Treatment plan compliant with" },
+      { text: "Regular doctor health review" },
+      { text: "Regular health care provider check in" },
     ],
     bankAccount: {
       accountName: "Rufus Oluwaseyi",
