@@ -53,7 +53,6 @@ export default async function MonthlyReportsPage() {
     },
   ]
 
-  // Uncomment when backend is ready:
   // const reports = await getMonthlyReports()
 
   return <MonthlyReportsListPageClient reports={reports} />

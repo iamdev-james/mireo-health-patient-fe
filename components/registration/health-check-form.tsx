@@ -8,14 +8,14 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { HEALTH_CHECK_QUESTIONS } from "@/lib/constants/registration"
 import { APIError, registrationAPI } from "@/lib/services/registration-api"
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
+import { useAppDispatch } from "@/lib/store/hooks"
 import { setCurrentStep, setHealthCheckAnswers } from "@/lib/store/slices/registration-slice"
 import { HealthCheckAnswer } from "@/types/registration"
 
 export default function HealthCheckForm() {
   const router = useRouter()
   const dispatch = useAppDispatch()
-  const isVerified = useAppSelector((state) => state.registration.isVerified)
+  // const isVerified = useAppSelector((state) => state.registration.isVerified)
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers] = useState<HealthCheckAnswer[]>([])
   const [isLoading, setIsLoading] = useState(false)

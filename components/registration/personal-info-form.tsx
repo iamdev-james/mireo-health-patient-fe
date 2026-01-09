@@ -13,14 +13,14 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { GENDER_OPTIONS, MARITAL_STATUS_OPTIONS, RELIGION_OPTIONS } from "@/lib/constants/registration"
 import { APIError, registrationAPI } from "@/lib/services/registration-api"
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
+import { useAppDispatch } from "@/lib/store/hooks"
 import { setCurrentStep, setPersonalInfo } from "@/lib/store/slices/registration-slice"
 import { type PersonalInfoInput, personalInfoSchema } from "@/lib/validations/registration"
 
 export default function PersonalInfoForm() {
   const router = useRouter()
   const dispatch = useAppDispatch()
-  const isVerified = useAppSelector((state) => state.registration.isVerified)
+  // const isVerified = useAppSelector((state) => state.registration.isVerified)
   const [isLoading, setIsLoading] = useState(false)
   const [apiError, setApiError] = useState<string | null>(null)
 

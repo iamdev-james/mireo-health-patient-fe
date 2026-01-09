@@ -15,27 +15,24 @@ interface PageProps {
   }>
 }
 
-async function getMonthlyReportDetail(id: string): Promise<MonthlyReportDetail | null> {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "/api"}/monthly-reports/${id}`, {
-      headers: {
-        // In production, get token from cookies
-        // Authorization: `Bearer ${token}`,
-      },
-      cache: "no-store",
-    })
+// async function getMonthlyReportDetail(id: string): Promise<MonthlyReportDetail | null> {
+//   try {
+//     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "/api"}/monthly-reports/${id}`, {
+//       headers: {},
+//       cache: "no-store",
+//     })
 
-    if (!response.ok) {
-      return null
-    }
+//     if (!response.ok) {
+//       return null
+//     }
 
-    const data = (await response.json()) as { data: MonthlyReportDetail }
-    return data.data
-  } catch (error) {
-    console.error("Failed to fetch monthly report detail:", error)
-    return null
-  }
-}
+//     const data = (await response.json()) as { data: MonthlyReportDetail }
+//     return data.data
+//   } catch (error) {
+//     console.error("Failed to fetch monthly report detail:", error)
+//     return null
+//   }
+// }
 
 export default async function MonthlyReportDetailPage({ params }: PageProps) {
   const { id } = await params
@@ -78,7 +75,6 @@ export default async function MonthlyReportDetailPage({ params }: PageProps) {
     ],
   }
 
-  // Uncomment when backend is ready:
   // const reportData = await getMonthlyReportDetail(params.id)
   // if (!reportData) {
   //   notFound()
