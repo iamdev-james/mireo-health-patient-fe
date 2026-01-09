@@ -24,7 +24,7 @@ export default function LabTestsPageClient({ tests }: LabTestsPageClientProps) {
   }
 
   return (
-    <PageTransition className="bg-gray-350 min-h-screen pb-24 md:bg-white">
+    <PageTransition className="bg-gray-350 m-auto min-h-screen w-full max-w-2xl pb-24 md:bg-white">
       <div className="bg-gray-350 sticky top-0 z-10 grid grid-cols-3 items-center px-4 py-4 md:bg-white">
         <BackButton />
         <p className="text-center text-lg font-medium text-nowrap md:text-xl">Laboratory Tests</p>
@@ -61,7 +61,7 @@ export default function LabTestsPageClient({ tests }: LabTestsPageClientProps) {
       </div>
 
       {/* Upload results button */}
-      <div className="bg-gray-350 fixed inset-x-0 bottom-0 p-6 shadow-lg">
+      <div className="bg-gray-350 fixed inset-x-0 bottom-0 m-auto w-full max-w-2xl p-6 sm:bg-white">
         <Link href="/medical-records/lab-tests/upload">
           <Button className="w-full" size={"xl"} disabled>
             Upload results

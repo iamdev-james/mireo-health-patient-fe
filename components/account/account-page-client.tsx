@@ -2,7 +2,8 @@
 
 "use client"
 
-import { Trash2, X } from "lucide-react"
+import { X } from "lucide-react"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { MenuListItem } from "@/components/account/menu-list-item"
@@ -71,15 +72,24 @@ export default function AccountPageClient({ userData }: AccountPageClientProps) 
             </div>
           </div>
 
-          <div className="rounded-2xl bg-white px-2 py-2">
-            <MenuListItem label="Subscription" href="/subscription" />
+          <div className="rounded-2xl bg-white">
+            <MenuListItem label="Subscription" href="/subscription" className="px-5" />
           </div>
-          <div className="rounded-2xl bg-white px-2 py-2">
+          <div className="rounded-2xl bg-white">
             <MenuListItem
               label="Delete account"
               href="#"
               variant="danger"
-              icon={<Trash2 className="h-5 w-5" />}
+              className="px-5"
+              icon={
+                <Image
+                  src="/images/Delete-filled.svg"
+                  alt="Trash Icon"
+                  width={16}
+                  height={16}
+                  className="text-destructive"
+                />
+              }
               onClick={() => setShowDeleteModal(true)}
             />
           </div>
@@ -89,7 +99,7 @@ export default function AccountPageClient({ userData }: AccountPageClientProps) 
           </Button>
         </div>
       </div>
-      {/* Delete Account Modal - Bottom Drawer */}
+      {/* Delete Account Modal */}
       {showDeleteModal && (
         <div
           className="bg-opacity-50 fixed inset-0 z-50 flex items-end bg-black/50 backdrop-blur"
@@ -102,14 +112,17 @@ export default function AccountPageClient({ userData }: AccountPageClientProps) 
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-6 flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-red-600">Delete account?</h2>
-              <button onClick={() => setShowDeleteModal(false)} className="text-gray-400 hover:text-gray-600">
-                <X className="h-6 w-6" />
+              <h2 className="text-destructive text-lg font-medium">Delete account?</h2>
+              <button
+                onClick={() => setShowDeleteModal(false)}
+                className="bg-gray-350 rounded-full p-2 text-gray-400 hover:text-gray-600"
+              >
+                <X className="h-5 w-5" />
               </button>
             </div>
 
-            <div className="mb-6 rounded-2xl bg-gray-50 p-6">
-              <p className="text-sm leading-relaxed text-gray-700">
+            <div className="bg-gray-350 mb-6 rounded-2xl px-4 py-6">
+              <p className="text-sm font-medium text-gray-400">
                 This will permanently remove your profile and medical records from Mireo. Once deleted, you will lose
                 access to all screening history, prescriptions, follow-up schedules, and messages.
               </p>
@@ -118,10 +131,12 @@ export default function AccountPageClient({ userData }: AccountPageClientProps) 
             <Button
               onClick={handleDeleteAccount}
               disabled={isDeleting}
-              className="flex h-14 w-full items-center justify-center gap-2 rounded-xl bg-red-600 text-lg font-medium text-white hover:bg-red-700 disabled:opacity-50"
+              className="flex w-full items-center justify-center gap-2"
+              variant="destructive"
+              size={"xl"}
             >
-              <Trash2 className="h-5 w-5" />
               {isDeleting ? "Deleting..." : "Delete account"}
+              <Image src="/images/Delete.svg" alt="Trash Icon" width={16} height={16} />
             </Button>
           </div>
         </div>

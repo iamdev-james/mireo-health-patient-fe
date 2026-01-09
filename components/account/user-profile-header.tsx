@@ -12,13 +12,7 @@ export function UserProfileHeader({ name, profileImage }: UserProfileHeaderProps
     <div className="flex items-center justify-between">
       <p className="text-2xl font-medium text-gray-900">Account</p>
       <div className="relative h-13 w-13 overflow-hidden rounded-full bg-gray-200">
-        {profileImage ? (
-          <Image src={profileImage} alt={name} fill className="object-cover" sizes="80px" />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center bg-[#0066CC] text-2xl font-semibold text-white">
-            {name.charAt(0).toUpperCase()}
-          </div>
-        )}
+        <Image src={profileImage || "/images/userimg.svg"} alt={name} fill className="object-cover" sizes="80px" />
       </div>
     </div>
   )

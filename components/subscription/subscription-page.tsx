@@ -45,7 +45,7 @@ export default function SubscriptionPageClient({ data }: SubscriptionPageClientP
 
   return (
     <>
-      <PageTransition className="min-h-screen bg-white pb-20">
+      <PageTransition className="m-auto min-h-screen w-full max-w-2xl bg-white pb-20">
         <div className="sticky top-0 z-10 grid grid-cols-3 items-center bg-white px-3 py-4">
           <BackButton />
           <p className="text-center text-lg font-medium text-nowrap md:text-xl">Subscription</p>

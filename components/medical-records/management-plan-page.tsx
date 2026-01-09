@@ -73,7 +73,7 @@ export default function ManagementPlanPageClient({ data }: ManagementPlanPageCli
             {data.labTestRequest.resultsLink && (
               <Link
                 href={data.labTestRequest.resultsLink}
-                className="border-primary text-primary mt-4 block w-full rounded-md border py-3 text-center text-sm font-medium hover:bg-blue-50"
+                className="border-primary text-primary mt-4 block w-full cursor-pointer rounded-md border py-3 text-center text-sm font-medium"
               >
                 View results
               </Link>

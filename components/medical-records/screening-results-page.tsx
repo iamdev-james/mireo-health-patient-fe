@@ -20,12 +20,12 @@ export default function ScreeningResultsPageClient({ data }: ScreeningResultsPag
       case "low":
         return "#F60000"
       default:
-        return "#6B7280" // gray-500
+        return "#6B7280"
     }
   }
 
   return (
-    <PageTransition className="min-h-screen bg-white pb-20">
+    <PageTransition className="m-auto min-h-screen w-full max-w-2xl bg-white pb-20">
       <div className="sticky top-0 z-10 grid grid-cols-3 items-center bg-white px-4 py-4">
         <BackButton />
         <p className="text-center text-lg font-medium text-nowrap md:text-xl">Screening Results</p>
@@ -100,7 +100,6 @@ export default function ScreeningResultsPageClient({ data }: ScreeningResultsPag
         {/* Baseline Tests */}
         <CollapsibleSection title="Baseline Tests" defaultOpen>
           <div className="space-y-6">
-            {/* Blood Sugar */}
             <div>
               <p className="mb-3 text-sm">Blood Sugar</p>
               <div className="bg-gray-350 grid grid-cols-2 gap-3 rounded-lg border border-gray-50 p-4">
@@ -133,7 +132,6 @@ export default function ScreeningResultsPageClient({ data }: ScreeningResultsPag
               </div>
             </div>
 
-            {/* Urinalysis */}
             <div>
               <p className="mb-3 text-sm">Urinalysis</p>
               <div className="bg-gray-350 grid grid-cols-2 rounded-lg border border-gray-50 px-4">
@@ -154,7 +152,6 @@ export default function ScreeningResultsPageClient({ data }: ScreeningResultsPag
           </div>
         </CollapsibleSection>
 
-        {/* View Pre-diagnosis Button */}
         <Link
           href="/medical-records/pre-diagnosis"
           className="bg-primary hover:bg-primary/90 block w-full rounded-md py-3 text-center text-sm font-medium text-white"

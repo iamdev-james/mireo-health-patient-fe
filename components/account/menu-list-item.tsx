@@ -10,14 +10,16 @@ interface MenuListItemProps {
   variant?: "default" | "danger"
   icon?: React.ReactNode
   onClick?: () => void
+  className?: string
 }
 
-export function MenuListItem({ label, href, variant = "default", icon, onClick }: MenuListItemProps) {
+export function MenuListItem({ label, href, variant = "default", icon, onClick, className }: MenuListItemProps) {
   const content = (
     <div
       className={cn(
         "hover:bg-gray-350 flex cursor-pointer items-center justify-between rounded-xl bg-transparent px-3 py-4 transition-colors",
-        variant === "danger" && "text-destructive"
+        variant === "danger" && "text-destructive",
+        className
       )}
     >
       <div className="flex items-center gap-3">
