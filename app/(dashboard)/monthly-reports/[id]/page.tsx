@@ -36,7 +36,6 @@ interface PageProps {
 
 export default async function MonthlyReportDetailPage({ params }: PageProps) {
   const { id } = await params
-  // Mock data for development
   const reportData: MonthlyReportDetail = {
     id: id,
     userInfo: {

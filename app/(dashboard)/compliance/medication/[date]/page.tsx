@@ -1,7 +1,5 @@
 // app/compliance/medication/[date]/page.tsx
 
-import { ChevronLeft } from "lucide-react"
-import Link from "next/link"
 import { TimeSlotSelector } from "@/components/compliance/time-slot-selector"
 import { BackButton } from "@/components/ui/back-button"
 import { PageTransition } from "@/components/ui/page-transition"

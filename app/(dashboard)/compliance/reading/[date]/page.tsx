@@ -1,17 +1,16 @@
 // app/compliance/reading/[date]/page.tsx
 "use client"
 
-import { ChevronLeft } from "lucide-react"
-import Link from "next/link"
 import { useParams, useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { BloodSugarGroup } from "@/components/compliance/blood-sugar-group"
 import { ReadingCard } from "@/components/compliance/reading-card"
 import { TabSwitcher } from "@/components/compliance/tab-switcher"
+import { BackButton } from "@/components/ui/back-button"
+import { PageTransition } from "@/components/ui/page-transition"
 import { Reading } from "@/types/compliance"
 
 async function getReadingsByDate(date: string): Promise<Reading[]> {
-  // TODO: Replace with actual API call
   return [
     // Blood pressure readings
     {
@@ -142,23 +141,19 @@ export default function ReadingDetailPage() {
   const randomReadings = filteredReadings.filter((r) => r.subType === "random")
   const fastingReadings = filteredReadings.filter((r) => r.subType === "fasting")
   const postMealReadings = filteredReadings.filter((r) => r.subType === "post-meal")
+  const displayDate = new Date(date).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  })
 
   return (
-    <div className="bg-gray-background min-h-screen pb-20">
-      {/* Header */}
-      <div className="bg-gray-background pt-safe sticky top-0 z-10 px-4">
-        <div className="relative flex items-center justify-center py-4">
-          <Link
-            href="/compliance"
-            className="absolute left-0 flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-gray-100 active:bg-gray-200"
-          >
-            <ChevronLeft className="h-6 w-6 text-black" />
-          </Link>
-          <h1 className="text-xl font-semibold text-black">Oct 3</h1>
-        </div>
+    <PageTransition className="m-auto min-h-screen w-full max-w-2xl bg-white">
+      <div className="sticky top-0 z-10 grid grid-cols-3 items-center bg-white px-3 py-4">
+        <BackButton />
+        <p className="text-center text-lg font-medium text-nowrap md:text-xl">{displayDate}</p>
+        <div />
       </div>
 
-      {/* Content */}
       <div className="px-4 pb-8">
         <TabSwitcher
           tabs={tabs}
@@ -176,9 +171,9 @@ export default function ReadingDetailPage() {
               </div>
             ) : (
               filteredReadings.map((reading) => (
-                <div key={reading.id} className="rounded-2xl border border-gray-100 bg-white p-4">
-                  <p className="mb-3 text-sm text-gray-400">{reading.time}</p>
-                  <ReadingCard reading={reading} />
+                <div key={reading.id} className="rounded-xl border border-gray-50 bg-white p-4">
+                  <p className="mb-3 text-sm font-medium text-gray-400">{reading.time}</p>
+                  <ReadingCard reading={reading} noLabel />
                 </div>
               ))
             )}
@@ -205,6 +200,6 @@ export default function ReadingDetailPage() {
           </div>
         )}
       </div>
-    </div>
+    </PageTransition>
   )
 }

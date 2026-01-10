@@ -22,7 +22,7 @@ export function TabSwitcher({ tabs, activeTab, onTabChange }: TabSwitcherProps) 
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className={`flex-1 rounded-md px-4 py-2.5 text-sm transition-all ${
+            className={`flex-1 rounded-md px-4 py-3 text-sm transition-all ${
               isActive ? "bg-white text-black" : "text-gray-400 hover:text-gray-600"
             } `}
           >
