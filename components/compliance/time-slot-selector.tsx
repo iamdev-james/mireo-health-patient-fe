@@ -2,7 +2,7 @@
 "use client"
 
 import { Check, X } from "lucide-react"
-import { TimeOfDay, MedicationDose } from "@/types/compliance"
+import { MedicationDose, TimeOfDay } from "@/types/compliance"
 
 interface TimeSlotSelectorProps {
   doses: MedicationDose[]
@@ -27,9 +27,11 @@ export function TimeSlotSelector({ doses, onToggle, readonly = false }: TimeSlot
             key={dose.time}
             onClick={() => !readonly && onToggle?.(dose.time)}
             disabled={readonly}
-            className={`flex items-center gap-2 rounded-lg border px-4 py-2.5 transition-all ${
-              isActive ? "border-blue-500 bg-blue-50 text-blue-600" : "border-gray-200 bg-white text-gray-400"
-            } ${!readonly && "hover:border-blue-400"} disabled:cursor-default`}
+            className={`flex items-center gap-2 rounded-md border px-4 py-2.5 transition-all ${
+              isActive
+                ? "bg-primary-200/10 border-primary-200/50 text-primary"
+                : "bg-gray-350 border-transparent text-gray-400"
+            } ${!readonly && "hover:border-primary-200/70"} disabled:cursor-default`}
           >
             {isActive ? <Check className="h-4 w-4" /> : <X className="h-4 w-4" />}
             <span className="text-sm font-medium">{timeLabels[dose.time]}</span>

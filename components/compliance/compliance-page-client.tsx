@@ -2,11 +2,11 @@
 "use client"
 
 import { useState } from "react"
-import { ComplianceData } from "@/types/compliance"
 import { UserProfileHeader } from "@/components/account/user-profile-header"
-import { TabSwitcher } from "./tab-switcher"
-import { ReadingsTabClient } from "./readings-tab-client"
+import { ComplianceData } from "@/types/compliance"
 import { MedicationTabClient } from "./medication-tab-client"
+import { ReadingsTabClient } from "./readings-tab-client"
+import { TabSwitcher } from "./tab-switcher"
 
 interface CompliancePageClientProps {
   data: ComplianceData

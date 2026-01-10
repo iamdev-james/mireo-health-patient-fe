@@ -22,7 +22,6 @@ async function getComplianceData(): Promise<ComplianceData> {
             timestamp: "2024-10-05T08:00:00Z",
             time: "8:00 AM",
           },
-          // No blood sugar for today - will show "Not logged"
         ],
       },
       {
@@ -80,22 +79,113 @@ async function getComplianceData(): Promise<ComplianceData> {
         name: "Amlodipine 5mg",
         dosage: "5mg",
         frequency: 1,
-        totalDays: 31,
-        takenDays: 18,
-        calendar: Array.from({ length: 31 }, (_, i) => {
-          const day = i + 1
-          let status: MedicationStatus = "future"
+        months: [
+          {
+            month: "October",
+            year: 2024,
+            totalDays: 31,
+            takenDays: 18,
+            calendar: Array.from({ length: 31 }, (_, i) => {
+              const day = i + 1
+              let status: "taken" | "missed" | "partial" | "future" = "taken"
 
-          if (day <= 10) status = "taken"
-          else if (day === 3 || day === 7 || day === 8) status = "missed"
-          else if (day <= 20) status = "taken"
+              if (day === 3) status = "partial"
+              else if (day === 7 || day === 8) status = "missed"
+              else if (day > 20) status = "future"
 
-          return {
-            day,
-            status,
-            doses: [{ time: "morning" as const, taken: status === "taken" }],
-          }
-        }),
+              return {
+                day,
+                status,
+                doses: [{ time: "morning" as const, taken: status === "taken" || status === "partial" }],
+              }
+            }),
+          },
+          {
+            month: "November",
+            year: 2024,
+            totalDays: 30,
+            takenDays: 22,
+            calendar: Array.from({ length: 30 }, (_, i) => {
+              const day = i + 1
+              let status: "taken" | "missed" | "partial" | "future" = "taken"
+
+              if (day === 3 || day === 7 || day === 15 || day === 22) status = "missed"
+              else if (day === 10 || day === 18 || day === 25) status = "partial"
+
+              return {
+                day,
+                status,
+                doses: [{ time: "morning" as const, taken: status === "taken" || status === "partial" }],
+              }
+            }),
+          },
+          {
+            month: "December",
+            year: 2024,
+            totalDays: 31,
+            takenDays: 24,
+            calendar: Array.from({ length: 31 }, (_, i) => {
+              const day = i + 1
+              let status: "taken" | "missed" | "partial" | "future" = "taken"
+
+              if (day === 5 || day === 12 || day === 19 || day === 28) status = "missed"
+              else if (day === 8 || day === 16 || day === 24) status = "partial"
+
+              return {
+                day,
+                status,
+                doses: [{ time: "morning" as const, taken: status === "taken" || status === "partial" }],
+              }
+            }),
+          },
+        ],
+      },
+      {
+        id: "2",
+        name: "Amlodipine 5mg",
+        dosage: "5mg",
+        frequency: 1,
+        months: [
+          {
+            month: "October",
+            year: 2024,
+            totalDays: 31,
+            takenDays: 18,
+            calendar: Array.from({ length: 31 }, (_, i) => {
+              const day = i + 1
+              let status: "taken" | "missed" | "partial" | "future" = "taken"
+
+              if (day === 3) status = "partial"
+              else if (day === 7 || day === 8) status = "missed"
+              else if (day > 20) status = "future"
+
+              return {
+                day,
+                status,
+                doses: [{ time: "morning" as const, taken: status === "taken" || status === "partial" }],
+              }
+            }),
+          },
+          {
+            month: "November",
+            year: 2024,
+            totalDays: 30,
+            takenDays: 22,
+            calendar: Array.from({ length: 30 }, (_, i) => {
+              const day = i + 1
+              let status: "taken" | "missed" | "partial" | "future" = "taken"
+
+              if (day === 3 || day === 7 || day === 15 || day === 22) status = "missed"
+              else if (day === 10 || day === 18 || day === 25) status = "partial"
+
+              return {
+                day,
+                status,
+                doses: [{ time: "morning" as const, taken: status === "taken" || status === "partial" }],
+              }
+            }),
+          },
+        ],
       },
     ],
   }

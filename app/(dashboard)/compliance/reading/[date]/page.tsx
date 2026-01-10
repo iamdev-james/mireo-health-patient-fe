@@ -1,14 +1,14 @@
 // app/compliance/reading/[date]/page.tsx
 "use client"
 
-import { useParams, useSearchParams, useRouter } from "next/navigation"
-import Link from "next/link"
 import { ChevronLeft } from "lucide-react"
-import { Reading } from "@/types/compliance"
-import { TabSwitcher } from "@/components/compliance/tab-switcher"
-import { ReadingCard } from "@/components/compliance/reading-card"
-import { BloodSugarGroup } from "@/components/compliance/blood-sugar-group"
+import Link from "next/link"
+import { useParams, useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
+import { BloodSugarGroup } from "@/components/compliance/blood-sugar-group"
+import { ReadingCard } from "@/components/compliance/reading-card"
+import { TabSwitcher } from "@/components/compliance/tab-switcher"
+import { Reading } from "@/types/compliance"
 
 async function getReadingsByDate(date: string): Promise<Reading[]> {
   // TODO: Replace with actual API call

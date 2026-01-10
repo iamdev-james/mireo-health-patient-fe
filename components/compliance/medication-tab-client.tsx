@@ -1,11 +1,12 @@
 // components/compliance/medication-tab-client.tsx
 "use client"
 
-import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { useRef, useState } from "react"
 import { Medication } from "@/types/compliance"
-import { MonthNavigator } from "./month-navigator"
 import { MedicationCalendar } from "./medication-calendar"
+import { MonthNavigator } from "./month-navigator"
+import { Button } from "../ui/button"
 
 interface MedicationTabClientProps {
   initialMedications: Medication[]
@@ -15,10 +16,19 @@ interface MedicationTabClientProps {
 export function MedicationTabClient({ initialMedications, initialMonth }: MedicationTabClientProps) {
   const router = useRouter()
   const [medications] = useState(initialMedications)
-  const [currentMonth, setCurrentMonth] = useState(initialMonth)
+  const [currentMonthIndex, setCurrentMonthIndex] = useState(0)
+  const [isTransitioning, setIsTransitioning] = useState(false)
+  const [touchStart, setTouchStart] = useState(0)
+  const [touchEnd, setTouchEnd] = useState(0)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  // Get the current month data from the first medication (assuming all medications share the same months)
+  const currentMonth = medications[0]?.months?.[currentMonthIndex]
+  const maxMonths = medications[0]?.months?.length || 0
 
   const handleDayClick = (medicationId: string, day: number) => {
-    const date = `${currentMonth}-${day.toString().padStart(2, "0")}`
+    if (!currentMonth) return
+    const date = `${currentMonth.year}-${getMonthNumber(currentMonth.month)}-${day.toString().padStart(2, "0")}`
     router.push(`/compliance/medication/${date}`)
   }
 
@@ -27,26 +37,76 @@ export function MedicationTabClient({ initialMedications, initialMonth }: Medica
   }
 
   const handlePreviousMonth = () => {
-    // TODO: Implement month navigation
-    console.log("Previous month")
+    if (currentMonthIndex > 0 && !isTransitioning) {
+      setIsTransitioning(true)
+      setCurrentMonthIndex((prev) => prev - 1)
+      setTimeout(() => setIsTransitioning(false), 300)
+    }
   }
 
   const handleNextMonth = () => {
-    // TODO: Implement month navigation
-    console.log("Next month")
+    if (currentMonthIndex < maxMonths - 1 && !isTransitioning) {
+      setIsTransitioning(true)
+      setCurrentMonthIndex((prev) => prev + 1)
+      setTimeout(() => setIsTransitioning(false), 300)
+    }
   }
+
+  // Touch handlers for swipe gestures
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 75) {
+      handleNextMonth()
+    }
+
+    if (touchStart - touchEnd < -75) {
+      handlePreviousMonth()
+    }
+  }
+
+  // Helper function to get month number from name
+  const getMonthNumber = (monthName: string): string => {
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ]
+    const index = months.findIndex((m) => m.toLowerCase() === monthName.toLowerCase())
+    return index.toString().padStart(2, "0")
+  }
+
+  const displayMonth = currentMonth ? `${currentMonth.month}` : initialMonth
 
   return (
     <div>
-      <div className="mb-6 flex items-center justify-between">
-        <MonthNavigator currentMonth={currentMonth} onPrevious={handlePreviousMonth} onNext={handleNextMonth} />
+      <div className="mb-6 flex items-start justify-between">
+        <MonthNavigator
+          currentMonth={displayMonth}
+          onPrevious={handlePreviousMonth}
+          onNext={handleNextMonth}
+          canGoPrevious={currentMonthIndex > 0 && !isTransitioning}
+          canGoNext={currentMonthIndex < maxMonths - 1 && !isTransitioning}
+        />
 
-        <button
-          onClick={handleLogClick}
-          className="rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700 active:bg-blue-800"
-        >
+        <Button onClick={handleLogClick} className="px-7">
           Log
-        </button>
+        </Button>
       </div>
 
       {medications.length === 0 ? (
@@ -57,9 +117,22 @@ export function MedicationTabClient({ initialMedications, initialMonth }: Medica
           </div>
         </div>
       ) : (
-        medications.map((medication) => (
-          <MedicationCalendar key={medication.id} medication={medication} onDayClick={handleDayClick} />
-        ))
+        <div
+          ref={containerRef}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          className={`transition-opacity duration-300 ${isTransitioning ? "opacity-50" : "opacity-100"}`}
+        >
+          {medications.map((medication) => (
+            <MedicationCalendar
+              key={medication.id}
+              medication={medication}
+              monthIndex={currentMonthIndex}
+              onDayClick={handleDayClick}
+            />
+          ))}
+        </div>
       )}
     </div>
   )

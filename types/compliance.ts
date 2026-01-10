@@ -37,10 +37,11 @@ export interface Medication {
   id: string
   name: string
   dosage: string
-  frequency: number // doses per day
+  frequency: number
   totalDays: number
   takenDays: number
   calendar: DailyMedication[]
+  dosage_taken?: MedicationDose[]
 }
 
 export interface ComplianceData {
