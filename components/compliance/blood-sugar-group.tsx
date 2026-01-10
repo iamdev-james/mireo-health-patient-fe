@@ -19,7 +19,7 @@ export function BloodSugarGroup({ title, subtitle, readings }: BloodSugarGroupPr
   if (readings.length === 0) return null
 
   return (
-    <div className="mb-4 rounded-xl border border-gray-50 bg-white p-4">
+    <div className="mb-6 rounded-xl border border-gray-50 bg-white p-4">
       <h3 className="mb-1 text-base font-medium text-black">{title}</h3>
       <p className="mb-4 text-sm text-gray-400">{subtitle}</p>
 

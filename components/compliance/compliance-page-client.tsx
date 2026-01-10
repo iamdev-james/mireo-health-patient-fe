@@ -24,7 +24,7 @@ export function CompliancePageClient({ data, userName, userImage, currentMonth }
   const [activeTab, setActiveTab] = useState<string>("medication")
 
   return (
-    <div className="bg-gray-background min-h-screen pb-20">
+    <div className="m-auto min-h-screen max-w-2xl bg-white pb-20">
       <div className="pt-safe px-4">
         {/* Header */}
         <div className="py-6">
