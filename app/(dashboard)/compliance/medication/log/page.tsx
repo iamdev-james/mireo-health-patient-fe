@@ -1,7 +1,7 @@
 // app/compliance/medication/log/page.tsx
+
 "use client"
 
-import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { TimeSlotSelector } from "@/components/compliance/time-slot-selector"
 import { BackButton } from "@/components/ui/back-button"
@@ -10,7 +10,7 @@ import { PageTransition } from "@/components/ui/page-transition"
 import { Medication, MedicationDose, TimeOfDay } from "@/types/compliance"
 
 // Extended type for UI state
-interface MedicationWithDoses extends Medication {
+interface MedicationWithDoses extends Omit<Medication, "doses"> {
   doses: MedicationDose[]
   recorded?: boolean
 }
@@ -22,23 +22,18 @@ const mockMedications: Medication[] = [
     name: "Amlodipine 5mg",
     dosage: "5mg",
     frequency: 3,
-    totalDays: 31,
-    takenDays: 18,
-    calendar: [],
+    months: [],
   },
   {
     id: "2",
     name: "Amlodipine 5mg",
     dosage: "5mg",
     frequency: 3,
-    totalDays: 31,
-    takenDays: 18,
-    calendar: [],
+    months: [],
   },
 ]
 
 export default function LogMedicationPage() {
-  const router = useRouter()
   const [medications, setMedications] = useState<MedicationWithDoses[]>(
     mockMedications.map((med) => ({
       ...med,
@@ -54,27 +49,29 @@ export default function LogMedicationPage() {
   const handleToggleDose = (medIndex: number, time: TimeOfDay) => {
     setMedications((prev) => {
       const updated = [...prev]
-      const doses = updated[medIndex].doses.map((d) => (d.time === time ? { ...d, taken: !d.taken } : d))
-      updated[medIndex] = { ...updated[medIndex], doses }
+      const med = updated[medIndex]
+      if (med) {
+        updated[medIndex] = {
+          ...med,
+          doses: med.doses.map((d) => (d.time === time ? { ...d, taken: !d.taken } : d)),
+        }
+      }
       return updated
     })
   }
 
   const handleRecord = async (medIndex: number) => {
-    // TODO: Save to API and IndexedDB
     const med = medications[medIndex]
-    const takenCount = med.doses.filter((d) => d.taken).length
+    if (!med) return
 
-    console.log("Recording medication:", {
-      id: med.id,
-      doses: med.doses,
-      takenCount,
-    })
+    // const takenCount = med.doses.filter((d) => d.taken).length
 
-    // Update UI to show recorded state
     setMedications((prev) => {
       const updated = [...prev]
-      updated[medIndex] = { ...updated[medIndex], recorded: true }
+      const currentMed = updated[medIndex]
+      if (currentMed) {
+        updated[medIndex] = { ...currentMed, recorded: true }
+      }
       return updated
     })
   }

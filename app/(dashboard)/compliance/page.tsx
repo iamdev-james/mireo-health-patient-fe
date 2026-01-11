@@ -1,12 +1,9 @@
 // app/compliance/page.tsx
 
 import { CompliancePageClient } from "@/components/compliance/compliance-page-client"
-import { ComplianceData, MedicationStatus } from "@/types/compliance"
+import { ComplianceData } from "@/types/compliance"
 
 async function getComplianceData(): Promise<ComplianceData> {
-  // TODO: Replace with actual API call
-  // For offline-first PWA, this should check IndexedDB first, then API
-
   return {
     readings: [
       {

@@ -11,6 +11,7 @@ import { PageTransition } from "@/components/ui/page-transition"
 import { Reading } from "@/types/compliance"
 
 async function getReadingsByDate(date: string): Promise<Reading[]> {
+  console.log("Fetching readings for date:", date)
   return [
     // Blood pressure readings
     {

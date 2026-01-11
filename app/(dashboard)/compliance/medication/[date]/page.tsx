@@ -3,10 +3,11 @@
 import { TimeSlotSelector } from "@/components/compliance/time-slot-selector"
 import { BackButton } from "@/components/ui/back-button"
 import { PageTransition } from "@/components/ui/page-transition"
-import { Medication, MedicationDose } from "@/types/compliance"
+import { MedicationDose } from "@/types/compliance"
 
-async function getMedicationsByDate(date: string): Promise<Medication[]> {
+async function getMedicationsByDate(date: string) {
   // TODO: Replace with actual API call
+  console.log("Fetching medications for date:", date)
   return [
     {
       id: "1",
