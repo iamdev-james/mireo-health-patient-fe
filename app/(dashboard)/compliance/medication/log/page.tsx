@@ -46,7 +46,7 @@ export default function LogMedicationPage() {
     }))
   )
 
-  const handleToggleDose = (medIndex: number, time: TimeOfDay) => {
+  const handleToggleDose = (medIndex: number, time: TimeOfDay | string) => {
     setMedications((prev) => {
       const updated = [...prev]
       const med = updated[medIndex]

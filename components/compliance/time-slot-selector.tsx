@@ -6,7 +6,7 @@ import { MedicationDose, TimeOfDay } from "@/types/compliance"
 
 interface TimeSlotSelectorProps {
   doses: MedicationDose[]
-  onToggle?: (time: TimeOfDay) => void
+  onToggle?: (time: TimeOfDay | string) => void
   readonly?: boolean
 }
 
@@ -19,13 +19,17 @@ const timeLabels: Record<TimeOfDay, string> = {
 export function TimeSlotSelector({ doses, onToggle, readonly = false }: TimeSlotSelectorProps) {
   return (
     <div className="flex gap-3">
-      {doses.map((dose) => {
+      {doses.map((dose: MedicationDose) => {
         const isActive = dose.taken
+        const timeLabel =
+          dose.time && typeof dose.time === "string" && dose.time in timeLabels
+            ? timeLabels[dose.time as TimeOfDay]
+            : dose.time || "Unknown"
 
         return (
           <button
             key={dose.time}
-            onClick={() => !readonly && onToggle?.(dose.time)}
+            onClick={() => !readonly && dose.time && onToggle?.(dose.time)}
             disabled={readonly}
             className={`flex items-center gap-2 rounded-md border px-4 py-2.5 transition-all ${
               isActive
@@ -34,7 +38,7 @@ export function TimeSlotSelector({ doses, onToggle, readonly = false }: TimeSlot
             } ${!readonly && "hover:border-primary-200/70"} disabled:cursor-default`}
           >
             {isActive ? <Check className="h-4 w-4" /> : <X className="h-4 w-4" />}
-            <span className="text-sm font-medium">{timeLabels[dose.time]}</span>
+            <span className="text-sm font-medium">{timeLabel}</span>
           </button>
         )
       })}

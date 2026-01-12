@@ -22,7 +22,6 @@ export function MedicationTabClient({ initialMedications, initialMonth }: Medica
   const [touchEnd, setTouchEnd] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // Get the current month data from the first medication (assuming all medications share the same months)
   const currentMonth = medications[0]?.months?.[currentMonthIndex]
   const maxMonths = medications[0]?.months?.length || 0
 
@@ -54,11 +53,11 @@ export function MedicationTabClient({ initialMedications, initialMonth }: Medica
 
   // Touch handlers for swipe gestures
   const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX)
+    setTouchStart(e.targetTouches[0]?.clientX ?? 0)
   }
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX)
+    setTouchEnd(e.targetTouches[0]?.clientX ?? 0)
   }
 
   const handleTouchEnd = () => {

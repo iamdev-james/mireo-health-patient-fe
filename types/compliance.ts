@@ -2,7 +2,7 @@
 
 export type ReadingStatus = "good" | "slightly-off" | "needs-review"
 export type MedicationStatus = "taken" | "missed" | "partial" | "future"
-export type TimeOfDay = "morning" | "afternoon" | "evening" | "night"
+export type TimeOfDay = "morning" | "afternoon" | "night"
 
 export interface Reading {
   id: string
