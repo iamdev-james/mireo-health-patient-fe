@@ -1,8 +1,8 @@
 // components/compliance/medication-tab-client.tsx
 "use client"
 
-import { useRouter } from "next/navigation"
-import { useRef, useState } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
+import { useRef, useState, useEffect } from "react"
 import { Medication } from "@/types/compliance"
 import { MedicationCalendar } from "./medication-calendar"
 import { MonthNavigator } from "./month-navigator"
@@ -15,8 +15,12 @@ interface MedicationTabClientProps {
 
 export function MedicationTabClient({ initialMedications, initialMonth }: MedicationTabClientProps) {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const [medications] = useState(initialMedications)
-  const [currentMonthIndex, setCurrentMonthIndex] = useState(0)
+
+  const savedMonthIndex = searchParams.get("monthIndex")
+  const [currentMonthIndex, setCurrentMonthIndex] = useState(savedMonthIndex ? parseInt(savedMonthIndex) : 0)
+
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [touchStart, setTouchStart] = useState(0)
   const [touchEnd, setTouchEnd] = useState(0)
@@ -26,13 +30,17 @@ export function MedicationTabClient({ initialMedications, initialMonth }: Medica
   const maxMonths = medications[0]?.months?.length || 0
 
   const handleDayClick = (medicationId: string, day: number) => {
-    if (!currentMonth) return
-    const date = `${currentMonth.year}-${getMonthNumber(currentMonth.month)}-${day.toString().padStart(2, "0")}`
-    router.push(`/compliance/medication/${date}`)
+    const monthData = medications[0]?.months?.[currentMonthIndex]
+    if (!monthData) return
+
+    const monthNumber = getMonthNumber(monthData.month)
+    const date = `${monthData.year}-${monthNumber}-${day.toString().padStart(2, "0")}`
+
+    router.push(`/compliance/medication/${date}?returnMonthIndex=${currentMonthIndex}`)
   }
 
   const handleLogClick = () => {
-    router.push("/compliance/medication/log")
+    router.push(`/compliance/medication/log?returnMonthIndex=${currentMonthIndex}`)
   }
 
   const handlePreviousMonth = () => {
@@ -53,21 +61,38 @@ export function MedicationTabClient({ initialMedications, initialMonth }: Medica
 
   // Touch handlers for swipe gestures
   const handleTouchStart = (e: React.TouchEvent) => {
+    if ((e.target as HTMLElement).tagName === "BUTTON") {
+      return
+    }
     setTouchStart(e.targetTouches[0]?.clientX ?? 0)
+    setTouchEnd(0)
   }
 
   const handleTouchMove = (e: React.TouchEvent) => {
+    if (touchStart === 0) {
+      return
+    }
     setTouchEnd(e.targetTouches[0]?.clientX ?? 0)
   }
 
   const handleTouchEnd = () => {
-    if (touchStart - touchEnd > 75) {
-      handleNextMonth()
+    if (touchStart === 0) {
+      setTouchStart(0)
+      setTouchEnd(0)
+      return
     }
 
-    if (touchStart - touchEnd < -75) {
+    const swipeDistance = touchStart - touchEnd
+
+    if (swipeDistance > 75) {
+      handleNextMonth()
+    } else if (swipeDistance < -75) {
       handlePreviousMonth()
     }
+
+    // Reset touch tracking
+    setTouchStart(0)
+    setTouchEnd(0)
   }
 
   // Helper function to get month number from name
@@ -87,7 +112,7 @@ export function MedicationTabClient({ initialMedications, initialMonth }: Medica
       "December",
     ]
     const index = months.findIndex((m) => m.toLowerCase() === monthName.toLowerCase())
-    return index.toString().padStart(2, "0")
+    return (index + 1).toString().padStart(2, "0")
   }
 
   const displayMonth = currentMonth ? `${currentMonth.month}` : initialMonth
@@ -122,13 +147,20 @@ export function MedicationTabClient({ initialMedications, initialMonth }: Medica
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
           className={`transition-opacity duration-300 ${isTransitioning ? "opacity-50" : "opacity-100"}`}
+          style={{ pointerEvents: isTransitioning ? "none" : "auto" }}
         >
           {medications.map((medication) => (
             <MedicationCalendar
               key={medication.id}
               medication={medication}
               monthIndex={currentMonthIndex}
-              onDayClick={handleDayClick}
+              onDayClick={(medicationId, day) => {
+                // Capture month data immediately to prevent race conditions
+                const monthData = medications[0]?.months?.[currentMonthIndex]
+                if (!isTransitioning && monthData) {
+                  handleDayClick(medicationId, day)
+                }
+              }}
             />
           ))}
         </div>

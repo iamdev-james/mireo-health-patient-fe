@@ -1,17 +1,29 @@
 // components/ui/back-button.tsx
-
 "use client"
 
 import { ArrowLeft } from "lucide-react"
 import { useRouter } from "next/navigation"
 
-export function BackButton() {
+interface BackButtonProps {
+  route?: string
+  className?: string
+}
+
+export function BackButton({ route, className = "" }: BackButtonProps) {
   const router = useRouter()
+
+  const handleClick = () => {
+    if (route) {
+      router.push(route)
+    } else {
+      router.back()
+    }
+  }
 
   return (
     <button
-      onClick={() => router.back()}
-      className="justify-self-start rounded-full p-2 hover:bg-gray-100"
+      onClick={handleClick}
+      className={`justify-self-start rounded-full p-2 hover:bg-gray-100 ${className}`}
       aria-label="Go back"
     >
       <ArrowLeft className="h-6 w-6 font-light" />

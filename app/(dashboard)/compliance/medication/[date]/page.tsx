@@ -6,7 +6,6 @@ import { PageTransition } from "@/components/ui/page-transition"
 import { MedicationDose } from "@/types/compliance"
 
 async function getMedicationsByDate(date: string) {
-  // TODO: Replace with actual API call
   console.log("Fetching medications for date:", date)
   return [
     {
@@ -44,10 +43,14 @@ interface MedicationDetailPageProps {
   params: Promise<{
     date: string
   }>
+  searchParams: Promise<{
+    returnMonthIndex?: string
+  }>
 }
 
-export default async function MedicationDetailPage({ params }: MedicationDetailPageProps) {
+export default async function MedicationDetailPage({ params, searchParams }: MedicationDetailPageProps) {
   const { date } = await params
+  const { returnMonthIndex } = await searchParams
   const medications = await getMedicationsByDate(date)
 
   const displayDate = new Date(date).toLocaleDateString("en-US", {
@@ -55,10 +58,12 @@ export default async function MedicationDetailPage({ params }: MedicationDetailP
     day: "numeric",
   })
 
+  const backRoute = returnMonthIndex ? `/compliance?monthIndex=${returnMonthIndex}` : undefined
+
   return (
     <PageTransition className="m-auto min-h-screen w-full max-w-2xl bg-white">
       <div className="sticky top-0 z-10 grid grid-cols-3 items-center bg-white px-3 py-4">
-        <BackButton />
+        <BackButton route={backRoute} />
         <p className="text-center text-lg font-medium text-nowrap md:text-xl">{displayDate}</p>
         <div />
       </div>

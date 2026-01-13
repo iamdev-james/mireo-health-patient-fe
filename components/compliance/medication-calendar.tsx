@@ -15,6 +15,12 @@ export function MedicationCalendar({ medication, monthIndex, onDayClick }: Medic
   if (!monthData) {
     return null
   }
+
+  const handleClick = (e: React.MouseEvent, medicationId: string, day: number) => {
+    e.stopPropagation() // Prevent event from bubbling to parent touch handlers
+    onDayClick(medicationId, day)
+  }
+
   return (
     <div className="mb-4 rounded-xl border border-gray-50 bg-white p-4">
       <div className="mb-4 flex items-center justify-between">
@@ -28,7 +34,8 @@ export function MedicationCalendar({ medication, monthIndex, onDayClick }: Medic
         {monthData?.calendar?.map((day) => (
           <button
             key={day.day}
-            onClick={() => onDayClick(medication.id, day.day)}
+            onClick={(e) => handleClick(e, medication.id, day.day)}
+            onTouchEnd={(e) => e.stopPropagation()} // Also stop touch events
             className={`h-9 w-8 rounded-md border text-xs transition-all active:scale-95 ${getStatusColor(day.status)}`}
           >
             {day.day}
