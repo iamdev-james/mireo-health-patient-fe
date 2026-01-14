@@ -2,7 +2,7 @@
 "use client"
 
 import { useRouter, useSearchParams } from "next/navigation"
-import { useRef, useState, Suspense } from "react"
+import { Suspense, useRef, useState } from "react"
 import { Medication } from "@/types/compliance"
 import { MedicationCalendar } from "./medication-calendar"
 import { MonthNavigator } from "./month-navigator"
