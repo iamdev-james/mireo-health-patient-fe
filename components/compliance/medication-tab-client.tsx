@@ -2,7 +2,7 @@
 "use client"
 
 import { useRouter, useSearchParams } from "next/navigation"
-import { useRef, useState } from "react"
+import { useRef, useState, Suspense } from "react"
 import { Medication } from "@/types/compliance"
 import { MedicationCalendar } from "./medication-calendar"
 import { MonthNavigator } from "./month-navigator"
@@ -13,7 +13,7 @@ interface MedicationTabClientProps {
   initialMonth: string
 }
 
-export function MedicationTabClient({ initialMedications, initialMonth }: MedicationTabClientProps) {
+function MedicationTabContent({ initialMedications, initialMonth }: MedicationTabClientProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [medications] = useState(initialMedications)
@@ -90,12 +90,10 @@ export function MedicationTabClient({ initialMedications, initialMonth }: Medica
       handlePreviousMonth()
     }
 
-    // Reset touch tracking
     setTouchStart(0)
     setTouchEnd(0)
   }
 
-  // Helper function to get month number from name
   const getMonthNumber = (monthName: string): string => {
     const months = [
       "January",
@@ -154,17 +152,19 @@ export function MedicationTabClient({ initialMedications, initialMonth }: Medica
               key={medication.id}
               medication={medication}
               monthIndex={currentMonthIndex}
-              onDayClick={(medicationId, day) => {
-                // Capture month data immediately to prevent race conditions
-                const monthData = medications[0]?.months?.[currentMonthIndex]
-                if (!isTransitioning && monthData) {
-                  handleDayClick(medicationId, day)
-                }
-              }}
+              onDayClick={handleDayClick}
             />
           ))}
         </div>
       )}
     </div>
+  )
+}
+
+export function MedicationTabClient(props: MedicationTabClientProps) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <MedicationTabContent {...props} />
+    </Suspense>
   )
 }
