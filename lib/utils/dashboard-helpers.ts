@@ -14,15 +14,6 @@ export function getStatusConfig(status: PatientStatus, countdown?: string): Stat
   }
 }
 
-export function hasBoard(status: PatientStatus): boolean {
-  return [
-    PatientStatus.SCHEDULE_CONSULTATION,
-    PatientStatus.LAB_REQUEST,
-    PatientStatus.SCREENING_BOOKED,
-    PatientStatus.TREATMENT_PLAN_READY,
-  ].includes(status)
-}
-
 export function isActiveTreatment(status: PatientStatus): boolean {
   return status === PatientStatus.ACTIVE_TREATMENT
 }

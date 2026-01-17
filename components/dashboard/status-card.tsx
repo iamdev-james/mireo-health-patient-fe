@@ -1,6 +1,7 @@
 // components/dashboard/status-card.tsx
 "use client"
 
+import Image from "next/image"
 import { StatusCardData } from "@/types/dashboard"
 import { Button } from "@/components/ui/button"
 import { Stethoscope, Phone, ArrowRight } from "lucide-react"
@@ -12,32 +13,26 @@ interface StatusCardProps {
 
 export function StatusCard({ data }: StatusCardProps) {
   return (
-    <div className="relative rounded-[20px] bg-blue-50/50 p-6">
-      <div className="absolute top-6 right-6">
-        <Stethoscope className="h-8 w-8 text-black" strokeWidth={1.5} />
+    <div className="bg-primary/15 border-primary/30 relative mt-8 rounded-[14px] border px-5 py-5">
+      <div className="absolute top-5 right-6">
+        <Image src="/images/stethoscope.svg" alt="Stethoscope Icon" width={30} height={30} className="" />
       </div>
 
-      <div className="pr-12">
-        <h2 className="mb-2 text-2xl leading-tight font-semibold text-black">{data.title}</h2>
+      <div>
+        <div className="pr-8">
+          <h2 className="mb-2 text-xl leading-tight font-semibold text-black">{data.title}</h2>
 
-        {data.message && <p className="mb-6 text-base leading-relaxed text-gray-500">{data.message}</p>}
+          {data.message && <p className="mb-2 pr-2 text-sm leading-relaxed text-gray-500">{data.message}</p>}
+        </div>
 
         {data.countdown && (
-          <Button
-            size="lg"
-            className="w-full rounded-xl bg-blue-600 py-6 text-lg font-medium hover:bg-blue-700"
-            disabled
-          >
+          <Button size="xl" className="mt-6 w-full">
             {data.countdown}
           </Button>
         )}
 
         {data.action && !data.countdown && (
-          <Button
-            asChild
-            size="lg"
-            className="w-full rounded-xl bg-blue-600 py-6 text-lg font-medium hover:bg-blue-700"
-          >
+          <Button asChild size="xl" className="mt-4 w-full">
             <Link href={data.action.href || "#"} className="flex items-center justify-center gap-2">
               {data.action.icon === "phone" && <Phone className="h-5 w-5" />}
               {data.action.label}
