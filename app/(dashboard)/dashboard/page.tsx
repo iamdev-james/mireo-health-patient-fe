@@ -7,7 +7,6 @@ import { Board } from "@/components/dashboard/board"
 import { TreatmentView } from "@/components/dashboard/treatment-view"
 import { Button } from "@/components/ui/button"
 import { UserProfileHeader } from "@/components/account/user-profile-header"
-import { Sparkles } from "lucide-react"
 import { getStatusConfig, isActiveTreatment, hasCountdown } from "@/lib/utils/dashboard-helpers"
 
 async function getDashboardData(): Promise<DashboardData> {
@@ -18,26 +17,73 @@ async function getDashboardData(): Promise<DashboardData> {
   // return res.json()
 
   return {
-    status: PatientStatus.NEW_USER,
+    status: PatientStatus.ACTIVE_TREATMENT,
     patient: {
       name: "Rufus",
       avatar: undefined,
+      diagnosis: "Hypertension",
     },
-    statusCard: getStatusConfig(PatientStatus.NEW_USER),
+    statusCard: getStatusConfig(PatientStatus.ACTIVE_TREATMENT),
     boardItems: [
+      // {
+      //   id: "1",
+      //   type: "doctor-review",
+      //   title: "Laboratory Test Request",
+      //   message:
+      //     "The doctor has recommended you to take the following tests at a medical laboratory and upload the results",
+      //   tests: [
+      //     { id: "1", name: "Urinalysis", uploaded: true },
+      //     { id: "2", name: "Fasting Blood Sugar", uploaded: false },
+      //     { id: "3", name: "Lipid Profile", uploaded: false },
+      //     { id: "4", name: "Microalbuminuria Test", uploaded: false },
+      //     { id: "5", name: "HbA1c Test (Glycated Hemoglobin)", uploaded: false },
+      //   ],
+      // },
+    ],
+    weeklyReadings: [
+      { day: "Mon", status: "good" },
+      { day: "Tue", status: "slightly-off" },
+      { day: "Wed", status: "needs-review" },
+      { day: "Thu", status: "good" },
+      { day: "Fri", status: "good" },
+      { day: "Sat", status: "good" },
+      { day: "Sun", status: "good" },
+    ],
+    healthReadings: [
       {
         id: "1",
-        type: "doctor-review",
-        title: "Laboratory Test Request",
-        message:
-          "The doctor has recommended you to take the following tests at a medical laboratory and upload the results",
-        tests: [
-          { id: "1", name: "Urinalysis", uploaded: true },
-          { id: "2", name: "Fasting Blood Sugar", uploaded: false },
-          { id: "3", name: "Lipid Profile", uploaded: false },
-          { id: "4", name: "Microalbuminuria Test", uploaded: false },
-          { id: "5", name: "HbA1c Test (Glycated Hemoglobin)", uploaded: false },
-        ],
+        label: "Blood Pressure",
+        value: "120/80 mmHg",
+        lastReading: "Yesterday, 2:00pm",
+      },
+      {
+        id: "2",
+        label: "Blood Sugar",
+        value: "120/80 mmHg",
+        lastReading: "Yesterday, 2:00pm",
+      },
+    ],
+    medications: [
+      {
+        id: "1",
+        name: "Amlodipine 500mg",
+        schedule: "1 Morning • 1 Afternoon • 1 Night",
+        taken: 1,
+        total: 3,
+      },
+      {
+        id: "2",
+        name: "Metformin 500mg",
+        schedule: "1 Night • 1 Afternoon • 1 Night",
+        taken: 2,
+        total: 3,
+      },
+      {
+        id: "3",
+        name: "Amlodipine 500mg",
+        schedule: "1 Night • 1 Afternoon • 1 Night",
+        taken: 0,
+        total: 3,
       },
     ],
   }
