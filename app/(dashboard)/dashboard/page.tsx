@@ -17,13 +17,13 @@ async function getDashboardData(): Promise<DashboardData> {
   // return res.json()
 
   return {
-    status: PatientStatus.ACTIVE_TREATMENT,
+    status: PatientStatus.NEW_USER,
     patient: {
       name: "Rufus",
       avatar: undefined,
       diagnosis: "Hypertension",
     },
-    statusCard: getStatusConfig(PatientStatus.ACTIVE_TREATMENT),
+    statusCard: getStatusConfig(PatientStatus.NEW_USER),
     boardItems: [
       // {
       //   id: "1",
