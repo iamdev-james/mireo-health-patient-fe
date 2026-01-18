@@ -55,6 +55,7 @@ export interface HealthReading {
   id: string
   label: string
   value: string
+  type: "blood-pressure" | "blood-sugar"
   lastReading: string
 }
 

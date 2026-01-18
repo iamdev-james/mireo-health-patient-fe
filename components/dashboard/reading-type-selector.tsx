@@ -13,25 +13,27 @@ interface ReadingTypeSelectorProps {
 
 export function ReadingTypeSelector({ options, selected, onSelect }: ReadingTypeSelectorProps) {
   return (
-    <div className="rounded-2xl border border-gray-100 bg-white p-4">
+    <div className="rounded-2xl border border-gray-50 bg-white px-5">
       {options.map((option, index) => (
         <button
           key={option.id}
           onClick={() => onSelect(option.id)}
           className={cn(
-            "w-full py-4 text-left transition-colors hover:bg-gray-50",
-            index !== options.length - 1 && "border-b border-gray-100"
+            "w-full cursor-pointer py-5 text-left transition-colors",
+            index !== options.length - 1 && "border-b border-gray-50"
           )}
         >
           <div className="flex items-start justify-between">
             <div>
-              <h3 className="text-lg font-semibold text-black">{option.title}</h3>
-              <p className="mt-1 text-sm text-gray-400">{option.description}</p>
+              <h3 className="text-base font-medium text-black md:text-lg">{option.title}</h3>
+              <p className="mt-1 text-sm font-medium text-gray-400">{option.description}</p>
             </div>
-            {selected === option.id && (
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600">
-                <Check className="h-5 w-5 text-white" strokeWidth={3} />
+            {selected === option.id ? (
+              <div className="bg-primary mt-2 mr-2 flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
               </div>
+            ) : (
+              <div className="bg-gray-70 border-gray-150 mt-2 mr-2 h-6 w-6 shrink-0 rounded-full border" />
             )}
           </div>
         </button>

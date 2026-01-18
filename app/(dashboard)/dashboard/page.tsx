@@ -53,12 +53,14 @@ async function getDashboardData(): Promise<DashboardData> {
       {
         id: "1",
         label: "Blood Pressure",
+        type: "blood-pressure",
         value: "120/80 mmHg",
         lastReading: "Yesterday, 2:00pm",
       },
       {
         id: "2",
         label: "Blood Sugar",
+        type: "blood-sugar",
         value: "120/80 mmHg",
         lastReading: "Yesterday, 2:00pm",
       },

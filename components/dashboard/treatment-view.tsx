@@ -64,7 +64,7 @@ export function TreatmentView({ data }: TreatmentViewProps) {
                 <p className="mb-4 text-xs text-gray-400">Last reading: {reading.lastReading}</p>
 
                 <Button asChild className="text-xs">
-                  <Link href="/readings/log">Log reading</Link>
+                  <Link href={`/compliance/reading/${reading.type}`}>Log reading</Link>
                 </Button>
               </div>
             ))}
@@ -109,7 +109,9 @@ export function TreatmentView({ data }: TreatmentViewProps) {
             </div>
 
             <Button size="xl" className="w-full">
-              Log today&apos;s dose
+              <Link href={`/compliance/medication/log`} prefetch>
+                Log today&apos;s dose
+              </Link>
             </Button>
           </div>
         </section>
