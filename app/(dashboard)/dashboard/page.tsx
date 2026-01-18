@@ -1,13 +1,13 @@
 // app/dashboard/page.tsx
 
 import Image from "next/image"
-import { DashboardData, PatientStatus } from "@/types/dashboard"
-import { StatusCard } from "@/components/dashboard/status-card"
+import { UserProfileHeader } from "@/components/account/user-profile-header"
 import { Board } from "@/components/dashboard/board"
+import { StatusCard } from "@/components/dashboard/status-card"
 import { TreatmentView } from "@/components/dashboard/treatment-view"
 import { Button } from "@/components/ui/button"
-import { UserProfileHeader } from "@/components/account/user-profile-header"
-import { getStatusConfig, isActiveTreatment, hasCountdown } from "@/lib/utils/dashboard-helpers"
+import { getStatusConfig, hasCountdown, isActiveTreatment } from "@/lib/utils/dashboard-helpers"
+import { DashboardData, PatientStatus } from "@/types/dashboard"
 
 async function getDashboardData(): Promise<DashboardData> {
   // const res = await fetch(`${process.env.API_URL}/dashboard`, {

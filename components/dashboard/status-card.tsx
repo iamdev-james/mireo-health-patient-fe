@@ -1,11 +1,11 @@
 // components/dashboard/status-card.tsx
 "use client"
 
+import { ArrowRight, Phone } from "lucide-react"
 import Image from "next/image"
-import { StatusCardData } from "@/types/dashboard"
-import { Button } from "@/components/ui/button"
-import { Stethoscope, Phone, ArrowRight } from "lucide-react"
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { StatusCardData } from "@/types/dashboard"
 
 interface StatusCardProps {
   data: StatusCardData

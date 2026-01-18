@@ -1,7 +1,7 @@
 // lib/utils/dashboard-helpers.ts
 
+import { STATUS_ACTIONS, STATUS_CONFIG } from "@/lib/constants/dashboard"
 import { PatientStatus, StatusCardData } from "@/types/dashboard"
-import { STATUS_CONFIG, STATUS_ACTIONS } from "@/lib/constants/dashboard"
 
 export function getStatusConfig(status: PatientStatus, countdown?: string): StatusCardData {
   const config = STATUS_CONFIG[status]

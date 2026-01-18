@@ -2,8 +2,8 @@
 "use client"
 
 import { Check } from "lucide-react"
-import { BloodSugarType, ReadingTypeOption } from "@/types/readings"
 import { cn } from "@/lib/utils"
+import { BloodSugarType, ReadingTypeOption } from "@/types/readings"
 
 interface ReadingTypeSelectorProps {
   options: ReadingTypeOption[]

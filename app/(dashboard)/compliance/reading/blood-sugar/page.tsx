@@ -11,10 +11,10 @@ import { ReadingTypeSelector } from "@/components/dashboard/reading-type-selecto
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { PageTransition } from "@/components/ui/page-transition"
+import { APIError, readingAPI } from "@/lib/services/reading-api"
+import { type BloodSugarInput, bloodSugarSchema } from "@/lib/validations/readings"
 import { BLOOD_SUGAR_TYPES } from "@/types/readings"
 import type { BloodSugarType } from "@/types/readings"
-import { APIError, readingAPI } from "@/lib/services/reading-api"
-import { bloodSugarSchema, type BloodSugarInput } from "@/lib/validations/readings"
 
 export default function BloodSugarPage() {
   const router = useRouter()

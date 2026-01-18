@@ -1,12 +1,11 @@
 // components/dashboard/board.tsx
 "use client"
 
-import { useState } from "react"
-import { BoardItem } from "@/types/dashboard"
-import { Button } from "@/components/ui/button"
-import { ClipboardList, ChevronDown, ChevronUp, Check, Phone, ArrowRight } from "lucide-react"
+import { ArrowRight, Check, ChevronDown, ChevronUp, ClipboardList, Phone } from "lucide-react"
 import Link from "next/link"
-import { cn } from "@/lib/utils"
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { BoardItem } from "@/types/dashboard"
 
 interface BoardProps {
   items?: BoardItem[]

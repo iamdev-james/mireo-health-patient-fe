@@ -1,10 +1,10 @@
 // components/dashboard/treatment-view.tsx
 
-import { DashboardData } from "@/types/dashboard"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { READING_STATUS_COLORS } from "@/lib/constants/dashboard"
 import { cn } from "@/lib/utils"
-import Link from "next/link"
+import { DashboardData } from "@/types/dashboard"
 
 interface TreatmentViewProps {
   data: DashboardData

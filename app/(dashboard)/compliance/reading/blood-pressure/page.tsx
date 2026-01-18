@@ -3,15 +3,15 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { BackButton } from "@/components/ui/back-button"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
+import { BackButton } from "@/components/ui/back-button"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { PageTransition } from "@/components/ui/page-transition"
 import { APIError, readingAPI } from "@/lib/services/reading-api"
-import { bloodPressureSchema, type BloodPressureInput } from "@/lib/validations/readings"
+import { type BloodPressureInput, bloodPressureSchema } from "@/lib/validations/readings"
 
 export default function BloodPressurePage() {
   const router = useRouter()
@@ -31,7 +31,7 @@ export default function BloodPressurePage() {
     setApiError(null)
 
     try {
-      const [systolic, diastolic] = data.value.split("/").map(Number)
+      //   const [systolic, diastolic] = data.value.split("/").map(Number)
       //   await readingAPI.submitBloodPressure(systolic, diastolic)
       router.push("/dashboard")
     } catch (error) {
