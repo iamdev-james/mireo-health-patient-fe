@@ -67,7 +67,7 @@ export const STATUS_ACTIONS: Partial<
 }
 
 export const READING_STATUS_COLORS = {
-  good: "bg-green-500",
-  "slightly-off": "bg-orange-500",
-  "needs-review": "bg-red-500",
+  good: "bg-success-500",
+  "slightly-off": "bg-warning-500",
+  "needs-review": "bg-error-500",
 }
