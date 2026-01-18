@@ -118,7 +118,7 @@ export default async function DashboardPage() {
 
       <Button
         size="lg"
-        className="fixed right-6 bottom-24 z-50 h-14 w-14 rounded-full bg-blue-600 p-0 shadow-lg hover:bg-blue-700"
+        className="bg-primary hover:bg-primary/90 fixed right-6 bottom-24 z-50 h-14 w-14 rounded-full p-0 shadow-lg"
         aria-label="Quick actions"
       >
         <Image
