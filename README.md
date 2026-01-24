@@ -1,104 +1,169 @@
+# Mireo Health Patient Frontend
 
-# [Next.js Enterprise Boilerplate](https://blazity.com/open-source/nextjs-enterprise-boilerplate) 
+![Image description](.github/assets/project-logo.png)
 
-A production-ready template for building enterprise applications with Next.js. This boilerplate provides a solid foundation with carefully selected technologies and ready-to-go infrastructure to help you develop high-quality applications efficiently.
+## About
 
-## Motivation
+This is the **patient frontend repository** for **Mireo Health**, an AI-powered health tech platform that helps simplify and make basic healthcare available to people in developing and unreached areas. This interface is designed for patients and non-medical users to access healthcare services, consultations, and health management tools. Our mission is to democratize healthcare access through innovative technology solutions.
 
-While most Next.js boilerplates focus on individual developer needs with excessive complexity, **next-enterprise** prioritizes strategic simplicity for enterprise teams. It offers a streamlined foundation with high-impact features that maximize developer productivity and accelerate time-to-market for business-critical applications.
+## 🚀 Technologies Used
 
-<a href="https://blazity.com/">
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="/assets/blazity-logo-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="/assets/blazity-logo-light.svg">
-  <img alt="Logo" align="right" height="80" src="/assets/blazity-logo-light.svg">
-</picture>
-</a>
+This application is built with modern technologies for optimal performance, scalability, and developer experience:
 
-> [!NOTE]
-> **Blazity** is a group of Next.js architects. We help organizations architect, optimize, and deploy high-performance Next.js applications at scale. Contact us at [contact@blazity.com](https://blazity.com) if you’d like to talk about your project.
+### Core Framework & Language
 
+- **[Next.js 15](https://nextjs.org/)** - React framework with App Directory for optimal performance
+- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript with enhanced developer experience
+- **[React 18](https://reactjs.org/)** - UI library with concurrent features
 
+### Styling & UI Components
 
-## Documentation
+- **[Tailwind CSS v4](https://tailwindcss.com/)** - Utility-first CSS framework
+- **[shadcn/ui](https://ui.shadcn.com/)** - Beautifully designed React components
+- **[CVA (Class Variance Authority)](http://cva.style/)** - Component variant management
 
-There is a separate documentation that explains its functionality, highlights core business values and technical decisions, provides guidelines for future development, and includes architectural diagrams.
+### Development Tools
 
-We encourage you to [visit our docs (docs.blazity.com)](https://docs.blazity.com) to learn more
+- **[ESLint 9](https://eslint.org/)** - Code linting and error prevention
+- **[Prettier](https://prettier.io/)** - Code formatting
+- **[pnpm](https://pnpm.io/)** - Fast, disk space efficient package manager
+- **[Corepack](https://github.com/nodejs/corepack)** - Package manager management
 
-## Integrated features
+### Testing
 
-### Boilerplate
-With this template you will get all the boilerplate features included:
+- **[Vitest](https://vitest.dev/)** - Unit testing framework
+- **[React Testing Library](https://testing-library.com/react)** - React component testing
+- **[Playwright](https://playwright.dev/)** - End-to-end testing
 
-* [Next.js 15](https://nextjs.org/) - Performance-optimized configuration using App Directory
-* [Tailwind CSS v4](https://tailwindcss.com/) - Utility-first CSS framework for efficient UI development
-* [ESlint 9](https://eslint.org/) and [Prettier](https://prettier.io/) - Code consistency and error prevention
-* [Corepack](https://github.com/nodejs/corepack) & [pnpm](https://pnpm.io/) as the package manager - For project management without compromises 
-* [Strict TypeScript](https://www.typescriptlang.org/) - Enhanced type safety with carefully crafted config and [ts-reset](https://github.com/total-typescript/ts-reset) library
-* [GitHub Actions](https://github.com/features/actions) - Pre-configured workflows including bundle size and performance tracking
-* Perfect Lighthouse score - Optimized performance metrics
-* [Bundle analyzer](https://www.npmjs.com/package/@next/bundle-analyzer) - Monitor and manage bundle size during development
-* Testing suite - [Vitest](https://vitest.dev), [React Testing Library](https://testing-library.com/react), and [Playwright](https://playwright.dev/) for comprehensive testing
-* Advanced testing - Smoke and acceptance testing capabilities
-* [Conventional commits](https://www.conventionalcommits.org/) - Standardized commit history management
-* [Observability](https://opentelemetry.io/) - Open Telemetry integration
-* [Absolute imports](https://nextjs.org/docs/advanced-features/module-path-aliases) - Simplified import structure
-* [Health checks](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) - Kubernetes-compatible monitoring
-* [shadcn/ui](https://ui.shadcn.com/) - Beautiful UI components built on Radix UI and Tailwind CSS
-* [CVA](http://cva.style/) (Class Variance Authority) - Consistent design system creation
-* [Renovate BOT](https://www.whitesourcesoftware.com/free-developer-tools/renovate) - Automated dependency and security updates
-* [Patch-package](https://www.npmjs.com/package/patch-package) - External dependency fixes without compromises
-* Component relationship tools - Graph for managing coupling and cohesion
-* [Semantic Release](https://github.com/semantic-release/semantic-release) - Automated changelog generation
-* [T3 Env](https://env.t3.gg/) - Streamlined environment variable management
+### Development & Documentation
 
-### Infrastructure & deployments
+- **[Storybook](https://storybook.js.org/)** - Component development and documentation
+- **[T3 Env](https://env.t3.gg/)** - Environment variable management
 
-#### Vercel
+### DevOps & Automation
 
-Easily deploy your Next.js app with [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=github&utm_campaign=next-enterprise) by clicking the button below:
+- **[GitHub Actions](https://github.com/features/actions)** - CI/CD workflows
+- **[Conventional Commits](https://www.conventionalcommits.org/)** - Standardized commit messages
+- **[Semantic Release](https://github.com/semantic-release/semantic-release)** - Automated versioning and changelog
+- **[Renovate](https://www.whitesourcesoftware.com/free-developer-tools/renovate)** - Automated dependency updates
 
-[![Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/Blazity/next-enterprise)
+### Monitoring & Performance
 
-#### Custom cloud infrastructure
+- **[OpenTelemetry](https://opentelemetry.io/)** - Observability and monitoring
+- **[Bundle Analyzer](https://www.npmjs.com/package/@next/bundle-analyzer)** - Bundle size optimization
 
-**next-enterprise** offers dedicated infrastructure as code (IaC) solutions built with Terraform, designed specifically for deploying Next.js applications based on our extensive experience working with enterprise clients.
+## 📋 Prerequisites
 
-Learn more in our [documentation (docs.blazity.com)][docs] how to quickstart with the deployments using simple CLI.
+Before you begin, ensure you have the following installed:
 
-#### Available cloud providers and theirs features:
+- **Node.js** (version 18.0 or higher)
+- **pnpm** (recommended) or npm/yarn
+- **Git**
 
-* **AWS (Amazon Web Services)**
-  * Automated provisioning of AWS infrastructure
-  * Scalable & secure setup using:
-     * VPC - Isolated network infrastructure
-     * Elastic Container Service (ECS) - Container orchestration
-     * Elastic Container Registry (ECR) - Container image storage
-     * Application Load Balancer - Traffic distribution
-     * S3 + CloudFront - Static asset delivery and caching
-     * AWS WAF - Web Application Firewall protection
-     * Redis Cluster - Caching
-  * CI/CD ready - Continuous integration and deployment pipeline
+## 🛠 Installation
 
-*... more coming soon*
+1. **Clone the repository**
 
-### Team & maintenance
+   ```bash
+   git clone <your-repository-url>
+   cd mireo-patient-fe
+   ```
 
-**next-enterprise** is backed and maintained by [Blazity](https://blazity.com), providing up to date security features and integrated feature updates.
+2. **Install dependencies**
 
-#### Active maintainers
+   ```bash
+   # Using pnpm (recommended)
+   pnpm install
 
-- Igor Klepacki ([neg4n](https://github.com/neg4n)) - Open Source Software Developer
-- Tomasz Czechowski ([tomaszczechowski](https://github.com/tomaszczechowski)) - Solutions Architect & DevOps
-- Jakub Jabłoński ([jjablonski-it](https://github.com/jjablonski-it)) - Head of Integrations
+   # Or using npm
+   npm install
 
-#### All-time contributors
-[bmstefanski](https://github.com/bmstefanski)
+   # Or using yarn
+   yarn install
+   ```
 
-## License
+3. **Set up environment variables**
 
-MIT
+   ```bash
+   # Copy the example environment file
+   cp .env.example .env.local
 
+   # Edit the environment variables
+   nano .env.local  # or use your preferred editor
+   ```
 
-[docs]: https://docs.blazity.com/next-enterprise/deployments/enterprise-cli
+4. **Run the development server**
+
+   ```bash
+   pnpm dev
+   # or
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+5. **Open your browser**
+
+   Navigate to [http://localhost:3000](http://localhost:3000) to see the application.
+
+## 📝 Available Scripts
+
+```bash
+# Development
+pnpm dev          # Start development server
+pnpm build        # Build for production
+pnpm start        # Start production server
+pnpm lint         # Run ESLint
+pnpm lint:fix     # Fix ESLint issues
+pnpm type-check   # Run TypeScript checks
+
+# Testing
+pnpm test         # Run unit tests
+pnpm test:watch   # Run tests in watch mode
+pnpm test:ui      # Run tests with UI
+pnpm test:e2e     # Run end-to-end tests
+
+# Storybook
+pnpm storybook    # Start Storybook development server
+pnpm build-storybook  # Build Storybook for production
+
+# Bundle Analysis
+pnpm analyze      # Analyze bundle size
+```
+
+## 🏗 Project Structure
+
+```
+├── app/                    # Next.js App Directory
+│   ├── (auth)/            # Authentication routes
+│   ├── dashboard/         # Patient dashboard pages
+│   ├── account/           # User profile management
+│   ├── globals.css        # Global styles
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Home page
+├── components/            # Reusable UI components
+│   ├── ui/               # shadcn/ui components
+│   ├── forms/            # Form components
+│   └── ...               # Custom components
+├── lib/                   # Utility functions and configurations
+├── hooks/                 # Custom React hooks
+├── types/                 # TypeScript type definitions
+├── public/                # Static assets
+└── stories/               # Storybook stories
+```
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+
+1. **Connect your repository to Vercel**
+2. **Configure environment variables** in the Vercel dashboard
+3. **Deploy automatically** on every push to main branch
+
+## 📞 Support
+
+For support, please contact the development team or create an issue in this repository.
+
+---
+
+**Mireo Health** - Making healthcare accessible to everyone, everywhere.
