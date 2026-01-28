@@ -53,7 +53,7 @@ export default function CreateAccountForm() {
         role: "patient" as const,
         invitation_code: "",
       }
-      
+
       await authService.register(registerData)
 
       // 2. Send OTP

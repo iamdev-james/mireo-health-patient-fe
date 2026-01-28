@@ -38,7 +38,7 @@ export function TopProgressBar() {
 
   return (
     <motion.div
-      className="bg-primary fixed left-0 top-0 z-[100] h-1 w-full origin-left"
+      className="bg-primary fixed top-0 left-0 z-[100] h-1 w-full origin-left"
       style={{ scaleX, opacity: isVisible ? 1 : 0 }}
     />
   )

@@ -57,9 +57,9 @@ export default function HealthCheckForm() {
       dispatch(setCurrentStep(4))
       router.push("/dashboard")
     } catch (error) {
-     console.error(error)
-     // Fallback to dashboard even on error for now
-     router.push("/dashboard")
+      console.error(error)
+      // Fallback to dashboard even on error for now
+      router.push("/dashboard")
     } finally {
       setIsLoading(false)
     }
@@ -76,11 +76,11 @@ export default function HealthCheckForm() {
         className="min-h-screen bg-white"
       >
         <div className="px-6 py-8">
-          <div className="mb-12 text-center relative">
-            <div className="absolute right-0 top-0">
-                <Button variant="ghost" onClick={handleSkip} className="text-gray-500 hover:text-gray-900">
-                    Skip
-                </Button>
+          <div className="relative mb-12 text-center">
+            <div className="absolute top-0 right-0">
+              <Button variant="ghost" onClick={handleSkip} className="text-gray-500 hover:text-gray-900">
+                Skip
+              </Button>
             </div>
             <h1 className="text-2xl font-medium md:font-semibold">Let's do a quick health check</h1>
             <p className="mt-4 text-sm text-gray-400">
