@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { HEALTH_CHECK_QUESTIONS } from "@/lib/constants/registration"
-import { APIError, registrationAPI } from "@/lib/services/registration-api"
 import { useAppDispatch } from "@/lib/store/hooks"
 import { setCurrentStep, setHealthCheckAnswers } from "@/lib/store/slices/registration-slice"
 import { HealthCheckAnswer } from "@/types/registration"
@@ -40,28 +39,28 @@ export default function HealthCheckForm() {
     }
   }
 
-  const handleSubmit = async (finalAnswers: HealthCheckAnswer[]) => {
-    // if (!isVerified) {
-    //   router.push("/create-account/verify-otp")
-    //   return
-    // }
+  const handleSkip = () => {
+    dispatch(setCurrentStep(4))
+    router.push("/dashboard")
+  }
 
+  const handleSubmit = async (finalAnswers: HealthCheckAnswer[]) => {
     setIsLoading(true)
     setError(null)
 
     try {
-      await registrationAPI.submitHealthCheck(finalAnswers)
-      await registrationAPI.completeRegistration()
+      // API integration deferred
+      // await registrationAPI.submitHealthCheck(finalAnswers)
+      // await registrationAPI.completeRegistration()
 
       dispatch(setHealthCheckAnswers(finalAnswers))
       dispatch(setCurrentStep(4))
       router.push("/dashboard")
     } catch (error) {
-      if (error instanceof APIError) {
-        setError(error.message)
-      } else {
-        setError("An unexpected error occurred. Please try again.")
-      }
+      console.error(error)
+      // Fallback to dashboard even on error for now
+      router.push("/dashboard")
+    } finally {
       setIsLoading(false)
     }
   }
@@ -123,6 +122,14 @@ export default function HealthCheckForm() {
                 disabled={isLoading}
               >
                 No
+              </Button>
+              <Button
+                onClick={handleSkip}
+                variant="ghost"
+                className="h-12 w-full font-medium text-gray-600 hover:text-gray-900"
+                disabled={isLoading}
+              >
+                Skip
               </Button>
             </div>
           </div>

@@ -33,6 +33,13 @@ export const RELIGION_OPTIONS = [
   { value: "prefer_not_to_say", label: "Prefer not to say" },
 ]
 
+export const TRIBE_OPTIONS = [
+  { value: "igbo", label: "Igbo" },
+  { value: "yoruba", label: "Yoruba" },
+  { value: "hausa", label: "Hausa" },
+  { value: "other", label: "Other" },
+]
+
 export const HEALTH_CHECK_QUESTIONS: HealthCheckQuestion[] = [
   {
     id: 1,

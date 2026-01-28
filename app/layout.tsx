@@ -3,6 +3,9 @@
 import { Metadata, Viewport } from "next"
 import StoreProvider from "@/lib/store/provider"
 import { satoshi } from "./fonts/satoshi"
+import { Toaster } from "sonner"
+import { FullScreenLoader } from "@/components/ui/full-screen-loader"
+import { TopProgressBar } from "@/components/ui/top-progress-bar"
 import { InstallPrompt } from "./Install-pwa"
 import { RegisterServiceWorker } from "./register-sw"
 
@@ -33,9 +36,12 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={satoshi.variable}>
-      <body>
+      <body suppressHydrationWarning>
         <StoreProvider>
+          <TopProgressBar />
+          <FullScreenLoader />
           {children}
+          <Toaster />
           <RegisterServiceWorker />
           <InstallPrompt />
         </StoreProvider>
