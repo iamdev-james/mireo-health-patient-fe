@@ -5,7 +5,6 @@ import { useEffect, useState } from "react"
 import { ProgressService } from "@/lib/services/progress-service"
 
 export function TopProgressBar() {
-  const [isInProgress, setIsInProgress] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
   const scaleX = useSpring(0, {
     stiffness: 100,
@@ -15,7 +14,7 @@ export function TopProgressBar() {
 
   useEffect(() => {
     return ProgressService.subscribe((progress) => {
-      setIsInProgress(progress)
+      // setIsInProgress(progress) // Removed unused state
       if (progress) {
         setIsVisible(true)
         scaleX.set(0.2) // Start at 20%
