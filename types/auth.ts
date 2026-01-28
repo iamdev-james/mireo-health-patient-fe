@@ -63,7 +63,7 @@ export interface UpdateProfileRequest {
   religion: string
   tribe: string
   occupation: string
-  lga_id: number
+  lga_id: number | null
   address: string
   gender: string
   date_of_birth: string
@@ -87,4 +87,39 @@ export interface UpdateProfileResponse {
   state_name: string
   manager_id: string
   primary_doctor_id: string
+}
+
+export interface UserProfile {
+  email: string
+  phone: string
+  first_name: string
+  last_name: string
+  id: string
+  role: string
+  gender: string
+  date_of_birth: string
+  marital_status: string
+  religion: string
+  tribe: string
+  occupation: string
+  address: string
+  lga_name: string
+  state_name: string
+  manager_id: string
+  primary_doctor_id: string
+}
+
+export interface DashboardStatus {
+  stage: string
+  status: string
+  screening_id: string
+  case_id: string
+  scheduled_at: string
+  chew_name: string
+  chew_phone: string
+  doctor_name: string
+  doctor_id: string
+  management_plan_id: string
+  treatment_plan_id: string
+  lab_requests: string[]
 }

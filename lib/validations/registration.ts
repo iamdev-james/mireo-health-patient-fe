@@ -48,7 +48,9 @@ export const personalInfoSchema = z.object({
     required_error: "Please select your marital status",
   }),
   religion: z.string().min(1, "Please select your religion"),
-  tribe: z.string().min(1, "Please enter your tribe").optional().or(z.literal("")),
+  tribe: z.enum(["igbo", "yoruba", "hausa", "other"], {
+    required_error: "Please select your tribe",
+  }),
   occupation: z
     .string()
     .min(2, "Occupation must be at least 2 characters")

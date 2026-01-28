@@ -6,4 +6,8 @@ export const API_ROUTES = {
     REFRESH_TOKEN: "/auth/refresh-token",
     UPDATE_PROFILE: "/users/patients",
   },
+  USER: {
+    PROFILE: "/users/patient",
+    DASHBOARD_STATUS: "/users/patient/dashboard-status",
+  },
 } as const

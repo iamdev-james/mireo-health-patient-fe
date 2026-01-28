@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { GENDER_OPTIONS, MARITAL_STATUS_OPTIONS, RELIGION_OPTIONS } from "@/lib/constants/registration"
+import { GENDER_OPTIONS, MARITAL_STATUS_OPTIONS, RELIGION_OPTIONS, TRIBE_OPTIONS } from "@/lib/constants/registration"
 import { APIError } from "@/lib/utils/api"
 import { authService } from "@/lib/services/auth-service"
 import { useAppDispatch } from "@/lib/store/hooks"
@@ -57,7 +57,7 @@ export default function PersonalInfoForm() {
         occupation: data.occupation,
         // TODO: Add fields for address and lga_id in the form
         address: "Not Provided",
-        lga_id: 1,
+        lga_id: null,
       })
       dispatch(setPersonalInfo(data))
       dispatch(setCurrentStep(3))
@@ -180,11 +180,23 @@ export default function PersonalInfoForm() {
 
               <div className="space-y-2">
                 <Label htmlFor="tribe">Tribe</Label>
-                <Input
-                  id="tribe"
-                  {...register("tribe")}
-                  className={`h-12 ${errors.tribe ? "border-red-500" : ""}`}
-                  disabled={isLoading}
+                <Controller
+                  name="tribe"
+                  control={control}
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} value={field.value || ""} disabled={isLoading}>
+                      <SelectTrigger className={`w-full ${errors.tribe ? "border-red-500" : ""}`} size={"xl"}>
+                        <SelectValue placeholder="Select tribe" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {TRIBE_OPTIONS.map((option) => (
+                          <SelectItem key={option.value} value={option.value}>
+                            {option.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )}
                 />
                 {errors.tribe && <p className="text-xs text-red-500">{errors.tribe.message}</p>}
               </div>

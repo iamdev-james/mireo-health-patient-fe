@@ -36,7 +36,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={satoshi.variable}>
-      <body>
+      <body suppressHydrationWarning>
         <StoreProvider>
           <TopProgressBar />
           <FullScreenLoader />

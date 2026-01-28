@@ -76,12 +76,7 @@ export default function HealthCheckForm() {
         className="min-h-screen bg-white"
       >
         <div className="px-6 py-8">
-          <div className="relative mb-12 text-center">
-            <div className="absolute top-0 right-0">
-              <Button variant="ghost" onClick={handleSkip} className="text-gray-500 hover:text-gray-900">
-                Skip
-              </Button>
-            </div>
+          <div className="mb-12 text-center">
             <h1 className="text-2xl font-medium md:font-semibold">Let's do a quick health check</h1>
             <p className="mt-4 text-sm text-gray-400">
               Answer a few simple questions. We'll use your responses to assess key health indicators and recommend next
@@ -127,6 +122,14 @@ export default function HealthCheckForm() {
                 disabled={isLoading}
               >
                 No
+              </Button>
+              <Button
+                onClick={handleSkip}
+                variant="ghost"
+                className="h-12 w-full font-medium text-gray-600 hover:text-gray-900"
+                disabled={isLoading}
+              >
+                Skip
               </Button>
             </div>
           </div>

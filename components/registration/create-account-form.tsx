@@ -51,7 +51,7 @@ export default function CreateAccountForm() {
         email: data.email,
         phone: `${data.countryCode}${data.phoneNumber}`,
         role: "patient" as const,
-        invitation_code: "",
+        invitation_code: "5FAE51E5",
       }
 
       await authService.register(registerData)
