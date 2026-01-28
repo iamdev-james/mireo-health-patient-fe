@@ -17,28 +17,28 @@ async function getDashboardData(): Promise<DashboardData> {
   // return res.json()
 
   return {
-    status: PatientStatus.NEW_USER,
+    status: PatientStatus.LAB_RESULTS_UPLOADED,
     patient: {
       name: "Rufus",
       avatar: undefined,
       diagnosis: "Hypertension",
     },
-    statusCard: getStatusConfig(PatientStatus.NEW_USER),
+    statusCard: getStatusConfig(PatientStatus.LAB_RESULTS_UPLOADED),
     boardItems: [
-      // {
-      //   id: "1",
-      //   type: "doctor-review",
-      //   title: "Laboratory Test Request",
-      //   message:
-      //     "The doctor has recommended you to take the following tests at a medical laboratory and upload the results",
-      //   tests: [
-      //     { id: "1", name: "Urinalysis", uploaded: true },
-      //     { id: "2", name: "Fasting Blood Sugar", uploaded: false },
-      //     { id: "3", name: "Lipid Profile", uploaded: false },
-      //     { id: "4", name: "Microalbuminuria Test", uploaded: false },
-      //     { id: "5", name: "HbA1c Test (Glycated Hemoglobin)", uploaded: false },
-      //   ],
-      // },
+      {
+        id: "1",
+        type: "doctor-review",
+        title: "Laboratory Test Request",
+        message:
+          "The doctor has recommended you to take the following tests at a medical laboratory and upload the results",
+        tests: [
+          { id: "1", name: "Urinalysis", uploaded: true },
+          { id: "2", name: "Fasting Blood Sugar", uploaded: false },
+          { id: "3", name: "Lipid Profile", uploaded: false },
+          { id: "4", name: "Microalbuminuria Test", uploaded: false },
+          { id: "5", name: "HbA1c Test (Glycated Hemoglobin)", uploaded: false },
+        ],
+      },
     ],
     weeklyReadings: [
       { day: "Mon", status: "good" },
