@@ -12,7 +12,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { COUNTRY_CODES } from "@/lib/constants/registration"
-import { APIError, registrationAPI } from "@/lib/services/registration-api"
+import { APIError } from "@/lib/utils/api"
+import { authService } from "@/lib/services/auth-service"
 import { useAppDispatch } from "@/lib/store/hooks"
 import { setAccountInfo, setCurrentStep } from "@/lib/store/slices/registration-slice"
 import { type CreateAccountInput, createAccountSchema } from "@/lib/validations/registration"
@@ -43,7 +44,21 @@ export default function CreateAccountForm() {
     setApiError(null)
 
     try {
-      await registrationAPI.createAccount(data)
+      // 1. Register
+      const registerData = {
+        first_name: data.firstname,
+        last_name: data.surname,
+        email: data.email,
+        phone: `${data.countryCode}${data.phoneNumber}`,
+        role: "patient" as const,
+        invitation_code: "5FAE51E5",
+      }
+
+      await authService.register(registerData)
+
+      // 2. Send OTP
+      await authService.sendOtp({ identifier: data.email })
+
       dispatch(setAccountInfo(data))
       dispatch(setCurrentStep(1))
       router.push("/create-account/verify-otp")

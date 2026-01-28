@@ -1,5 +1,7 @@
 // lib/utils/api.ts
 
+import { ProgressService } from "@/lib/services/progress-service"
+
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "/api"
 
 export class APIError extends Error {
@@ -44,6 +46,8 @@ export async function fetchAPI<T>(endpoint: string, options?: RequestInit & { re
     }
   }
 
+  ProgressService.start()
+
   try {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       ...fetchOptions,
@@ -59,5 +63,7 @@ export async function fetchAPI<T>(endpoint: string, options?: RequestInit & { re
   } catch (error) {
     if (error instanceof APIError) throw error
     throw new APIError("Network error occurred", 500)
+  } finally {
+    ProgressService.done()
   }
 }
