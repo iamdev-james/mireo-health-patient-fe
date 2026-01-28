@@ -40,28 +40,28 @@ export default function HealthCheckForm() {
     }
   }
 
-  const handleSubmit = async (finalAnswers: HealthCheckAnswer[]) => {
-    // if (!isVerified) {
-    //   router.push("/create-account/verify-otp")
-    //   return
-    // }
+  const handleSkip = () => {
+    dispatch(setCurrentStep(4))
+    router.push("/dashboard")
+  }
 
+  const handleSubmit = async (finalAnswers: HealthCheckAnswer[]) => {
     setIsLoading(true)
     setError(null)
 
     try {
-      await registrationAPI.submitHealthCheck(finalAnswers)
-      await registrationAPI.completeRegistration()
+      // API integration deferred
+      // await registrationAPI.submitHealthCheck(finalAnswers)
+      // await registrationAPI.completeRegistration()
 
       dispatch(setHealthCheckAnswers(finalAnswers))
       dispatch(setCurrentStep(4))
       router.push("/dashboard")
     } catch (error) {
-      if (error instanceof APIError) {
-        setError(error.message)
-      } else {
-        setError("An unexpected error occurred. Please try again.")
-      }
+     console.error(error)
+     // Fallback to dashboard even on error for now
+     router.push("/dashboard")
+    } finally {
       setIsLoading(false)
     }
   }
@@ -77,7 +77,12 @@ export default function HealthCheckForm() {
         className="min-h-screen bg-white"
       >
         <div className="px-6 py-8">
-          <div className="mb-12 text-center">
+          <div className="mb-12 text-center relative">
+            <div className="absolute right-0 top-0">
+                <Button variant="ghost" onClick={handleSkip} className="text-gray-500 hover:text-gray-900">
+                    Skip
+                </Button>
+            </div>
             <h1 className="text-2xl font-medium md:font-semibold">Let's do a quick health check</h1>
             <p className="mt-4 text-sm text-gray-400">
               Answer a few simple questions. We'll use your responses to assess key health indicators and recommend next

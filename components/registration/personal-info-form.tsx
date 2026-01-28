@@ -12,7 +12,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { GENDER_OPTIONS, MARITAL_STATUS_OPTIONS, RELIGION_OPTIONS } from "@/lib/constants/registration"
-import { APIError, registrationAPI } from "@/lib/services/registration-api"
+import { APIError } from "@/lib/utils/api"
+import { authService } from "@/lib/services/auth-service"
 import { useAppDispatch } from "@/lib/store/hooks"
 import { setCurrentStep, setPersonalInfo } from "@/lib/store/slices/registration-slice"
 import { type PersonalInfoInput, personalInfoSchema } from "@/lib/validations/registration"
@@ -43,7 +44,21 @@ export default function PersonalInfoForm() {
     setApiError(null)
 
     try {
-      await registrationAPI.submitPersonalInfo(data)
+      // Convert DD/MM/YYYY to YYYY-MM-DD
+      const [day, month, year] = data.dateOfBirth.split("/")
+      const formattedDate = `${year}-${month}-${day}`
+
+      await authService.updateProfile({
+        gender: data.gender,
+        date_of_birth: formattedDate,
+        marital_status: data.maritalStatus,
+        religion: data.religion,
+        tribe: data.tribe || "",
+        occupation: data.occupation,
+        // TODO: Add fields for address and lga_id in the form
+        address: "Not Provided",
+        lga_id: 1,
+      })
       dispatch(setPersonalInfo(data))
       dispatch(setCurrentStep(3))
       router.push("/create-account/health-check")

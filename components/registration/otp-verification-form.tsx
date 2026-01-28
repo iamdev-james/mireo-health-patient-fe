@@ -8,7 +8,8 @@ import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { OTP_RESEND_COOLDOWN } from "@/lib/constants/registration"
-import { APIError, registrationAPI } from "@/lib/services/registration-api"
+import { APIError } from "@/lib/utils/api"
+import { authService } from "@/lib/services/auth-service"
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
 import { setCurrentStep, setOTPVerified } from "@/lib/store/slices/registration-slice"
 
@@ -85,14 +86,13 @@ export default function OTPVerificationForm() {
     setError(null)
 
     try {
-      const result = await registrationAPI.verifyOTP({
-        code,
-        phoneNumber: accountInfo.phoneNumber!,
-        email: accountInfo.email!,
+      const result = await authService.confirmOtp({
+        identifier: accountInfo.email!, // Using email as identifier
+        otp: code,
       })
 
-      if (result?.token) {
-        sessionStorage.setItem("registration_token", result?.token)
+      if (result?.access_token) {
+        sessionStorage.setItem("auth_token", result.access_token)
       }
 
       dispatch(setOTPVerified())
@@ -115,7 +115,7 @@ export default function OTPVerificationForm() {
     if (!canResend) return
 
     try {
-      await registrationAPI.resendOTP(accountInfo.phoneNumber!, accountInfo.email!)
+      await authService.sendOtp({ identifier: accountInfo.email! })
       setResendTimer(OTP_RESEND_COOLDOWN)
       setCanResend(false)
     } catch (error) {
