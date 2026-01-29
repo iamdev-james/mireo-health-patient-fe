@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { UserProfileHeader } from "@/components/account/user-profile-header"
 import { Board } from "@/components/dashboard/board"
+import { ScreeningOptionsSheet } from "@/components/dashboard/screening-options-sheet"
 import { StatusCard } from "@/components/dashboard/status-card"
 import { TreatmentView } from "@/components/dashboard/treatment-view"
 import { Button } from "@/components/ui/button"
@@ -18,6 +19,7 @@ export default function DashboardPage() {
   const router = useRouter()
   const [data, setData] = useState<DashboardData | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [isScreeningSheetOpen, setIsScreeningSheetOpen] = useState(false)
 
   useEffect(() => {
     async function loadData() {
@@ -134,6 +136,7 @@ export default function DashboardPage() {
               ...data.statusCard,
               countdown: hasCountdown(data.status) ? "02d :10h :53m" : undefined,
             }}
+            onActionClick={data.status === PatientStatus.NEW_USER ? () => setIsScreeningSheetOpen(true) : undefined}
           />
 
           <Board items={data.boardItems} />
@@ -153,6 +156,8 @@ export default function DashboardPage() {
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         />
       </Button>
+
+      <ScreeningOptionsSheet isOpen={isScreeningSheetOpen} onClose={() => setIsScreeningSheetOpen(false)} />
     </div>
   )
 }

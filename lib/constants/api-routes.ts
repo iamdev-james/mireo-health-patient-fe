@@ -10,4 +10,12 @@ export const API_ROUTES = {
     PROFILE: "/users/patient",
     DASHBOARD_STATUS: "/users/patient/dashboard-status",
   },
+  SCREENING: {
+    REQUEST: "/screenings/requests",
+    VERIFY_PAYMENT: (screeningId: string) => `/screenings/${screeningId}/verify_payment`,
+  },
+  LOCATIONS: {
+    STATES: "/common/locations/states",
+    LGAS: "/common/locations/lgas",
+  },
 } as const
