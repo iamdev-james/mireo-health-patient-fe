@@ -11,7 +11,8 @@ import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { APIError, signInAPI } from "@/lib/services/sign-in-api"
+import { APIError } from "@/lib/utils/api"
+import { authService } from "@/lib/services/auth-service"
 import { type SignInInput, signInSchema } from "@/lib/validations/sign-in"
 
 export default function SignInForm() {
@@ -35,7 +36,7 @@ export default function SignInForm() {
     setApiError(null)
 
     try {
-      await signInAPI.requestOTP(data)
+      await authService.sendOtp({ identifier: data.identifier })
       sessionStorage.setItem("sign_in_identifier", data.identifier)
       router.push("/sign-in/verify-otp")
     } catch (error) {
