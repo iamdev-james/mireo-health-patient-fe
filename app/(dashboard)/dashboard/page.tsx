@@ -12,7 +12,13 @@ import { Button } from "@/components/ui/button"
 import { FullScreenLoader } from "@/components/ui/full-screen-loader"
 import { LoaderService } from "@/lib/services/loader-service"
 import { userService } from "@/lib/services/user-service"
-import { getStatusConfig, hasCountdown, isActiveTreatment } from "@/lib/utils/dashboard-helpers"
+import {
+  calculateCountdown,
+  formatScheduledDate,
+  getStatusConfig,
+  hasCountdown,
+  isActiveTreatment,
+} from "@/lib/utils/dashboard-helpers"
 import { DashboardData, PatientStatus } from "@/types/dashboard"
 
 export default function DashboardPage() {
@@ -37,9 +43,13 @@ export default function DashboardPage() {
         // Logic: specific checks for stage
         let currentStatus: PatientStatus = (statusData.status as PatientStatus) || PatientStatus.NEW_USER
 
-        // If stage is "screening", force NEW_USER to show the screening card
-        if (statusData.stage === "screening" || !statusData.screening_id) {
-          currentStatus = PatientStatus.NEW_USER
+        // Handle specific screening statuses
+        if (statusData.stage === "screening") {
+          if (statusData.status === "screening_awaiting_confirmation") {
+            currentStatus = PatientStatus.SCREENING_BOOKED
+          } else if (!statusData.screening_id) {
+            currentStatus = PatientStatus.NEW_USER
+          }
         }
 
         const dashboardData: DashboardData = {
@@ -50,7 +60,7 @@ export default function DashboardPage() {
             diagnosis: "Hypertension", // This should probably come from the API too
           },
           statusCard: getStatusConfig(currentStatus),
-          boardItems: [], // Populate if API provides
+          boardItems: [],
           weeklyReadings: [
             { day: "Mon", status: "good" },
             { day: "Tue", status: "slightly-off" },
@@ -85,6 +95,30 @@ export default function DashboardPage() {
               total: 3,
             },
           ], // Fixed for now
+        }
+
+        // Specific overrides for SCREENING_BOOKED
+        if (currentStatus === PatientStatus.SCREENING_BOOKED && statusData.scheduled_at) {
+          const formattedDate = formatScheduledDate(statusData.scheduled_at)
+          const countdown = calculateCountdown(statusData.scheduled_at)
+
+          // Update Status Card
+          dashboardData.statusCard.message = `Your assessment is set for ${formattedDate}`
+          dashboardData.statusCard.countdown = countdown
+
+          // Update Board Items
+          dashboardData.boardItems = [
+            {
+              id: "screening-booked",
+              type: "booking-confirmation",
+              title: "Booking Confirmed",
+              message: `Your screening is scheduled for ${formattedDate}`,
+              action: {
+                label: "Track progress",
+                href: "/screening/track", // Placeholder
+              },
+            },
+          ]
         }
 
         setData(dashboardData)

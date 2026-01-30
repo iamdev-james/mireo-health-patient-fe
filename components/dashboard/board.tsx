@@ -101,7 +101,7 @@ function BoardItemCard({ item }: { item: BoardItem }) {
         </div>
 
         <Button asChild variant="outline" size="xl" className="text-primary w-full">
-          <Link href={"#"}>Track Progress</Link>
+          <Link href={item.action?.href || "#"}>{item.action?.label || "Track progress"}</Link>
         </Button>
       </div>
     )

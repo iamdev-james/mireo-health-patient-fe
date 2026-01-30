@@ -35,8 +35,8 @@ export default function ScreeningSuccessPage() {
         // Verify payment
         const response = await screeningService.verifyPayment(parsed.screening_id)
 
-        // Check if payment was successful (status is not screening_not_started)
-        if (response.status !== "screening_not_started") {
+        // Check if payment was successful
+        if (response.status === "success") {
           setStatus("success")
         } else {
           setErrorMessage("Payment verification pending. Please check your payment status.")
