@@ -78,6 +78,7 @@ const withPWA = withPWAInit({
 const config: NextConfig = {
   reactStrictMode: true,
   output: "standalone",
+  turbopack: {},
   logging: {
     fetches: {
       fullUrl: true,
