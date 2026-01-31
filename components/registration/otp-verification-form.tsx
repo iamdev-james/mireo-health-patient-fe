@@ -93,6 +93,9 @@ export default function OTPVerificationForm() {
 
       if (result?.access_token) {
         sessionStorage.setItem("auth_token", result.access_token)
+        if (result.refresh_token) {
+          sessionStorage.setItem("refresh_token", result.refresh_token)
+        }
       }
 
       dispatch(setOTPVerified())

@@ -8,7 +8,8 @@ import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { OTP_RESEND_COOLDOWN } from "@/lib/constants/registration"
-import { APIError, signInAPI } from "@/lib/services/sign-in-api"
+import { APIError } from "@/lib/utils/api"
+import { authService } from "@/lib/services/auth-service"
 
 export default function SignInOTPForm() {
   const router = useRouter()
@@ -88,13 +89,16 @@ export default function SignInOTPForm() {
     setError(null)
 
     try {
-      const result = await signInAPI.verifyOTP({
-        code,
+      const result = await authService.confirmOtp({
         identifier,
+        otp: code,
       })
 
-      if (result.token) {
-        sessionStorage.setItem("auth_token", result.token)
+      if (result.access_token) {
+        sessionStorage.setItem("auth_token", result.access_token)
+        if (result.refresh_token) {
+          sessionStorage.setItem("refresh_token", result.refresh_token)
+        }
         sessionStorage.removeItem("sign_in_identifier")
       }
 
@@ -116,7 +120,7 @@ export default function SignInOTPForm() {
     if (!canResend || !identifier) return
 
     try {
-      await signInAPI.resendOTP(identifier)
+      await authService.sendOtp({ identifier })
       setResendTimer(OTP_RESEND_COOLDOWN)
       setCanResend(false)
     } catch (error) {
