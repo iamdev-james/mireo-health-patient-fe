@@ -9,9 +9,11 @@ import { StatusCardData } from "@/types/dashboard"
 
 interface StatusCardProps {
   data: StatusCardData
+  /** Optional callback when action button is clicked. If provided, takes precedence over href navigation. */
+  onActionClick?: () => void
 }
 
-export function StatusCard({ data }: StatusCardProps) {
+export function StatusCard({ data, onActionClick }: StatusCardProps) {
   return (
     <div className="bg-primary/15 border-primary/30 relative mt-8 rounded-[14px] border px-5 py-5">
       <div className="absolute top-5 right-6">
@@ -32,13 +34,25 @@ export function StatusCard({ data }: StatusCardProps) {
         )}
 
         {data.action && !data.countdown && (
-          <Button asChild size="xl" className="mt-4 w-full">
-            <Link href={data.action.href || "#"} className="flex items-center justify-center gap-2">
-              {data.action.icon === "phone" && <Phone className="h-5 w-5" />}
-              {data.action.label}
-              {data.action.icon === "arrow-right" && <ArrowRight className="h-5 w-5" />}
-            </Link>
-          </Button>
+          <>
+            {onActionClick ? (
+              <Button size="xl" className="mt-4 w-full" onClick={onActionClick}>
+                <span className="flex items-center justify-center gap-2">
+                  {data.action.icon === "phone" && <Phone className="h-5 w-5" />}
+                  {data.action.label}
+                  {data.action.icon === "arrow-right" && <ArrowRight className="h-5 w-5" />}
+                </span>
+              </Button>
+            ) : (
+              <Button asChild size="xl" className="mt-4 w-full">
+                <Link href={data.action.href || "#"} className="flex items-center justify-center gap-2">
+                  {data.action.icon === "phone" && <Phone className="h-5 w-5" />}
+                  {data.action.label}
+                  {data.action.icon === "arrow-right" && <ArrowRight className="h-5 w-5" />}
+                </Link>
+              </Button>
+            )}
+          </>
         )}
       </div>
     </div>
