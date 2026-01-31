@@ -8,10 +8,10 @@ import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { OTP_RESEND_COOLDOWN } from "@/lib/constants/registration"
-import { APIError } from "@/lib/utils/api"
 import { authService } from "@/lib/services/auth-service"
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
 import { setCurrentStep, setOTPVerified } from "@/lib/store/slices/registration-slice"
+import { APIError } from "@/lib/utils/api"
 
 export default function OTPVerificationForm() {
   const router = useRouter()

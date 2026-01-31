@@ -12,10 +12,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { GENDER_OPTIONS, MARITAL_STATUS_OPTIONS, RELIGION_OPTIONS, TRIBE_OPTIONS } from "@/lib/constants/registration"
-import { APIError } from "@/lib/utils/api"
 import { authService } from "@/lib/services/auth-service"
 import { useAppDispatch } from "@/lib/store/hooks"
 import { setCurrentStep, setPersonalInfo } from "@/lib/store/slices/registration-slice"
+import { APIError } from "@/lib/utils/api"
 import { type PersonalInfoInput, personalInfoSchema } from "@/lib/validations/registration"
 
 export default function PersonalInfoForm() {

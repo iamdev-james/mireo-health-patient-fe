@@ -12,10 +12,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { COUNTRY_CODES } from "@/lib/constants/registration"
-import { APIError } from "@/lib/utils/api"
 import { authService } from "@/lib/services/auth-service"
 import { useAppDispatch } from "@/lib/store/hooks"
 import { setAccountInfo, setCurrentStep } from "@/lib/store/slices/registration-slice"
+import { APIError } from "@/lib/utils/api"
 import { type CreateAccountInput, createAccountSchema } from "@/lib/validations/registration"
 
 export default function CreateAccountForm() {
@@ -57,7 +57,7 @@ export default function CreateAccountForm() {
       await authService.register(registerData)
 
       // 2. Send OTP
-      await authService.sendOtp({ identifier: data.email })
+      // await authService.sendOtp({ identifier: data.email })
 
       dispatch(setAccountInfo(data))
       dispatch(setCurrentStep(1))

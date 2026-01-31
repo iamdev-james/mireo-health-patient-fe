@@ -8,8 +8,8 @@ import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { OTP_RESEND_COOLDOWN } from "@/lib/constants/registration"
-import { APIError } from "@/lib/utils/api"
 import { authService } from "@/lib/services/auth-service"
+import { APIError } from "@/lib/utils/api"
 
 export default function SignInOTPForm() {
   const router = useRouter()

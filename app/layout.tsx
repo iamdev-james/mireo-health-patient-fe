@@ -1,11 +1,11 @@
 // app/layout.tsx
 
 import { Metadata, Viewport } from "next"
-import StoreProvider from "@/lib/store/provider"
-import { satoshi } from "./fonts/satoshi"
 import { Toaster } from "sonner"
 import { FullScreenLoader } from "@/components/ui/full-screen-loader"
 import { TopProgressBar } from "@/components/ui/top-progress-bar"
+import StoreProvider from "@/lib/store/provider"
+import { satoshi } from "./fonts/satoshi"
 import { InstallPrompt } from "./Install-pwa"
 import { RegisterServiceWorker } from "./register-sw"
 

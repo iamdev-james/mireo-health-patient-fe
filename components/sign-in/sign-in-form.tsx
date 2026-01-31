@@ -11,8 +11,8 @@ import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { APIError } from "@/lib/utils/api"
 import { authService } from "@/lib/services/auth-service"
+import { APIError } from "@/lib/utils/api"
 import { type SignInInput, signInSchema } from "@/lib/validations/sign-in"
 
 export default function SignInForm() {
