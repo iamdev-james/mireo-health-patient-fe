@@ -47,7 +47,7 @@ export default function DashboardPage() {
         if (statusData.stage === "screening") {
           if (statusData.status === "screening_awaiting_confirmation") {
             currentStatus = PatientStatus.SCREENING_BOOKED
-          } else if (!statusData.screening_id) {
+          } else if (statusData.status === "screening_not_started") {
             currentStatus = PatientStatus.NEW_USER
           }
         }
