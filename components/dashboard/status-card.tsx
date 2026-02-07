@@ -15,8 +15,8 @@ interface StatusCardProps {
 
 export function StatusCard({ data, onActionClick }: StatusCardProps) {
   return (
-    <div className="bg-primary/15 border-primary/30 relative mt-8 rounded-[14px] border px-5 py-5">
-      <div className="absolute top-5 right-6">
+    <div className="bg-primary/15 border-primary/30 relative mt-8 rounded-[14px] border px-4 py-4">
+      <div className="absolute top-5 right-4.5">
         <Image src="/images/stethoscope.svg" alt="Stethoscope Icon" width={30} height={30} className="" />
       </div>
 

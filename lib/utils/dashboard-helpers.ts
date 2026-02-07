@@ -19,7 +19,11 @@ export function isActiveTreatment(status: PatientStatus): boolean {
 }
 
 export function hasCountdown(status: PatientStatus): boolean {
-  return [PatientStatus.CONSULTATION_SCHEDULED, PatientStatus.SCREENING_BOOKED].includes(status)
+  return [
+    PatientStatus.CONSULTATION_BOOKED,
+    PatientStatus.SCREENING_BOOKING_CONFIRMED,
+    PatientStatus.FOLLOWUP_CONSULTATION_BOOKED,
+  ].includes(status)
 }
 
 export function formatScheduledDate(dateString: string): string {
