@@ -19,7 +19,7 @@ import {
   hasCountdown,
   isActiveTreatment,
 } from "@/lib/utils/dashboard-helpers"
-import { DashboardData, PatientStatus, mapBackendStatusToEnum } from "@/types/dashboard"
+import { DashboardData, mapBackendStatusToEnum, PatientStatus } from "@/types/dashboard"
 
 export default function DashboardPage() {
   const router = useRouter()
