@@ -1,4 +1,3 @@
-
 // https://github.com/francoismassart/eslint-plugin-tailwindcss/pull/381
 // import eslintPluginTailwindcss from "eslint-plugin-tailwindcss"
 import eslintPluginNext from "@next/eslint-plugin-next"
@@ -16,6 +15,9 @@ const eslintIgnore = [
   "*.min.js",
   "*.config.js",
   "*.d.ts",
+  "public/sw.js",
+  "public/workbox-*.js",
+  "report-bundle-size.js",
 ]
 
 const config = typescriptEslint.config(
