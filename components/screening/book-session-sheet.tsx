@@ -19,7 +19,7 @@ interface BookSessionSheetProps {
 // Generate dates from Jan 29, 2026 onwards
 const generateAvailableDates = (): { label: string; value: string }[] => {
   const dates: { label: string; value: string }[] = []
-  const baseDate = new Date("2026-01-29T10:00:00")
+  const baseDate = new Date("2026-02-19T10:00:00")
 
   const timeSlots = ["10:00 AM", "2:00 PM", "9:00 AM"]
 

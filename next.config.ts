@@ -1,6 +1,6 @@
 import withBundleAnalyzer from "@next/bundle-analyzer"
-import withPWAInit from "next-pwa"
 import { type NextConfig } from "next"
+import withPWAInit from "next-pwa"
 
 import { env } from "./env.mjs"
 

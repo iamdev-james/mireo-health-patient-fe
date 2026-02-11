@@ -19,7 +19,7 @@ import {
   hasCountdown,
   isActiveTreatment,
 } from "@/lib/utils/dashboard-helpers"
-import { DashboardData, PatientStatus } from "@/types/dashboard"
+import { DashboardData, mapBackendStatusToEnum, PatientStatus } from "@/types/dashboard"
 
 export default function DashboardPage() {
   const router = useRouter()
@@ -40,17 +40,7 @@ export default function DashboardPage() {
       try {
         const [profile, statusData] = await Promise.all([userService.getProfile(), userService.getDashboardStatus()])
 
-        // Logic: specific checks for stage
-        let currentStatus: PatientStatus = (statusData.status as PatientStatus) || PatientStatus.NEW_USER
-
-        // Handle specific screening statuses
-        if (statusData.stage === "screening") {
-          if (statusData.status === "screening_awaiting_confirmation") {
-            currentStatus = PatientStatus.SCREENING_BOOKED
-          } else if (statusData.status === "screening_not_started") {
-            currentStatus = PatientStatus.NEW_USER
-          }
-        }
+        const currentStatus: PatientStatus = mapBackendStatusToEnum(statusData.status)
 
         const dashboardData: DashboardData = {
           status: currentStatus,
@@ -97,8 +87,8 @@ export default function DashboardPage() {
           ], // Fixed for now
         }
 
-        // Specific overrides for SCREENING_BOOKED
-        if (currentStatus === PatientStatus.SCREENING_BOOKED && statusData.scheduled_at) {
+        // Specific overrides for SCREENING_BOOKING_CONFIRMED
+        if (currentStatus === PatientStatus.SCREENING_BOOKING_CONFIRMED && statusData.scheduled_at) {
           const formattedDate = formatScheduledDate(statusData.scheduled_at)
           const countdown = calculateCountdown(statusData.scheduled_at)
 
@@ -170,7 +160,9 @@ export default function DashboardPage() {
               ...data.statusCard,
               countdown: hasCountdown(data.status) ? "02d :10h :53m" : undefined,
             }}
-            onActionClick={data.status === PatientStatus.NEW_USER ? () => setIsScreeningSheetOpen(true) : undefined}
+            onActionClick={
+              data.status === PatientStatus.SCREENING_NOT_STARTED ? () => setIsScreeningSheetOpen(true) : undefined
+            }
           />
 
           <Board items={data.boardItems} />

@@ -1,2 +1,20 @@
 .next
 node_modules
+
+# Next.js generated files
+next-env.d.ts
+
+# PWA generated files
+public/sw.js
+public/workbox-*.js
+
+# Build outputs
+dist
+build
+out
+coverage
+
+# Package manager
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
